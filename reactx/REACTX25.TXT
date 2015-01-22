@@ -1,0 +1,81 @@
+
+
+ Version 1.0 (c) Copyright International Business Machines Corp., 1989, 1991
+
+
+ REACTX25 SAMPLE APPLICATION
+
+ The REACTX25 sample program reactivates the X.25 adapter
+ when an adapter failure occurs.  Many adapter failures can
+ be recovered after the adapter is shut down.  This program
+ issues the SET_USER_LOG_QUEUE verb to wait for an error of
+ type 0017.  If this is a subtype 2 then either a link
+ failure or an adapter failure occured.  This module assumes
+ an adapter failed.  The DISCONNECT_PHYSICAL_LINK and
+ CONNECT_PHYSICAL_LINK verbs are then issued until the
+ CONNECT_PHYSICAL_LINK verb returns with a non zero return
+ code.  The Communications Manager periodically reactivates
+ the DLC so that when this X.25 is reconnected the DLC
+ should be automatically reactivated.  It is still up to the
+ application to reactivate the link either explicitly or by
+ attempting to use it again.
+
+ The sample programs are designed to work in the OS/2 pro-
+ tected mode, with the Communications Manager of the OS/2
+ Extended Services.  The sample program source code and the
+ supporting files are for C only.
+
+ PREREQUISITES
+
+ To run the sample program, a user must be familiar with the
+ following things:
+
+ 1.  OS/2 installation and command prompt
+
+ 2.  Communications Manager installation
+
+ 3.  C language compiler
+
+
+
+
+
+
+
+ COMPILE and LINK
+
+ There is only one sample program for reactivating the X.25
+ adapter.  Copy all the files with the filename of REACTX25
+ into the C source code subdirectory.  The files to be
+ copied are the Source code (.C extension), Module
+ definition (.DEF extension), Make file (no extension), and
+ the Link response (.LRF extension).
+
+ This sample program will need to access ACSMGTC.H and
+ ACSSVC.H.  These include files should be in the \CMLIB
+ subdirectory.
+
+ Set up the environment for the C compiler according to the
+ compilers instructions.
+
+
+ To compile and link the sample program, type the following
+ at the OS/2 command prompt:
+
+
+ [C:\SRC]make reactx25 [Press Enter]
+
+ After the above procedure, the executable file REACTX25.EXE
+ will be created.
+
+
+ RUNNING THE SAMPLE PROGRAM
+
+ The sample program can be either executed at the command
+ line or in the STARTUP.CMD file.  There are no parameters.
+ The sample program will display messages to the screen
+ indicating the status of the program.  If REACTX25.EXE is
+ started before the Communications Manager then it will wait
+ for Communications Manager to start.
+
+                        

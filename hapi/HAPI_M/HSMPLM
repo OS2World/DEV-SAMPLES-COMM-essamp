@@ -1,0 +1,6 @@
+hsmplm.obj:  hsmplm.asm
+MASM hsmplm,,,;
+
+hsmplm.exe:  hsmplm.obj phllmasm.obj
+LINK @hsmplm.lrf
+

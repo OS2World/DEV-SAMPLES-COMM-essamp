@@ -1,0 +1,30 @@
+/*
+ 
+This file should be used to help configure both the APPC requester
+and APPC server within one workstation.
+ 
+You may copy this configuration command into your current APPC node
+definition file (.NDF).
+ 
+Change "AN_LU_NAME" to the name of new actual LU on the your local
+workstation.
+ 
+Change the filespec to the actual name of the executable file performing
+the APPC server function.
+ 
+*/
+ 
+DEFINE_LOCAL_LU lu_name(CHOOSE_AN_LU)      /* you must choose an LU_NAME */
+                                           /* that is unique within your */
+                                           /* net name (netid).          */
+                lu_alias(FILESVR)
+                nau_address(independent_lu);
+ 
+DEFINE_TP tp_name(FileServer)
+          filespec(\cmlib\appn\samples\file\filecsvr.exe)
+          conversation_type(mapped)
+          conv_security_rqd(no)
+          sync_level(confirm)
+          tp_operation(nonqueued_am_started)
+          program_type(vio_windowable);
+ 

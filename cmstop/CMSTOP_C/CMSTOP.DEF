@@ -1,0 +1,13 @@
+;
+;
+; Component EM Kernel Environment Manager
+;
+; DEF File : CMSTOP.DEF
+;
+NAME  CMSTOP WINDOWCOMPAT
+DESCRIPTION 'Stop Communications Manager - IBM Confidential'
+
+IMPORTS
+            REMAPI.CMKKERNELREG
+            REMAPI.CMKDEACTIVATESERVICE
+

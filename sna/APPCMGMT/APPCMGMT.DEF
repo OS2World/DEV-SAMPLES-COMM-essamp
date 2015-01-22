@@ -1,0 +1,5 @@
+NAME        APPCMGMT WINDOWCOMPAT
+DESCRIPTION 'APPC management sample program'
+PROTMODE
+STACKSIZE   8192
+

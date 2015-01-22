@@ -1,0 +1,5 @@
+NAME        CPICCSVR WINDOWCOMPAT NEWFILES
+DESCRIPTION 'APPC file transfer using CPI-C sample program (server side)'
+PROTMODE
+STACKSIZE   8192
+

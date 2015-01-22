@@ -1,0 +1,150 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+CONFIGURATION FOR THE APPCTELL SAMPLE PROGRAM
+
+
+The APPCTELL sample program uses APPC native application programming interface
+verbs.  The function of the sample program is to transmit a message from one
+OS/2 workstation to another.  One sample program is used to perform both
+sides of this transaction.
+
+On the requester side, at the OS/2 command prompt, the user starts APPCTELL and
+supplies a destination, and a message.  The program transmits the message to a
+copy of the program on the server machine which displays it on a full-screen
+Pop-up.
+
+APPCTELL is designed to work in the OS/2 protect mode with the
+Communications Manager. APPCTELL is written using the C programming language.
+
+
+PREREQUISITES
+
+To successfully send a message with APPCTELL, you need to have the
+Communications Manager configured and running, with APPCTELL configured on the
+receiving machine.
+
+o Communications Manager
+  The machine must be configured as either an End Node or a Network Node and
+  have at least a Control Point (CP) defined.  It is assumed that you have
+  also configured and activated a DLC.  You must also have started the attach
+  manager.
+
+
+To compile APPCTELL, you should be familiar with, and have the following
+available
+
+o OS/2 Toolkit:
+     - 1.3 or higher as a 16-bit application
+     - 2.0 as a 32-bit application
+
+o Extended Services for OS/2 Release 1.0, Communications Manager and
+  High Level Languages (HLL) include files.
+
+o The IBM Extended Services for OS/2 Communications Manager API
+  Sample Programs Support diskette containing the program source.
+
+o The C compiler and linker.  You should be able to compile programs for OS/2
+  (path and include environment variables are correct).
+
+
+
+
+CONFIGURING THE COMMUNICATIONS MANAGER TO USE APPCTELL
+
+You can configure APPCTELL using either the Advanced Services of Communications
+Manager, the APPNC program, selecting 'SNA Network Definitions Configurations'
+from the Communication Manager Tools from the Desktop Manager, or by editing
+your node definitions file.
+
+To configure Communications Manager using the APPNC configuration screens,
+perform the follow steps:
+
+To configure the Requester Side:
+Select 'Additional SNA Features'.
+Select 'Partner LUs' to create a new Partner LU.
+Type the Fully Qualified LU name of an LU on the Partner workstation.
+Select a name for the specified partner, and enter it in the Alias field.
+Select OK.
+
+To configure the Server Side:
+Select 'Additional SNA Features'.
+Select 'Transaction Program Definitions'.
+Type APPCTELL for the Transaction Program name.
+Enter the path to APPCTELL.EXE in the next field.  This will
+  be of the form: path\SNA\APPCTELL\appctell.exe, where 'path'
+  was that specified when the CM Sample Programs Diskette was installed.
+Select Continue.
+Select Background for Presentation Type.
+Select Non-Queued Attach Manager Started.
+Select OK.
+
+
+You can also use the following lines imbedded directly in your .NDF file:
+
+/*
+
+Requester Side:
+Change the "fq_partner_lu_name" parameter value of the DEFINE_PARTNER_LU verb
+to the LU name of an LU that exists on the receiving machine.  The CP name of
+the receiver may be used as the LU name.  The name need not be fully qualified
+unless the receiver has a different network name, also known on some machines
+as netid.  Choose a convenient alias for this particular partner.
+
+Server Side:
+The "filespec" parameter value of the DEFINE_TP verb must be changed to
+reflect the correct drive, path and file name of APPCTELL.EXE.
+
+*/
+
+DEFINE_PARTNER_LU fq_partner_lu_name(FQPLUNAME) /* Specify the actual name   */
+                  partner_lu_alias(AliasName);  /* Choose an alias           */
+
+
+DEFINE_TP         tp_name(APPCTELL)             /* Change path, if necessary */
+                  filespec(c:\cmlib\appn\sna\appctell\appctell.exe)
+                  conversation_type(basic)
+                  conv_security_rqd(no)
+                  sync_level(confirm)
+                  tp_operation(nonqueued_am_started)
+                  program_type(background);
+
+
+
+RUNNING THE SAMPLE PROGRAM
+
+1.  From the requester side, switch to OS/2 and select the OS/2 Full Screen
+    or Windowed command prompt.
+
+2.  Start APPCTELL, and specify the alias of the receiving machine, and the
+    message that you want transmitted.
+
+    For example, entering "appctell Bob Are you there?" would attempt to
+    send the message "Are you there?" to the receiving machine you have given
+    the alias "Bob".  One thing to remember is that the alias name is case
+    sensitive.  Thus, "bob" is not the same alias as "Bob".
+
+
+
+COMPILING THE SAMPLE PROGRAM
+
+1.  Change directory to the directory containing the sample program
+    (path\SNA\APPCTELL).
+
+2.  Add the path of the include files for Communications Manager to your
+    INCLUDE environment variable. A common INCLUDE statement necessary
+    for compilation is:
+
+       SET INCLUDE=C:\C600\INCLUDE;C:\CMLIB;C:\TOOLKT13\C\INCLUDE;
+
+
+3.  Make sure \CMLIB is in your LIB environment variable.
+    A common LIB statement necessary for linking is:
+
+       SET LIB=C:\C600\LIB;C:\CMLIB;C:\OS2;C:\TOOLKT13\LIB;
+
+4.  Compile the program using the "nmake" command for Microsoft C compiler
+    Version 6.0:
+          nmake appctell.mak
+
+

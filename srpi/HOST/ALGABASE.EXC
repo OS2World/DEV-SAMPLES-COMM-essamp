@@ -1,0 +1,16 @@
+/***     ***/
+
+'QUERY CMSLEVEL ( STACK LIFO'
+
+parse UPPER pull ostype p2 relnum rest
+
+if ( ostype='VM/XA' & relnum>='5.6,' )
+   then 'GLOBAL MACLIB DMSGPI'
+   else 'GLOBAL MACLIB CMSLIB DMSSP'
+
+'ASSEMBLE IBMABASE'
+'LOAD IBMABASE (RLDSAVE'
+'GENMOD IBMABASE'
+
+exit
+

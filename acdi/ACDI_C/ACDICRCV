@@ -1,0 +1,10 @@
+acdicrcv.exe: acdicrcv.obj acx.msg
+   link @acdicrcv.lrf
+   msgbind acdicrcv.bnd
+
+acdicrcv.obj: acdicrcv.c
+ cl /ALw /G2 /Zp /c $**
+
+acx.msg: acx.txt
+ mkmsgf acx.txt acx.msg
+

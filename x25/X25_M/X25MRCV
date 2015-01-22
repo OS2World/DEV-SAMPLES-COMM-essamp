@@ -1,0 +1,6 @@
+x25mrcv.obj: x25mrcv.asm
+  masm x25mrcv.asm;
+
+x25mrcv.exe: x25mrcv.obj
+  link @x25mrcv.lrf
+

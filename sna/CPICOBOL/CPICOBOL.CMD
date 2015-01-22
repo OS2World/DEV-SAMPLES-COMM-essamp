@@ -1,0 +1,53 @@
+@ECHO OFF
+IF x%1 == x? GOTO QUESTION
+IF x%1 == x  GOTO QUESTION
+REM
+SETLOCAL
+REM **** SET DRIVE FOR COBOL COMPILER IF NOT DEFAULT ****
+SET COBOLDRIVE=D:
+REM ***** SET PATHS FOR COBOL COMPILER *****
+SET LIB=%LIB%C:\OS2;C:\CMLIB;
+SET SOURCEPROG=%2
+SET RESULTPATH=%3
+SET SOURCEPATH=C:\CMLIB\APPN\SNA\CPICOBOL\
+@ECHO .
+@ECHO ***** SWITCH TO COBOL DIRECTORY *****
+%COBOLDRIVE%
+cd \%1
+@ECHO .
+@ECHO ***** COMPILE SOURCE PROGRAM *****
+COBOL %SOURCEPATH%%SOURCEPROG% /LITLINK /ANS85, %RESULTPATH%\%SOURCEPROG%,%RESULTPATH%\%SOURCPROG%;
+REM;
+IF ERRORLEVEL 1 GOTO COMPILE_ERROR
+@ECHO .
+@ECHO ***** LINK OBJECT FILE *****
+LINK %RESULTPATH%\%SOURCEPROG%, %RESULTPATH%\%SOURCEPROG%,%RESULTPATH%\%SOURCEPROG%, LCOBOL.LIB + CPICOBOL.LIB +DOSCALLS.LIB,%SOURCEPATH%\%SOURCEPROG%.DEF;
+IF ERRORLEVEL 1 GOTO LINK_ERROR
+@ECHO .
+@ECHO ***** FINISH AND EXIT *****
+GOTO DONE
+:COMPILE_ERROR
+@ECHO There were compiler errors
+GOTO DONE
+:QUESTION
+@ECHO  SYNTAX:
+@ECHO  .
+@ECHO  CPICOBOL [cobol directory] [source program ][result directory]
+@ECHO  .
+@ECHO  EXAMPLE: CPICOBOL COBOL DEFSIDE C:
+@ECHO     (The object, listing, and executable files will be put on
+@ECHO      the C drive).
+@ECHO  .
+@ECHO  NOTE: This command file searches the following paths by default:
+@ECHO        -for sample source files:  C:\CMLIB\APPN\SNA\CPICOBOL
+@ECHO        -for CPI-C library files:  C:\CMLIB
+@ECHO        -for OS/2 library files:   C:\OS2\DOSCALLS
+@ECHO       This command file searches the default drive only.
+@ECHO       Please modify the appropriate statements if necessary.
+@GOTO DONE_QUES
+:LINK_ERROR
+ECHO There were linker errors
+:DONE
+ENDLOCAL
+:DONE_QUES
+

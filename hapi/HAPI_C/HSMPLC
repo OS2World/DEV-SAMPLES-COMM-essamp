@@ -1,0 +1,6 @@
+hsmplc.exe:  hsmplc.obj phllc_s.obj
+ LINK @hsmplc.lrf
+
+hsmplc.obj:  hsmplc.c
+ CC /Zl /Ze /Zp /AS hsmplc,,,;
+

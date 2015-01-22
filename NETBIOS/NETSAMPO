@@ -1,0 +1,7 @@
+netsampo.exe :  netsampo.obj
+  LINK386  /map /noi /pm:vio netsampo.obj,netsampo.exe,,,netsampo.def
+
+netsampo.obj :  netsampo.c
+   icc /C /Gt netsampo.c
+
+

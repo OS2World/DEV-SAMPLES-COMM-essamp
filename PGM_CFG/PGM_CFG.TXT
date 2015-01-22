@@ -1,0 +1,102 @@
+IBM Extended Services for OS/2 Programmable Configuration Samples
+
+These samples are to be used as a guide when you code your Programmable
+Configuration REXX programs.  They are not intended to be copied and
+executed as they are presented here.  Many fields require resource names
+and addresses from your institution's environment.
+
+*******************************************************************************
+
+ACDI.CMD
+   This is a sample Programmable Configuration program to configure ACDI
+   over an asynchronous connection to a remote computer.  The features
+   and records that must be configured to establish this connection are:
+      MACHINE WKST
+      ACDI STRING
+      ACDI PORT
+   It is assumed that the model connected to the workstation for this
+   sample is one for which an IBM model exists as follows:
+      M1 - for Hayes Smartmodem 1200, IBM PC 2400, ROLM 244PC
+      M2 - for Hayes Smartmodem 2400
+      M3 - for Hayes V-Series Modem Enhancer 1200
+      M4 - for Hayes V-Series Modem Enhancer 2400
+      M5 - for MicroCom AX/2400C
+      M6 - for V.25vis Command Set Modems
+      M7 - for IBM PC 1200
+
+*******************************************************************************
+
+TWINAX.CMD
+   This is a sample Programmable Configuration program to configure APPN
+   over a twinaxial connection.  The features and records that must be
+   configured to establish this connection are:
+      MACHINE WKST
+      SNA TDLC
+      APPN DEFINE_LOCAL_CP
+      APPN DEFINE_LOGICAL_LINK
+      APPN DEFINE_LOCAL_LU
+      APPN DEFINE_PARTNER_LU
+      APPN DEFINE_PARTNER_LU_LOCATION
+      APPN DEFINE_MODE
+      APPN DEFINE_DEFAULTS is automatically added
+      APPN DEFINE_TP
+      APPN START_ATTACH_MANAGER is automatically added
+      APPN CNOS_FQ_PLU_NAME
+      APPN DEFINE_USER_ID_PASSWORD
+   There must be an application program installed on the workstation that
+   interfaces with the APPN API.
+
+*******************************************************************************
+
+X25.CMD
+   This is a sample Programmable Configuration program to configure APPN
+   over X.25 connection using 5250 Workstation Emulation.  The features
+   and records that must be configured to establish this connection are:
+      MACHINE WSKT
+      SNA XDLC
+      APPN DEFINE_LOCAL_CP
+      APPN DEFINE_LOGICAL_LINK
+      APPN CNOS PLU Alias Profile
+      APPN DEFINE_PARTNER_LU
+      APPN DEFINE_PARTNER_LU_LOCATION
+      APPN DEFINE_MODE
+      APPN DEFINE_DEFAULTS
+      X25 ADAPTER
+      X25 PVC
+      X25 LINK
+      X25 RDIR
+      X25 ROUTE
+      5250 TERM
+      5250 SESSION
+
+*******************************************************************************
+
+3270.CMD
+   This is a sample Programmable Configuration program to configure 3270
+   DFT connection via a 3278/79 or 3270 adapter.  The features and records
+   that must be configured to establish this connection are:
+      MACHINE WKST
+      3270DFT CONNECT
+      3270DFT SESSION
+
+*******************************************************************************
+
+5250.CMD
+   This is a sample Programmable Configuration program to configure APPN
+   connection using 5250 Workstation Emulation.  The features and records
+   that must be configured to establish this connection are:
+      MACHINE WSKT
+      SNA TDLC
+      APPN DEFINE_LOGICAL_LINK
+      APPN DEFINE_LOCAL_CP
+      APPN DEFINE_PARTNER_LU
+      APPN DEFINE_PARTNER_LU_LOCATION
+      APPN DEFINE_MODE
+      APPN DEFINE_DEFAULTS is automatically added
+      APPN CNOS_FQ_PLU_NAME
+      5250 TERM
+      5250 PRT
+      5250 SESSION
+   There must be an application program installed on the workstation that
+   interfaces with the APPN API.
+

@@ -1,0 +1,5 @@
+NAME        APPCTELL WINDOWCOMPAT
+DESCRIPTION 'APPC send/receive message sample program'
+PROTMODE
+STACKSIZE  8192
+

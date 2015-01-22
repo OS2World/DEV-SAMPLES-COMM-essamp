@@ -1,0 +1,526 @@
+;   MODULE NAME : APD.TXT
+;
+;   DESCRIPTIVE NAME : DISPLAY SAMPLE PROGRAM FOR OPERATING SYSTEM/2
+;                       EXTENDED SERVICES/2 1.0
+;
+;   COPYRIGHT        : (C) COPYRIGHT IBM CORP. 1991
+;                      LICENSED MATERIAL - PROGRAM PROPERTY OF IBM
+;                      ALL RIGHTS RESERVED
+;
+;   FUNCTION:   Defines messages for the DISPLAY and PMDSPLAY sample
+;               programs.
+;
+;   MODULE TYPE:     Microsoft C Compiler Version 6.0
+;               (compiles with large memory model)
+;
+;   ASSOCIATED FILES:  See also DISPLAY.MAK, PMDSPLAY.MAK
+;
+;       MSGID.H      - #defines for messages
+;
+; Note to Translators: the '\' in the following messages is used to indicate
+;                   the allowable text width: 18-39, 42-63.
+;
+APD
+APD0000I: OS/2 error allocating DISPLAY buffer:  %u\n
+APD0001I: OS/2 error freeing DISPLAY buffer:  %u\n
+APD0002I: The APPC Communications Subsystem is not loaded.  \ Possible reasons:\n\n\
+ - Communications Manager has not been started.\n\
+ - Communications Manager is active but APPC is not fully started.\n\
+ - APPC has not been configured in Communications Manager.\n\
+ - The necessary APPC software has not been installed.\n
+APD0003I: The X.25 Communications Subsystem is not loaded.\n
+APD0004I: \nUnexpected DISPLAY or DISPLAY_APPN return code:\n
+APD0005I: Primary return code = X'%4X'\nSecondary return code = X'%8lX'\n
+APD0006I: Null pointer returned by DISPLAY.\n
+APD0007I: **************************************\n
+APD0008I: *       Communications Manager       *\n*       DISPLAY Sample Program       *\n
+APD0009I: **************************************\n
+APD0010I: This workstation is running APPC.\n
+APD0011I: This workstation is running APPN.\n
+APD0012I: \n**************************************\n
+APD0013I: * Invalid option: %s
+APD0014I: * Option not available in APPC: %s
+APD0015I: \n* For help, type \display ?\
+APD0016I: \nUsage: DISPLAY [Partner LU Name] [Options]\n
+APD0017I: \nOPTION  INFORMATION DISPLAYED          OPTION  INFORMATION DISPLAYED\n\
+------  ----------------------------   ------  ----------------------------\n
+APD0018I:  -TPD   Transaction Program Defs.      \
+APD0019I:  -G     Gateway                        \
+APD0020I:  -LI    Active Links                   \
+APD0021I:  -LU0   Logical Units 0 to 3           \
+APD0022I:  -LU6   Logical Unit 6.2               \
+APD0023I:  -SE    Sessions                       \
+APD0024I:  -TP    Transaction Programs           \
+APD0025I:  -X     X.25 Physical Links            \
+APD0026I:  -SN    SNA Global Data                \
+APD0027I:  -SY    System Default                 \
+APD0028I:  -AD    Adapter (Token Ring, SDLC)     \
+APD0029I:  -LUD   Logical Unit Definitions       \
+APD0030I:  -P     Partner Logical Unit Defs.     \
+APD0031I:  -MD    Mode Definitions               \
+APD0032I:  -LD    Link Definitions               \
+APD0033I:  -MS    Management Services            \
+APD0034I:  -CN    Connection Networks            \
+APD0035I:  -CO    Class Of Service               \
+APD0036I:  -D     Directory                      \
+APD0037I:  -I     Intermediate Sessions          \
+APD0038I:  -N     Node                           \
+APD0039I:  -TO    Topology                       \
+APD0040I: \nOptions are not case sensitive.  Multiple options must be separated\n\
+by blanks.  Partner LU Name, if present, must be the first option, and\n\ may be an alias or fully qualified.\n\
+THE DEFAULT IS ALL SECTIONS ON THE LOCAL MACHINE.\n
+APD0041I: \n**************************************\n*
+APD0042I:        SNA Global Information      \
+APD0043I:     Logical Unit 6.2 Information   \
+APD0044I:   Transaction Program Definitions  \
+APD0045I:     Active Transaction Programs    \
+APD0046I:         Session Information        \
+APD0047I:       Active Links Information     \
+APD0048I:   Logical Units 0 to 3 Information \
+APD0049I:         Gateway Information        \
+APD0050I:    X.25 Physical Link Information  \
+APD0051I:      System Default Information    \
+APD0052I:         Adapter Information        \
+APD0053I:      LU Definition Information     \
+APD0054I:  Partner LU Definition Information \
+APD0055I:     Mode Definition Information    \
+APD0056I:     Link Definition Information    \
+APD0057I:   Management Services Information  \
+APD0058I:           Node Information         \
+APD0059I:        Directory Information       \
+APD0060I:         Topology Information       \
+APD0061I:  Intermediate Sessions Information \
+APD0062I:     Class of Service Information   \
+APD0063I:    Connection Network Information  \
+APD0064I:  *\n**************************************\n
+APD0065I:                                           \
+APD0066I: \n
+APD0067I: No
+APD0068I: Yes
+APD0069I: Not supported
+APD0070I: Supported
+APD0071I: Not configured
+APD0072I: Configured
+APD0073I: Not active
+APD0074I: Active
+APD0075I: **ERROR** Unexpected value X'%X'\n
+APD0076I: DISPLAY can return only 64K of data--the rest was truncated\n
+APD0077I: **BUFFER OVERFLOW** Only %u of these were returned in buffer\n
+APD0078I: Communications Manager version
+APD0079I: Network name
+APD0080I: Control point (CP) name
+APD0081I: Physical unit (PU) name
+APD0082I: Node ID (for XID)
+APD0083I: Machine type
+APD0084I: Machine model number
+APD0085I: Workstation serial number
+APD0086I: CP alias
+APD0087I: Node type
+APD0088I: Network node\n
+APD0089I: End node\n
+APD0090I: CP local address
+APD0091I: Not used (independent LU)\n
+APD0092I: (dependent LU)\n
+APD0093I: Communications Manager version
+APD0094I: Number of logical units (LUs)
+APD0095I: LU name
+APD0096I: LU alias
+APD0097I: Number of partner LUs (PLUs)
+APD0098I: Fully-qualified LU name
+APD0099I: Default LU
+APD0100I: LU local address
+APD0101I: Independent\n
+APD0102I: Configured sessions limit
+APD0103I: Transaction programs limit
+APD0104I: No limit \n
+APD0105I: LU type
+APD0106I: 6.2\n
+APD0107I: Partner LU alias
+APD0108I: Number of modes for this PLU
+APD0109I: Partner LU uninterpreted name
+APD0110I: Partner LU name
+APD0111I: Partner LU session limit
+APD0112I: DLC name
+APD0113I: Adapter number
+APD0114I: Destination DLC address
+APD0115I: Parallel sessions
+APD0116I: Already verified security
+APD0117I: Conversation security
+APD0118I: Session security
+APD0119I: Implicit partner
+APD0120I: Mode name
+APD0121I: Max RU size, upper limit
+APD0122I: Max RU size, lower limit
+APD0123I: Max negotiable session limit
+APD0124I: Current session limit
+APD0125I: Min negotiated winner limit
+APD0126I: Min negotiated loser limit
+APD0127I: Active session count
+APD0128I: Pending session count
+APD0129I: Auto-activated winner sessions
+APD0130I: Active winner sessions
+APD0131I: Active loser sessions
+APD0132I: Session termination count
+APD0133I: Drain target
+APD0134I: Drain source
+APD0135I: Pacing size
+APD0136I: No pacing\n
+APD0137I: Implicit mode
+APD0138I: Attach manager active
+APD0139I: Defined transaction programs
+APD0140I: Transaction program name
+APD0141I: File name
+APD0142I: Synchronization level confirm
+APD0143I: Synchronization level none
+APD0144I: Conversation type
+APD0145I: Basic\n
+APD0146I: Mapped\n
+APD0147I: Either basic or mapped\n
+APD0148I: Incoming allocate queue limit
+APD0149I: Incoming allocate queue depth
+APD0150I: Incoming allocate timeout
+APD0151I: Non-queued program\n
+APD0152I: Hold forever\n
+APD0153I: Receive allocates pending
+APD0154I: Receive allocate timeout
+APD0155I: Transaction program type
+APD0156I: Queued operator started\n
+APD0157I: Queued attach manager started\n
+APD0158I: Non-queued attach manager started\n
+APD0159I: Queued operator preloaded\n
+APD0160I: Program state
+APD0161I: Inactive\n
+APD0162I: Loaded\n
+APD0163I: Loading\n
+APD0164I: Running\n
+APD0165I: Conversation security required
+APD0166I: Process ID
+APD0167I: Not known to attach manager\n
+APD0168I: Program parameter string
+APD0169I: Program type
+APD0170I: Background\n
+APD0171I: Full screen\n
+APD0172I: Presentation manager\n
+APD0173I: VIO windowable\n
+APD0174I: Transaction program initiated
+APD0175I: Locally
+APD0176I: Remotely
+APD0177I: Icon file
+APD0178I: Active transaction programs
+APD0179I: Number of conversations
+APD0180I: Transaction program ID
+APD0181I: User ID
+APD0182I: Logical unit of work name
+APD0183I: Logical unit of work instance
+APD0184I: Logical unit of work sequence
+APD0185I: Conversation ID
+APD0186I: Conversation state
+APD0187I: Send\n
+APD0188I: Receive\n
+APD0189I: Confirm\n
+APD0190I: Confirm send\n
+APD0191I: Confirm deallocate\n
+APD0192I: Receive-and-Post pending\n
+APD0193I: Session ID
+APD0194I: Synchronization level
+APD0195I: None\n
+APD0196I: Confirm\n
+APD0197I: Conversation type
+APD0198I: Conversation group ID
+APD0199I: Number of sessions
+APD0200I: Send maximum RU size
+APD0201I: Receive maximum RU size
+APD0202I: Send pacing window
+APD0203I: Receive pacing window
+APD0204I: Link ID
+APD0205I: Link name
+APD0206I: Outbound destination address (DAF)
+APD0207I: Outbound origin address (OAF)
+APD0208I: OAF-DAF assignor indicator (ODAI)
+APD0209I: Session type
+APD0210I: SSCP-PU session\n
+APD0211I: SSCP-LU session\n
+APD0212I: LU-LU session\n
+APD0213I: Connection type
+APD0214I: Host\n
+APD0215I: Peer\n
+APD0216I: Host and peer\n
+APD0217I: Procedure correlator ID (PCID)
+APD0218I: PCID generator CP name
+APD0219I: Pacing type
+APD0220I: Fixed\n
+APD0221I: Adaptive\n
+APD0222I: Number of active links
+APD0223I: Link activated
+APD0224I: Link state
+APD0225I: Allocating local link station\n
+APD0226I: Exchanging XID\n
+APD0227I: Exchanging set mode\n
+APD0228I: Active\n
+APD0229I: Sending disconnect\n
+APD0230I: Processing remote disconnect\n
+APD0231I: Deactivating link
+APD0232I: Active and activating sessions
+APD0233I: Max frame data (BTU) size
+APD0234I: Adjacent node CP name
+APD0235I: Adjacent node type
+APD0236I: Learn\n
+APD0237I: LEN\n
+APD0238I: CP-CP session support
+APD0239I: Link station role
+APD0240I: Negotiable\n
+APD0241I: Primary\n
+APD0242I: Secondary\n
+APD0243I: Line type
+APD0244I: Switched\n
+APD0245I: Nonswitched\n
+APD0246I: Transmission group number
+APD0247I: Effective capacity
+APD0248I: bits per second
+APD0249I: kilobits per second
+APD0250I: megabits per second
+APD0251I: gigabits per second
+APD0252I: Cost per connect time
+APD0253I: Cost per byte
+APD0254I: Propagation delay
+APD0255I: seconds
+APD0256I: milliseconds
+APD0257I: microseconds
+APD0258I: nanoseconds
+APD0259I:  (minimum)
+APD0260I:  (local area network)
+APD0261I:  (telephone)
+APD0262I:  (packet switched network)
+APD0263I:  (satellite)
+APD0264I:  (maximum)
+APD0265I: User defined parameter 1
+APD0266I: User defined parameter 2
+APD0267I: User defined parameter 3
+APD0268I: Security
+APD0269I: Nonsecure\n
+APD0270I: Public switched network\n
+APD0271I: Underground cable\n
+APD0272I: Secure conduit\n
+APD0273I: Guarded conduit\n
+APD0274I: Encrypted\n
+APD0275I: Guarded radiation\n
+APD0276I: Maximum security\n
+APD0277I: Number of LUs
+APD0278I: Access type
+APD0279I: 3270 emulation\n
+APD0280I: LUA\n
+APD0281I: LU short name
+APD0282I: LU long name
+APD0283I: SSCP-LU session state
+APD0284I: Inactive\n
+APD0285I: Active\n
+APD0286I: Activating\n
+APD0287I: Deactivating\n
+APD0288I: *** This LU is being deleted ***
+APD0289I: LU-LU session state
+APD0290I: Number of configured gateway LUs
+APD0291I: Workstation LU name
+APD0292I: Workstation PU name
+APD0293I: Workstation pool class
+APD0294I: Dedicated LU\n
+APD0295I: Workstation local address
+APD0296I: Not assigned\n
+APD0297I: Host local address
+APD0298I: Workstation LU type
+APD0299I: Unknown\n
+APD0300I: Host LU name
+APD0301I: Workstation DLC name
+APD0302I: Workstation adapter number
+APD0303I: Workstation DLC address
+APD0304I: Workstation link active?
+APD0305I: Active (workstation is offline)\n
+APD0306I: Active (workstation is online)\n
+APD0307I: Number of X.25 physical links
+APD0308I: X.25 link name
+APD0309I: X.25 link comments
+APD0310I: Adapter slot number
+APD0311I: X.25 link type
+APD0312I: Leased line\n
+APD0313I: VX32\n
+APD0314I: X.25 link mode
+APD0315I: Disconnect\n
+APD0316I: Connect\n
+APD0317I: Auto connect\n
+APD0318I: X.25 link state
+APD0319I: Connecting\n
+APD0320I: Connected\n
+APD0321I: Error level 1\n
+APD0322I: Error level 2\n
+APD0323I: Disconnecting\n
+APD0324I: Disconnected\n
+APD0325I: Adapter error\n
+APD0326I: Adapter access error\n
+APD0327I: Incoming wait\n
+APD0328I: X.25 link direction
+APD0329I: Incoming\n
+APD0330I: Outgoing\n
+APD0331I: 2-way\n
+APD0332I: Number of active PVCs
+APD0333I: Total number of PVCs
+APD0334I: Number of active SVCs
+APD0335I: Number of incoming SVCs
+APD0336I: Number of 2-way SVCs
+APD0337I: Number of outgoing SVCs
+APD0338I: Default mode name
+APD0339I: Default local LU name
+APD0340I: Implicit partner LU support
+APD0341I: Maximum held alerts
+APD0342I: Maximum logical record send size
+APD0343I: Default TP directory
+APD0344I: Default TP operation
+APD0345I: Default TP program type
+APD0346I: Number of adapters
+APD0347I: Limited resource
+APD0348I: Limited resource timeout
+APD0349I: Receive window
+APD0350I: Send window
+APD0351I: Maximum link stations
+APD0352I: Asynchronous balanced mode
+APD0353I: Number of logical units (LUs)
+APD0354I: Number of partner logical units
+APD0355I: Alternate partner LU alias
+APD0356I: Number of modes
+APD0357I: Default RU size
+APD0358I: Number of links
+APD0359I: Preferred NN server
+APD0360I: Auto-activate link
+APD0361I: Use adapter definition\n
+APD0362I: Solicit SSCP session
+APD0363I: Init self
+APD0364I: BIND support
+APD0365I: Number of held MDS alerts
+APD0366I: Number of held NMVT alerts
+APD0367I: Number of focal points
+APD0368I: Number of MS applications
+APD0369I: Number of active transactions
+APD0370I: MS application name
+APD0371I: MS category
+APD0372I: Focal point CP name
+APD0373I: Backup application name
+APD0374I: Backup focal point CP name
+APD0375I: Focal point type
+APD0376I: Explicit primary\n
+APD0377I: Default primary\n
+APD0378I: Backup\n
+APD0379I: Domain\n
+APD0380I: Host\n
+APD0381I: No focal point\n
+APD0382I: Focal point status
+APD0383I: Pending\n
+APD0384I: Never active\n
+APD0385I: Focal point routing
+APD0386I: Default\n
+APD0387I: Direct\n
+APD0388I: Application name
+APD0389I: Application category
+APD0390I: OS/2 queue name
+APD0391I: Origin CP name
+APD0392I: Origin MS application name
+APD0393I: Destination CP name
+APD0394I: Destination MS application name
+APD0395I: Agent unit of work:
+APD0396I:    Requester CP name
+APD0397I:    Requester agent application
+APD0398I:    Sequence number
+APD0399I: Route additional resistance
+APD0400I: Maximum directory cache entries
+APD0401I: No maximum\n
+APD0402I: Current directory cache entries
+APD0403I: Directory save interval
+APD0404I: Directory never saved\n
+APD0405I: Total directory entries
+APD0406I: Network node entries
+APD0407I: Local and adjacent node entries
+APD0408I: Network node CP name
+APD0409I: Number of associated LUs
+APD0410I: * (wildcard entry)
+APD0411I: Owning CP name
+APD0412I: LU entry type
+APD0413I: Home\n
+APD0414I: Register\n
+APD0415I: Cache\n
+APD0416I: Number of network nodes
+APD0417I: Network node CP name
+APD0418I: Congested?
+APD0419I: Quiescing?
+APD0420I: ISR depleted?
+APD0421I: Number of TGs
+APD0422I: TG partner CP name
+APD0423I: TG partner node type
+APD0424I: Real\n
+APD0425I: Virtual (connection network)\n
+APD0426I: Topology
+APD0427I: Network
+APD0428I: Local
+APD0429I: Number of intermediate sessions
+APD0430I: Primary side adjacent CP name
+APD0431I: Secondary side adjacent CP name
+APD0432I: (Unknown, session is activating)\n
+APD0433I: Primary side link name
+APD0434I: Secondary side link name
+APD0435I: Number of class of service definitions
+APD0436I: Class of service name
+APD0437I: Transmission priority
+APD0438I: Network\n
+APD0439I: High\n
+APD0440I: Medium\n
+APD0441I: Low\n
+APD0442I: Number of node rows
+APD0443I: Number of TG rows
+APD0444I:
+APD0445I: Node row weight
+APD0446I: Congestion min
+APD0447I: Congestion max
+APD0448I: Route additional resistance min
+APD0449I: Route additional resistance max
+APD0450I:
+APD0451I: TG row weight
+APD0452I: Cost per connect time min
+APD0453I: Cost per connect time max
+APD0454I: Cost per byte min
+APD0455I: Cost per byte max
+APD0456I: Security min
+APD0457I: Security max
+APD0458I: Propagation delay min
+APD0459I: Propagation delay max
+APD0460I: Effective capacity min
+APD0461I: Effective capacity max
+APD0462I: User defined parameter 1 min
+APD0463I: User defined parameter 1 max
+APD0464I: User defined parameter 2 min
+APD0465I: User defined parameter 2 max
+APD0466I: User defined parameter 3 min
+APD0467I: User defined parameter 3 max
+APD0468I: Connection network definitions
+APD0469I: Connection network name
+APD0470I: Attached adapters
+APD0471I: \nOpcode      : %4X
+APD0472I: \nPrimary RC  : %4X
+APD0473I: \nSecondary RC: %8lX
+APD0474I: \nSense Data  : %8lX
+APD0475I: \nTP_STARTED Failed!
+APD0476I: \nMC_ALLOCATE Failed!
+APD0477I: \nRECEIVE_ALLOCATE Failed!
+APD0478I: \nMC_SEND_DATA Failed!
+APD0479I: \nMC_RECEIVE_AND_WAIT Failed!
+APD0480I: \nMC_CONFIRMED Failed!
+APD0481I: \nMC_DEALLOCATE Failed!
+APD0482I: \nTP_ENDED Failed!
+APD0483I: \nThe specified partner has not been configured.  You can either:\n\
+  - Reconfigure, and add this alias, or,\n\
+  - Specify the fully qualified name of the partner.\n
+APD0484I: \nAllocation failure
+APD0485I: no retry.
+APD0486I: retry.
+APD0487I: \nThe specified partner probably has not started its \
+ATTACH_MANAGER.
+APD0488I: \nThe specified partner probably has been configured with no \
+DEFINE_TP\nfor this program, or the DIRECTORY_FOR_INBOUND_ATTACHES is not\n\
+where its copy of this program resides.
+APD0489I: Invalid PLU name: %s\n
+

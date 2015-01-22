@@ -1,0 +1,11 @@
+NAME BSAMPL WINDOWCOMPAT        ;This is the SRPI application module
+
+PROTMODE                        ;It will run only in protect mode
+
+DESCRIPTION 'SRPI APPLICATION'
+
+STACKSIZE 3500
+
+IMPORTS
+ SRPI.SENDREQ                   ;Import SRPI dynamic link routine entry point
+

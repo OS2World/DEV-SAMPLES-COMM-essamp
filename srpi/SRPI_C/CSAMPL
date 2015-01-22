@@ -1,0 +1,6 @@
+csampl.exe:csampl.obj srpi_c.obj
+  LINK @csampl.lrf
+
+csampl.obj:csampl.c
+  cl /c /AL /G2 /Zl /Zp csampl.c
+

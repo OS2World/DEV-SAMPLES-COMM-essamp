@@ -1,0 +1,6 @@
+NAME REACTX25
+PROTMODE
+STACKSIZE 3500
+IMPORTS ACSSVC.ACSMGT
+IMPORTS ACSSVC.ACSSVC
+                                                                        

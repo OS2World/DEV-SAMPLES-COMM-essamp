@@ -1,0 +1,31 @@
+// This .NDF fragment is intended to be appended to an .NDF file in the
+// requester's \CMLIB\APPN subdirectory.
+//
+// Instructions:
+// 1. Replace "network_name" with the server's DEFINE_LOCAL_CP fq_cp_name netid.
+// 2. Replace "server_lu" with the server's DEFINE_LOCAL_LU lu_name.
+//
+// If server and requester are both end nodes or if only one
+// is a network node but not the NN server of the other then
+// remove comment delimiters around DEFINE_PARTNER_LU_LOCATION and:
+// 1. Replace "network_name.server_lu" with the DEFINE_PARTNER_LU
+//    fq_partner_lu_name.
+// 2. Replace "network_name.server_cp" with the server's DEFINE_LOCAL_CP
+//    fq_cp_name.
+ 
+DEFINE_PARTNER_LU  fq_partner_lu_name(network_name.server_lu)
+                   partner_lu_alias(CPICSVR)
+                   conv_security_verification(NO)
+                   max_mc_ll_send_size(32767)
+                   parallel_session_support(YES)
+                   description(Server LU);
+ 
+DEFINE_CPIC_SIDE_INFO  symbolic_destination_name (CPICSVR)
+                       partner_lu_alias(CPICSVR)
+                       tp_name (FileServer)
+                       mode_name (#INTER);
+ 
+/* DEFINE_PARTNER_LU_LOCATION  fq_partner_lu_name(network_name.server_lu)
+                               wildcard_entry(NO)
+                               fq_owning_cp_name(network_name.server_cp); */
+ 

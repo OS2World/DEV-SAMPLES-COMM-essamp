@@ -1,0 +1,6 @@
+dlcsampo.exe : dlcsampo.obj
+  link /noi /pm:vio dlcsampo.obj,dlcsampo.exe,,,dlcsampo.def
+
+dlcsampo.obj :  dlcsampo.c dlcsam16.mak dirintf.h dlcintf.h dlcgblv.h
+   cl dlcsampo.c -c
+

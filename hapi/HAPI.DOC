@@ -1,0 +1,306 @@
+
+
+
+           IBM Extended Services for OS/2 (c) Copyright International Business
+        Machines Corp., 1991
+
+
+
+
+        EHLLAPI SAMPLE PROGRAMS
+
+        The EHLLAPI sample programs are a sample of writing application
+        programs using the EHLLAPI functions.  The sample programs are
+        designed to work in the OS/2 protect mode, with the Communications
+        Manager of the IBM Extended Services for OS/2.  Sample program
+        source code and the supporting files are provided for C, MASM,
+        COBOL, and BASIC Compiler languages.  Since the sample programs are
+        in source form, you will need to go through additional steps to run
+        these programs.
+
+        The sample programs request EHLLAPI configuration information and
+        HOST session information.  The sample programs then attempt to send
+        the string "EHLLAPI" to one of the started sessions.  An EHLLAPI
+        search function will be called to search for the string.  Last, the
+        first 1920 characters of the host session screen will be displayed.
+
+        Also provided on the sample program diskette is the Program Sampler
+        executable file.  This Program Sampler (HLLSAMP.EXE) lets you
+        experiment with various EHLLAPI functions.  See "Running the
+        Program Sampler" in the EHLLAPI Programming Guide.
+
+        RESTRICTIONS
+
+        1.  The Communications Manager must be loaded with at least one
+            3270 or one 5250 session started.  The 5250 session must not be
+            a printer session.
+
+        PREREQUISITES
+
+        To run a sample program, you must be familiar with the following
+        things:
+
+        1.  OS/2 installation and command prompt
+
+        2.  Communications Manager installation
+
+        3.  Compiler for the desired language
+
+        INSTALLATION
+
+        Install OS/2 and Communications Manager according to instructions
+        in "IBM Extended Services for OS/2 Start Here".
+
+        The compiler associated with the desired language also needs to be
+        installed using the installation procedure of that language
+        compiler.  Refer to the following language sections for additional
+        information.
+
+
+
+                                                                               Page  1        
+
+
+
+        SAMPLE EHLLAPI PROGRAMS
+
+        1.  C LANGUAGE
+
+            a.  INSTALL C COMPILER
+
+            b.  C SAMPLE PROGRAM
+
+                The C sample EHLLAPI program is called HSMPLC.  Copy from
+                the HAPI_C directory on the sample program diskette the
+                files with the filename HSMPLC into a directory on your
+                hard drive.  The files to be copied are source code (.C
+                extension), module definition file (.DEF extension), make
+                description file (no extension), and link response file
+                (.LRF extension).
+
+                Copy HAPI_C.H from the Communications Manager directory
+                (CMLIB) into the the directory containing the other include
+                files.
+
+                Copy PHLLC_S.OBJ file from the Communications Manager
+                directory (CMLIB) into the directory where other object
+                files will be maintained.
+
+            c.  LIBRARY FILES FOR C SAMPLE PROGRAM
+
+                Copy DOSCALLS.LIB from the OS/2 directory (OS2) into the
+                compiler's library directory.
+
+            d.  COMPILE/LINK C SAMPLE PROGRAM
+
+                Compile and link the sample EHLLAPI program according to
+                your C compiler instructions.
+
+        2.  MACRO ASSEMBLER
+
+            a.  INSTALL MACRO ASSEMBLER
+
+            b.  ASSEMBLER SAMPLE PROGRAM
+
+                The MASM sample EHLLAPI program is called HSMPLM.  Copy
+                from the HAPI_M directory on the sample program diskette
+                the files with the filename HSMPLM into a directory on your
+                hard drive.  The files to be copied are source code (.ASM
+                extension), module definition file (.DEF extension), make
+                description file (no extension), and link response file
+                (.LRF extension).
+
+                Copy HAPI_M.INC from the Communications Manager directory
+                (CMLIB) into the the directory containing the other include
+                files
+
+                Copy PHLLMASM.OBJ from the Communications Manager directory
+                (CMLIB) into the directory where other object files will be
+                maintained.
+
+
+                                                                               Page  2        
+
+
+
+            c.  LIBRARY FILES FOR ASSEMBLER SAMPLE PROGRAM
+
+                Copy DOSCALLS.LIB from the OS/2 directory (OS2) into the
+                compiler's library directory.
+
+            d.  ASSEMBLE/LINK ASSEMBLER SAMPLE PROGRAM Assemble and link
+                the sample EHLLAPI program according to your assembler
+                instructions.
+
+        3.  COBOL LANGUAGE
+
+            a.  INSTALL COBOL COMPILER
+
+            b.  COBOL SAMPLE PROGRAM
+
+                The COBOL sample EHLLAPI program is called HSMPLCBL.  Copy
+                from the HAPI_CBL directory on the sample program diskette
+                the files with the filename HSMPLCBL into a directory on
+                your hard drive.  The files to be copied are source code
+                (.CBL extension), module definition file (.DEF extension),
+                link response file (.LRF extension) and the batch file
+                (HSMPLCBB.CMD).
+
+                Copy HAPI_CBL.INC file from the Communications Manager
+                directory (CMLIB) into the the directory containing the
+                other include files.
+
+                Copy PHLLCOB.OBJ file from the Communications Manager
+                directory (CMLIB) into the directory where other object
+                files will be maintained.
+
+            c.  LIBRARY FILES FOR COBOL SAMPLE PROGRAM
+
+                Copy DOSCALLS.LIB from the OS/2 directory (OS2) into the
+                compiler's library directory.
+
+            d.  COMPILE/LINK COBOL SAMPLE PROGRAM Compile and link the
+                sample EHLLAPI program according to your Cobol compiler
+                instructions.
+
+        4.  BASIC LANGUAGE
+
+            a.  INSTALL BASIC COMPILER
+
+            b.  BASIC SAMPLE PROGRAM
+
+                The BASIC sample EHLLAPI program is called HSMPLBAS.  Copy
+                from the HAPI_BAS directory on the sample program diskette
+                the files with the filename HSMPLBAS into a directory on
+                your hard drive.  The files to be copied are source code
+                (.BAS extension), module definition file (.DEF extension),
+                link response file (.LRF extension) and the batch file
+                (HSMPLBSB.CMD).
+
+
+
+
+                                                                               Page  3        
+
+
+
+                Copy HAPI_BAS.INC file from the Communications Manager
+                directory (CMLIB) into the the directory containing the
+                other include files.
+
+                Copy PHLLCBAS.OBJ file from the Communications Manager
+                directory (CMLIB) into the directory where other object
+                files will be maintained.
+
+            c.  LIBRARY FILES FOR BASIC SAMPLE PROGRAM
+
+                Copy DOSCALLS.LIB from the OS/2 directory (OS2) into the
+                compiler's library directory.
+
+            d.  COMPILE/LINK BASIC SAMPLE PROGRAM
+
+                Compile and link the sample EHLLAPI program according to
+                your C compiler instructions.
+
+        CONFIGURATION STEPS
+
+        EHLLAPI supports the following connections of the Communications
+        Manager:
+
+        1.  DFT 3270 terminal emulation
+
+        2.  SDLC 3270 terminal emulation
+
+        3.  IBM Token-Ring Network 3270 terminal emulation
+
+        4.  X.25 3270 terminal emulation
+
+        5.  IBM PC Network via Gateway 3270 terminal emulation
+
+        6.  5250 Work Station Feature
+
+
+        For configuring and starting Communications Manager with the
+        terminal emulation connections above, refer to the "IBM Extended
+        Services for OS/2  User's Guide" and "IBM Extended Services for
+        OS/2 System Administrator's Guide for Communications".
+
+        RUNNING EHLLAPI SAMPLE PROGRAMS
+
+        Create a new directory SAMPLE on the PC where your EHLLAPI sample
+        program will reside.  Copy the executable (.EXE) created in the
+        above compile and link process to the SAMPLE subdirectory.
+
+        From the "Communications Manager Main Menu", start the 3270
+        emulation feature.  Switch to an OS/2 screen group and change the
+        current directory to SAMPLE.  Execute the sample EHLLAPI program.
+        The sample program will prompt you to press ENTER at certain points
+        within the program execution.
+
+        The functions which demonstrate the Structured Field process
+        requires the host file transfer file, IND$FILE, to be present on
+
+
+                                                                               Page  4        
+
+
+
+        the host session.  The sample program will prompt the user to
+        verify this and allow him to continue by selecting "Y" or to stop
+        execution by selecting "N".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                               Page  5        
+

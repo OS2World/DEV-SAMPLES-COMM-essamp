@@ -1,0 +1,5 @@
+NAME        CPICCREQ WINDOWCOMPAT NEWFILES
+DESCRIPTION 'APPC file transfer using CPI-C sample program (requester side)'
+PROTMODE
+STACKSIZE   8192
+

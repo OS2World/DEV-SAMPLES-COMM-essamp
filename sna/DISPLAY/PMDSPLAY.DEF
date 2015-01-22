@@ -1,0 +1,13 @@
+NAME          PMDSPLAY       WINDOWAPI
+DESCRIPTION   'PM Interface for the DISPLAY Verb'
+PROTMODE
+HEAPSIZE      0
+STACKSIZE     16384
+EXPORTS       MainWndProc
+              InfoWndProc
+              FileDlgProc
+              TargetDlgProc
+              AboutDlgProc
+IMPORTS       ACSSVC.ACSSVC
+              ACSSVC.ACSMGT
+

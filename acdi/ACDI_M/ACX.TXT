@@ -1,0 +1,13 @@
+;
+; This is the message text file for the ACDI Sample Transmit/Receive Programs
+;
+;
+ACX
+ACX0001: ACDI Sample Transmit Program.
+ACX0002: ACDI Verb in Error - Function Code =
+ACX0003:                      Return   Code =
+ACX0004: OS/2 Call in Error - Return   Code =
+ACX0005: Vio  Call in Error - Return   Code =
+ACX0006: Kbd  Call in Error - Return   Code =
+ACX0007: ACDI Sample Receive Program.
+

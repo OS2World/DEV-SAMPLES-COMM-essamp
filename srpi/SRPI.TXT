@@ -1,0 +1,499 @@
+
+                     EXTENDED SERVICES VERSION 1.0
+            COMMUNICATIONS MANAGER API SAMPLE PROGRAMS SUPPORT
+
+
+   Version 1.0 (c) Copyright International Business Machines Corp., 1988, 1991
+
+
+   SRPI SAMPLE PROGRAMS
+
+   The SRPI sample programs are provided as an example of how the SRPI
+   Send_Request interface verb can be used by a PC requester application
+   to invoke a server on the host.  The function of the sample programs
+   is to request records from a customer records data set on the IBM host
+   computer.  The IBM host computer sends the customer records to the
+   requester program for processing.  If the customer's balance in the
+   record is positive, the record is sent back to the server.  The server
+   puts the positive balance into an accounts receivable data set on the
+   IBM host computer.  To support this function, a sample PC requester
+   program, a sample host server program and a sample host data file are
+   provided.
+
+   The sample programs are designed to work in the OS/2 protect mode, with
+   the Communications Manager of the Extended Services 1.0.  Sample program
+   source code and the supporting files are provided for the C, MASM, and
+   COBOL languages.  Since the sample programs are in source form, you will
+   need to go through additional steps to run these programs.
+
+   RESTRICTIONS
+
+   1.  The Communications Manager must be loaded with at least one
+       3270 terminal session configured for use with SRPI.
+
+   2.  The sample server is based on the sample server source program
+       documented in the "Programmer's Guide to the Server-Requester
+       Programming Interface for VM/System Product".  The sample server
+       provided is used to run under VM/CMS environment only.  For a
+       sample server that will run under MVS environment, refer to the
+       "TSO Extensions Programmer's Guide to the Server-Requester
+       Programming Interface for MVS/Extended Architecture" for more
+       information.
+
+   3.  The balance field in the customer record is in binary format and
+       it is non-displayable on VM in the sample customer data set.
+
+   PREREQUISTES
+
+   To run a sample program, you must be familiar with the following
+   things:
+
+   1.  OS/2 installation and command prompt
+
+   2.  Communications Manager installation
+
+   3.  Compiler for the desired language
+
+   4.  VM/CMS operation and commands
+
+
+
+
+                                                                        1
+
+
+   INSTALLATION
+
+
+   Install OS/2 and the Communications Manager according to instructions
+   in the documentation provided with the product.  When installing the
+   Communications Manager, use its full function installation procedure.
+   The 3270 Emulation and File Transfer feature groups of the
+   Communications Manager need to be installed.  Installation of these
+   features will copy the SRPI API structures, macros and object files to
+   the Communications Manager directory, which is \CMLIB.
+
+   The compiler associated with the desired language also needs to be
+   installed using the installation procedure of that language compiler.
+   Refer to the following language sections for additional information.
+
+
+   SAMPLE REQUESTER PROGRAMS
+
+   1.  C LANGUAGE
+
+       The C sample requester program is called CSAMPL.C.
+
+
+       þ  ENVIRONMENT:
+
+          NOTE: The C compiler must be installed with the "large model"
+                library.
+
+          After setting up the environment for C compiling, add C:\CMLIB
+          and C:\OS2 to the LIB and INCLUDE paths.  UUCCPRB.H,
+          SRPI_C.OBJ, and ACS.LIB are used from the CMLIB directory and
+          DOSCALLS.LIB is used from the OS2 directory.
+
+
+       þ  COMPILING AND LINKING:
+
+          To compile and link the sample requester program, make the SRPI
+          API directory SRPI_C the current directory and execute the
+          following command at the OS/2 command prompt:
+
+                 nmake -r csampl [press Enter]
+
+          The executable file CSAMPL.EXE will be created.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        2
+
+
+
+   2.  MACRO ASSEMBLER
+
+       The MASM sample requester program is called MSAMPL.ASM.
+
+
+       þ  ENVIRONMENT:
+
+          After setting up the environment for assembling, add C:\CMLIB
+          and C:\OS2 to the LIB and INCLUDE paths.  UUMCPRB.INC,
+          UUMINFAC.MAC, and ACS.LIB are used from the CMLIB directory and
+          DOSCALLS.LIB is used from the OS2 directory.
+
+
+       þ  COMPILING AND LINKING:
+
+          To compile and link the sample requester program, make the SRPI
+          API directory SRPI_M the current directory and execute the
+          following command at the OS/2 command prompt:
+
+                 make msampl [press Enter]
+
+          The executable file MSAMPL.EXE will be created.
+
+
+   3.  COBOL LANGUAGE
+
+       The COBOL sample requester program is called BSAMPL.CBL.
+
+
+       þ  ENVIRONMENT:
+
+          After setting up the environment for COBOL compiling, add
+          C:\CMLIB and C:\OS2 to the LIB and INCLUDE paths.  SRPI_CBL.OBJ
+          and ACS.LIB are used from the CMLIB directory and DOSCALLS.LIB
+          is used from the OS2 directory.  Copy UUBCPRB.CBL from the
+          CMLIB directory into the SRPI API directory SPRI_CBL.
+
+
+       þ  COMPILING AND LINKING:
+
+          To compile and link the sample requester program, make the SRPI
+          API directory SRPI_CBL the current directory and execute the
+          following command at the OS/2 command prompt:
+
+                 bsampmak [press Enter]
+
+          The executable file BSAMPL.EXE will be created.
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        3
+
+
+   HARDWARE REQUIREMENTS:
+
+   A 3270 terminal emulation (DFT) connection to an IBM host computer via
+   a SNA controller from an IBM Personal Computer AT using the IBM 3278/79
+   Adapter (DCA) or from a PS/2 using The IBM 3270 Connection adapter.
+
+   NOTE: For non-DFT communications hardware requirements, refer to the
+   System Administrator's Guide.
+
+
+
+   COMMUNICATIONS MANAGER CONFIGURATION:
+
+   SRPI supports the following connections of the Communications
+   Manager:
+
+   1.  3270 DFT terminal emulation
+
+   2.  3270 non-DFT terminal emulation with the following connectivities:
+
+         a) SDLC
+         b) Token Ring
+         c) X.25
+         d) IBM PC Network via 3270 Gateway
+         e) Etherand via 3270 Gateway
+         f) 3174 Peer Communicatons
+
+
+   For configuring and starting Communications Manager with the terminal
+   emulation connections above, refer to the "Extended Services Version 1.0
+   User's Guide" and "Extended Services Version 1.0 System Administrator's
+   Guide for Communications".
+
+   As an illustration of the configuration process for SRPI, the following
+   instructions will guide you through the configuration process for a 3270
+   DFT SRPI session, panel by panel, until complete.  This will configure a
+   system for the following features to run the SRPI sample programs:
+
+   1.  3270 terminal emulation (DFT) SNA connection
+
+   2.  Server-Requester Programming Interface (SRPI) profiles
+
+   NOTE: For non-DFT Communications configuration refer to the System
+   Administrator's Guide.
+
+   Create a sample configuration file for the SRPI sample program using
+   the configuration services in Communications Manager by following
+   the instructions on the next few pages.
+
+
+
+
+
+
+
+
+
+
+                                                                        4
+
+
+   CONFIGURATION STEPS
+
+   On the PC that will run the sample program, copy the system-supplied
+   configuration file, ACSCFG.CFG, to SRPISMPL.CFG in the C:\CMLIB
+   directory.
+
+     [C:\CMLIB]copy acscfg.cfg srpismpl.cfg [press Enter]
+
+   Start the Communications Manager using SRPISMPL as the startup
+   configuration file, type the following at the OS/2 command prompt:
+
+     [C:\CMLIB]cm srpismpl [press Enter]
+
+   Beginning at the "Communications Manager Main Menu" follow the
+   instructions below.
+
+   Press F10
+   Select (A) "Advanced" from action bar
+   Select (C) "Configuration"
+
+   "Specify Configuration File Name"  [SRPISMPL] panel displayed
+   ENTER
+
+   "Communication Configuration Menu" panel displayed
+   Select (f) "3270 feature profiles"
+
+   "3270 Feature Configuration" panel displayed
+   Select (D) "DFT..."
+
+   "Profile Operations" pop-up panel displayed
+   Select (C) "Create/Change"
+
+   "Create/Change 3270 Profile" panel displayed
+   Select (C) "Connection..."
+
+   "Select Adapter Type" pop-up panel displayed
+   Select the appropriate adapter for the machine you are
+          working on.  PS/2 = 3270 Connection
+          AT = 3278/79 emulation or Advanced 3270/79 ...
+   ENTER
+
+   "Create/Change 3270 Profile" panel displayed
+   Select (S) "Session 1"
+   Select (T) "Terminal"
+
+   "Create/Change 3270 DFT Logical Terminal Session Profile" panel displayed
+   Specify "Session ID"  to be "TEST"
+   Specify "Comment" to be "This is a sample logical terminal"
+   ENTER
+
+   "3270 Feature Configuration" panel displayed
+   ESCAPE
+
+
+
+
+
+                                                                        5
+
+
+   "Communication Configuration Menu" panel displayed
+   Select (S) "Server-Requester Programming
+               Interface (SRPI) profiles"
+
+   "SRPI Profile Operations" panel displayed
+   Select (C) "Create"
+
+   "Specify model profile and Server Alias" pop-up displayed
+   Specify "Model Profile" to be "3270"
+   Specify "Server Alias" to be "IBMABASE"
+   ENTER
+
+   "Create/Change Server 3270 Profile" panel displayed
+   Specify "Server Name" to be "IBMABASE"
+   Specify "Comment" to be "This is a sample server"
+   Specify "3270 session ID"  to be "TEST"
+   ENTER
+
+   "SRPI Profile Operations" panel displayed
+   ESC
+
+   "Communication Configuration Menu" panel displayed
+
+   Press F10
+   Select (V) "Verify" from action bar
+   Select (R) "Run Verify"
+
+   The following message should appear:
+    "Verification of the configuration file is complete.
+     No errors occured... "
+   ENTER
+
+   Press F10
+   Select (X) "Exit" from action bar
+   Select (X) "Exit Communication Configuration"
+
+   "Communications Manager Main Menu" panel displayed
+
+   Before running the sample SRPI program, exit and restart the
+   Communications Manager using SRPISMPL as the configuration file.  This
+   will allow the changes to take affect.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        6
+
+
+
+   INSTALL SAMPLE SRPI SERVER:
+
+
+   To set up the sample server environment, two files are needed on the
+   IBM host computer:
+
+      IBMABASE MODULE (the sample server)
+      INPUT FILE (the sample customer data set)
+
+   The following instructions will guide you to properly install the SRPI
+   sample server on the host.
+
+   From the "Communications Manager Main Menu", start the 3270 emulation
+   feature and log on to the specified session.  Create a new screen
+   group from the Program Selector menu on the PC.  At the OS/2 command
+   prompt, enter the following commands to upload the three host sample
+   files from the diskette:
+
+      SEND A:IBMABASE.ASM TEST: IBMABASE ASSEMBLE A (ASCII CRLF RECFM F
+      SEND A:ALGABASE.EXC TEST: ALGABASE EXEC A (ASCII CRLF
+      SEND A:INPUT.FIL TEST: INPUT FILE A (LRECL 109
+
+   Note: If the above files are not located on a diskette in drive A,
+   then enter the correct path inplace of the A:.
+
+   After the file transfer completes, switch to the same 3270 session and
+   type ALGABASE at the VM/CMS command line to assemble and link.  This
+   will generate the executable sample server file with the name of
+   IBMABASE MODULE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        7
+
+
+   RUNNING SRPI REQUESTER AND SERVER SAMPLE PROGRAMS
+
+   Create a new directory SAMPLE on the PC where your requester sample
+   program will reside.  For C language, copy the file CSAMPL.EXE from
+   C:\IBMC2 to C:\SAMPLE subdirectory.  For PASCAL, copy the file PSAMPL.EXE
+   from C:\PASCAL to C:\SAMPLE subdirectory.  For MASM, copy the file
+   MSAMPL.EXE from C:\MASM\BIN to C:\SAMPLE subdirectory.  For COBOL, copy
+   the file BSAMPL.EXE form C:\PCOBOL\SRC to C:\SAMPLE subdirectory.
+
+   Enter CMSSERV from the CMS command line in the 3270 session you just
+   started.  The IBM Enhanced Connectivity Facilities screen appears.
+   Switch to an OS/2 screen group and change the current directory to
+   SAMPLE.  Execute the sample requester program.  When the program
+   completes, switch back to the 3270 session with CMSSERV screen.  Press
+   PF3 key to end the communication between CMSSERV and your PC.  Verify
+   that there are two files generated in your 3270 session as a result of
+   the SRPI requester execution.  The names of these two files are OUTPUT
+   FILE and LOG FILE.
+
+   The content of the OUTPUT FILE is listed below:
+
+   Barttwell, Jim 300 Top Bend         Austin Texas   78759  1000-2000-3020
+
+   The content of the LOG FILE is listed below:
+
+   CUSTOMER RECORDS READ ***
+   Ahab, John     1000 High Circle       Austin Texas   78759  1000-2000-3000
+    ADMIN
+
+   CUSTOMER RECORDS READ ***
+   Black, Edward  2000 Big Top Road   Austin Texas   78759  1000-2000-3010
+    ADMIN
+
+   CUSTOMER RECORDS READ ***
+   Barttwell, Jim 3000 Top Bend       Austin Texas   78759  1000-2000-3020
+    ADMIN
+
+   CUSTOMER RECORDS UPDATED
+   Barttwell, Jim 3000 Top Bend       Austin Texas   78759  1000-2000-3020
+   Barttwell, Jim 3000 Top Bend       Austin Texas   78759  1000-2000-3020
+    ADMIN
+
+   WSCOMM RECEIVED BY SERVER
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        8
+
+

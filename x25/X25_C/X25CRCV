@@ -1,0 +1,8 @@
+all:          x25crcv.exe
+
+x25crcv.obj:  x25crcv.c
+  cl /Alfu /W4 /c x25crcv.c
+
+x25crcv.exe:  x25crcv.obj
+  link @x25crcv.lrf
+

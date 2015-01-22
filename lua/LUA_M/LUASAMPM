@@ -1,0 +1,9 @@
+
+luasampm.obj: luasampm.asm  lua_m.inc  acssvca.inc
+   masm luasampm /c /l /ml /mx /p /v ;
+
+
+luasampm.exe: luasampm.obj
+   link @luasampm.lrf
+
+

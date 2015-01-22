@@ -1,0 +1,6 @@
+BSAMPL+srpi_cbl
+BSAMPL
+BSAMPL /map
+coblib+doscalls/nop
+BSAMPL
+

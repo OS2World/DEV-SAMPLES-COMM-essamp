@@ -1,0 +1,4 @@
+NAME        FILECFG WINDOWCOMPAT
+DESCRIPTION 'APPC configure requester/server sample program'
+PROTMODE
+STACKSIZE   4500

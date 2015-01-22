@@ -1,0 +1,349 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+
+CPI-C FILE REQUESTER AND FILE SERVER C SAMPLE PROGRAMS
+
+The function of the CPICCREQ and CPICCSVR sample programs is to demonstrate how
+to transmit a file from one OS/2 workstation to another using CPI-C application
+program interface calls.  CPICCREQ is a receive program, referred to as the
+"requester" and CPICCSVR is a send program, referred to as the "server".  Do
+not confuse these names with the LAN Requester/Server software, which is not
+related to APPC.  The requester sample program refers to the CPI-C
+system-defined values called side information using a symbolic destination name
+to obtain the server transaction program name, LU name, and mode name for the
+conversation.
+
+The requester can be started at one OS/2 workstation to request that the server
+program be started on another OS/2 workstation and send a specific server file
+to the requester.  Additionally, the requester can specify a new name for the
+received file and the path where the received file will be stored.  An
+alternative configuration is provided to allow the server and requester to
+coexist on the same OS/2 workstation.
+
+The sample programs are designed to work with Communications Manager while in
+the protected mode of Extended Services 1.0.  The sample program source
+code and supporting files are designed to work in the OS/2 protect mode with
+the Communications Manager. They are written using the C programming language
+and can be compiled as a 16-bit application using Microsoft C6 or as a 32-bit
+using IBM C Set/2 Compiler.
+
+
+PREREQUISITES
+
+To run the sample programs, you need to have Communications Manager configured
+and running, then configure the sample programs.
+
+o Communications Manager
+  The machine must be configured as either an End Node or a Network Node and
+  have at least a Control Point (CP) defined.  It is assumed that you have
+  also configured to use a DLC.  You must also have started the attach
+  manager on the server side.
+
+To compile the sample programs, you should be familiar with and have the
+following available
+
+o OS/2 Toolkit:
+     - 1.3 or higher as a 16-bit application
+     - 2.0 as a 32-bit application
+
+o Extended Services for OS/2 Release 1.0, Communications Manager and
+  High Level Languages (HLL) include files.
+
+o The IBM Extended Services for OS/2 Communications Manager API
+  Sample Programs Support diskette containing the program source.
+
+o The C compiler and linker.  You should be able to compile programs for OS/2
+  (PATH and INCLUDE environment variables are correct).
+
+
+
+CONFIGURING COMMUNICATIONS MANAGER TO USE THE SAMPLE PROGRAMS
+
+You can configure the sample programs using either the Advanced Services
+of Communications Manager, the APPNC configuration screens, or by editing your
+node definitions file.
+
+CONFIGURING USING APPNC
+
+To configure Communications Manager using the APPNC configuration screens,
+perform the follow steps for each situation:
+
+For requester and server on the same workstation:
+
+   Follow both requester workstation and server workstation instructions below,
+   skipping those steps marked with an asterisk (*).
+
+On the requester workstation:
+
+   If you do not want to modify your current working configuration files:
+      Make a copy of a working .CFG file in \CMLIB.
+      Make copies of the corresponding ".NDF" and ".SEC" files in \CMLIB\APPN
+      -- use the ".NDF" copy as the working ".NDF" below.
+
+*     Select 'Additional SNA Features'.
+*     Select 'Partner LUs' to create a new Partner LU.
+*     Type the Fully Qualified LU name of an LU on the Partner workstation.
+*     Type CPICSVR in the Alias field.
+*     Select OK.
+
+      Select 'CPI-C Communications Side Information'.
+      Type CPICSVR in the CPI-C Symbolic Destination Name field.
+      Type CPICSVR in the Partner LU alias field.
+      Type FileServer (case sensitive) in the Partner TP TP Name field.
+      Select #INTER for the Mode Name
+      Select OK.
+
+*     Select File, Verify.
+
+On the server workstation:
+
+*  If you want to create new configuration files:
+*     Make a copy of a working .CFG file in \CMLIB.
+*     Make copies of the corresponding ".NDF" and ".SEC" files.
+*          in \CMLIB\APPN -- use the ".NDF" copy as the working ".NDF" file
+*          below.
+
+*  Invoke APPNC, specifying a working ".NDF" file in \CMLIB\APPN, then:
+*     Select 'Additional SNA Features'.
+      Select 'Local LUs'.
+      Type CPICSVR in the Lu Name field.
+      Type CPICSVR in the Alias field.
+      Select OK.
+
+      Select 'Transaction Program Definitions'.
+      Type FileServer for the (case-sensitive) Transaction Program name.
+      Type the filespec of the server program in the Path and File Name field.
+           With the sample programs are installed in the 'path' directory,
+           you would type:
+            'path'\SNA\CPICFILE\CPICCSVR.EXE
+      Select Continue.
+      Select VIO-Windowable for Presentation Type.
+      Select Non-Queued Attach Manager Started.
+      Select OK.
+
+      Select 'Configuration'
+      Select 'Local Node Characteristics'.
+      If not already selected, select Activate attach manager at startup.
+      Select OK.
+      Select File, Verify.
+
+
+CONFIGURING USING THE SUPPLIED ".NDF" FRAGMENTS
+
+You can configure two different OS/2 workstations
+to support the server in one and the receiver in the other, or you can
+configure one OS/2 workstation to support both.  For either case you
+can choose to update your working configuration or to create a new
+configuration.   Choose only one of the following four cases below:
+
+Case 1: Configure two different OS/2 workstations, updating the working
+        configuration files.
+
+ 1. Append the sample ".NDF" fragment to the working node definition file
+    in C:\CMLIB\APPN.
+    On the server, specify:
+       CD \CMLIB\APPN
+       COPY  working.NDF + 'path'\SNA\CPICFILE\CPICSVR.NDF
+    On the requester, specify:
+       CD \CMLIB\APPN
+       COPY  working.NDF + 'path'\SNA\CPICFILE\CPICREQ.NDF
+
+ 2. Edit working.NDF on both the server and requester and look
+    near the end of the file for instructions for changes
+    you must make before verifying the file.
+
+ 3. Verify the configuration on both the server and requester
+       APPNV working /E
+
+    Specify the /E option when Communications Manager is currently
+    active, to dynamically update your configuration.
+    (APPNV uses the new working.NDF to update both working.CFG and
+    working.CF2 so the new configuration will be used the next time
+    you start Communications Manager.
+
+Case 2: Configure two different OS/2 workstations, creating new
+        configuration files.
+
+ 1. Make a copy of your working.CFG file in C:\CMLIB:
+    On the server, specify:
+       CD \CMLIB
+       COPY  working.CFG  CPICSVR.CFG
+    On the requester, specify:
+       CD \CMLIB
+       COPY  working.CFG  CPICREQ.CFG
+
+ 2. Combine the working.NDF file with the sample
+    node definition fragment to create a new .NDF file in C:\CMLIB\APPN:
+    On the server, specify:
+       CD \CMLIB\APPN
+       COPY  working.NDF + SNA\CPICFILE\CPICSVR.NDF  CPICSVR.NDF
+       COPY  working.SEC  CPICSVR.SEC
+    On the requester, specify:
+       CD \CMLIB\APPN
+       COPY  working.NDF + SNA\CPICFILE\CPICREQ.NDF  CPICREQ.NDF
+       COPY  working.SEC  CPICREQ.SEC
+
+ 3. Edit working.NDF on both the server and requester
+    and look near the end of the file for instructions
+    for changes you must make before verifying the file.
+
+ 4. Verify the configurations on both the server and requester
+    For the server, specify:
+           APPNV CPICSVR
+    For the requester, specify:
+           APPNV CPICREQ
+
+ 5. Finally, if Communications Manager is running, stop and restart it,
+    specifying the new configuration file.
+    For the server, specify:
+           CM CPICSVR
+    For the requester, specify:
+           CM CPICREQ
+
+
+Case 3: Configure a single OS/2 workstation to support both
+        server and requester, updating the working configuration files.
+
+ 1. Append the sample CPICBOTH.NDF fragment to the
+    working node definition file in C:\CMLIB\APPN:
+       CD \CMLIB\APPN
+       COPY  working.NDF + SNA\CPICFILE\CPICBOTH.NDF
+
+ 2. Edit working.NDF and look near the end of the file for instructions
+    for changes you must make before verifying the file.
+
+ 3. Verify the configuration
+       APPNV working /E
+
+    Specify the /E option when Communications Manager is currently
+    active, to dynamically update your configuration.
+    (APPNV uses the new working.NDF to update both working.CFG and
+    working.CF2 so the new configuration will be used the next time
+    you start Communications Manager.
+
+Case 4: Configure a single OS/2 workstation to support both
+        server and requester, creating new configuration files.
+
+ 1. Make a copy of your working.CFG file in C:\CMLIB:
+       CD \CMLIB
+       COPY  C:\CMLIB\working.CFG  C:\CMLIB\CPICBOTH.CFG
+
+ 2. Combine the working node definition file with
+    the sample .NDF file to create a new CPICBOTH.NDF file in C:\CMLIB\APPN:
+       CD \CMLIB\APPN
+       COPY working.NDF + SNA\CPICFILE\CPICBOTH.NDF  CPICBOTH.NDF
+       COPY  working.SEC  CPICBOTH.SEC
+
+ 3. Edit CPICBOTH.NDF and look near the end of the file for instructions
+    for changes you must make before verifying the file.
+
+ 4. Verify the configuration
+       APPNV CPICBOTH
+
+ 5. If Communications Manager is running, stop it.
+    Start Communications Manager, specifying the new configuration file:
+       CM CPICBOTH
+
+
+RUNNING THE SAMPLE PROGRAMS
+
+1.  From the requester side, switch to OS/2 and select the OS/2 Full Screen
+    or OS/2 Window command prompt.
+
+2.  Copy APC.MSG from the sample program subdirectory to \CMLIB to make it
+    available to the Communications Manager.
+
+3.  If you change the DEFINE_TP tp_operation for the server TP to
+    QUEUED_OPERATOR_STARTED or QUEUED_OPERATOR_PRELOADED, then at the server,
+    set environment variable APPCTPN to the value specified for tp_name, then
+    start the server program.  For this sample program, you would enter:
+        SET APPCTPN = FileServer
+        CPICCSVR
+
+4.  Start the requester program (CPICCREQ.EXE) with the drive, path and
+    file name of the file you want to request from the server program.
+    The specified file is then transmitted to the requester.
+    The server workstation runs in unattended mode.
+
+    The parameters for CPICCREQ are:
+
+      CPICCREQ  server_filespec
+                requester_new_filespec
+                alternate_symbolic_destination name
+
+    For example, entering "CPICCREQ C:\TEMP" would copy the file named
+    "C:\TEMP" from the server to the requester and name it "C:\TEMP".
+
+    The optional second parameter designates the filespec you want
+    the file copied into.  For example, "CPICCREQ C:\TEMP D:\DIFFRNT" would
+    copy the file "C:\TEMP" on the server to "D:\DIFFRNT" on the requester.
+    You must specify two different filenames when running both programs
+    on the same workstation to avoid reading and writing the same file.
+
+    When the second parameter is specified, an optional third parameter
+    designates an alternative CPI-C symbolic destination name
+    (identifying a server LU, mode name, and transaction program name).
+
+    Refer to Common Programming Interface Communications Reference
+    for any CPI-C call error return code values displayed by the sample
+    program. Refer to the Variables and Characteristics appendix to translate
+    return code values to labels, then to the Returns Codes appendix for
+    return code label descriptions, and to the CPI Communications on OS/2
+    appendix for information on Communications Manager error return codes
+    and error logging.  In addition to displayed return codes, messages may be
+    logged in the Communications Manager message log, and for CPI-C return
+    code CM_PRODUCT_SPECIFIC_ERROR (20), in particular, refer to the
+    Communications Manager error log. Communications Manager Problem
+    Determination Guide contains information on how to access the message log
+    and error log, and descriptions of CPI-C message log and error log entries.
+
+Note that the requester or server from this sample program can be used with
+the server or requester, respectively, from the other file transfer sample
+program.   The requester's "fq_partner_lu_name" on the DEFINE_PARTNER_LU
+verb must be changed to match the server's fq_cp_name on the server's
+DEFINE_LOCAL_CP.
+
+COMPILING THE SAMPLE PROGRAMS USING MICROSOFT C6
+
+1.  Change directory to the directory containing the sample program
+    (usually \CMLIB\SNA\CPICREQ).
+
+2.  Make sure "\TOOLKT13\BIN" is on your path.  This is necessary to build
+    the message file.
+
+3.  Add the path of the include files for Communications Manager to your
+    INCLUDE environment variable. A common INCLUDE statement necessary for
+    compilation is:
+
+       SET INCLUDE=C:\C600\INCLUDE;C:\CMLIB;C:\TOOLKT13\C\INCLUDE;
+
+4.  Make sure \CMLIB is in your LIB environment variable.
+    A common LIB statement necessary for linking is:
+
+       SET LIB=C:\C600\LIB;C:\CMLIB;C:\OS2;C:\TOOLKT13\LIB;
+
+5.  Compile the programs using the  "make" command for Microsoft C
+    compiler:
+            nmake cpiccreq.mak
+            nmake cpiccsvr.mak
+
+6.  Copy APC.MSG from the sample program subdirectory to \CMLIB to make it
+    available to the Communications Manager.  This is necessary for the
+    server side to be able to log messages using the LOG_MESSAGE services
+    verb.
+
+COMPILING THE SAMPLE PROGRAM WITH IBM C Set/2 Compiler
+
+1. Include the '#define E32TO16' statement in the source files.
+
+2. Follow the general steps above, ensuring that the environment
+   for using the C Set/2 Compiler is provided.
+
+
+RESTRICTIONS
+
+o   When you request a file with the path, the directory must exist on the
+    local machine.  This program will not create the directory path for you.
+
+

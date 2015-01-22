@@ -1,0 +1,23 @@
+/*
+ 
+This file should be used to help configure the APPC requester side of
+the file sample programs.  The APPC requester is the workstation where
+you enter FILECREQ.
+ 
+You may copy this configuration command into your current APPC node
+definition file (.NDF).
+ 
+Change "AN_LU_NAME" to the fully-qualified name of an actual LU on the
+target machine.
+ 
+*/
+ 
+DEFINE_PARTNER_LU
+                  fq_partner_lu_name(AN_LU_NAME)  /* change this to an */
+                                                  /* LU that exists on */
+                                                  /* the server.       */
+                  partner_lu_alias(FILESVR)
+                  partner_lu_uninterpreted_name(BLANK)
+                  parallel_session_support(yes)
+                  conv_security_verification(no);
+ 

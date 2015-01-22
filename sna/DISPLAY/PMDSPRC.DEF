@@ -1,0 +1,7 @@
+LIBRARY PMDSPLAY
+DESCRIPTION   'DLL file containing PMDSPLAY resources'
+
+STUB 'OS2STUB.EXE'
+
+DATA NONE
+

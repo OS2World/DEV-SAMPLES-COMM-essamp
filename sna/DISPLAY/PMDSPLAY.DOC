@@ -1,0 +1,182 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+
+PMDSPLAY SAMPLE PROGRAM
+
+   The PMDSPLAY sample program displays, in an OS/2 Presentation Manager
+   environment, status and configuration information for the active
+   SNA configuration of the Communications Manager. PMDSPLAY demonstrates
+   the use of the APPC management verbs DISPLAY and DISPLAY_APPN for
+   retrieving this information.
+
+   Source for the PMDSPLAY sample program is provided in C.  Most of
+   the source is shared with the DISPLAY sample program.
+
+
+RUNNING THE PMDSPLAY SAMPLE PROGRAM
+
+   To run the sample programs, you need to have Communications Manager
+   installed and running.
+
+   In addition to providing PMDSPLAY as a sample program, Communications
+   Manager will install the PMDSPLAY-related executable files in the
+   directory \CMLIB\APPN. PMDSPLAY will be called from the Communications
+   Manager Subsystem Management menu when 'Display active SNA configuration'
+   is selected. Also, PMDSPLAY is called when 'SNA Network Definitions
+   Configuration' is selected from the Desktop Manager.
+
+   To use the remote capability of the PMDSPLAY sample program, the
+   RDSPSRVR sample program must be installed on the remote computer.
+   See the file RDSPSRVR.DOC.
+
+   From an OS/2 command prompt (full-screen or windowed), enter the
+   command as follows:
+
+      START PMDSPLAY
+
+   Options may be specified by selecting the Presentation Manager
+   Action Bar Items and Menu Items.  Press F1 to get help.
+
+   To display information about the local computer, do the following:
+
+      o Select the "Display" Action Bar Item
+
+      o Select the "General SNA" or "APPN" Menu Item
+
+      o Select one of the Menu Items displayed
+
+   To display the information on the screen only, do the following:
+
+      o Select the "Options" Action Bar Item
+
+      o Select the "Display to Screen" Menu Item
+
+      Note:  This is the default, and is mutually exclusive with
+             the "Display to File" Menu Item
+
+   To display the information to the file of your choice, and have
+   that information echoed to the screen, do the following:
+
+      o Select the "Options" Action Bar Item
+
+      o Select the "Display to File..." Menu Item
+
+      o Select the file you wish to save the information in, using
+        the listboxes and/or the entryfield as appropriate
+
+      o If you wish to append to an existing file, select the "Append"
+        checkbox
+
+      o When you are done, select the "OK" pushbutton to select that
+        file, or select the "Cancel" pushbutton to exit the dialog
+        without saving any changes
+
+   To display information about a partner LU, do the following:
+
+      o Select the "Options" Action Bar Item
+
+      o Select the "Select Target..." Menu Item
+
+      o Select the partner whose information you wish to view, using
+        the listbox and/or the entryfield as appropriate.  The partner
+        LU name may be an alias, or a fully qualified partner LU name.
+        The default choice, "Local", is the local computer.  Note that
+        you can perform a "remote" display on your own computer by
+        specifying your own LU alias or fully qualified LU name
+
+      o When you are done, select the "OK" pushbutton to select that
+        partner, or select the "Cancel" pushbutton to exit the dialog
+        without saving any changes.  If you select "OK", PMDSPLAY will
+        attempt to start a conversation with the specified partner.
+        If it is unable to do so, the return codes and sense data will
+        be shown.  If it is able to allocate the conversation, you
+        may then choose the information you wish to see.  Only one
+        conversation at a time is maintained, and if you choose
+        "Local", any current conversation is terminated
+
+   Context sensitive help is available by placing the cursor on any
+   selectable field, and pressing Function Key 1 (F1).
+
+
+COMPILING THE PMDSPLAY SAMPLE PROGRAM
+
+   To compile the PMDSPLAY sample program, you must have the following
+   installed:
+
+   o Extended Services for OS/2 Release 1.0, Communications Manager and
+     High Level Languages (HLL) include files.
+
+   o The IBM Extended Services for OS/2 Communications Manager API
+     Sample Programs Support diskette containing the program source.
+
+   o Microsoft C Compiler Version 6.0 (including multi-thread support)
+
+   The procedure is as follows.
+
+   1.  Change directory to the directory containing the source for the
+       PMDSPLAY sample program (path\SNA\DISPLAY).
+
+   2.  In addition to the settings required for the C compiler and the
+       IBM OS/2 Programming Tools, set the following environment
+       variables to include the following directories:
+
+          INCLUDE and LIB must include "\CMLIB".
+
+   3.  Compile the program using the "nmake" command for Microsoft C compiler
+       Version 6.0:
+             nmake pmdsplay.mak
+
+
+       The source files associated with the PMDSPLAY sample program are
+       listed below.
+
+          PMDSPLAY.MAK - MAKE file
+          PMDSPLAY.DEF - Module definition file (for LINK of PMDSPLAY.EXE)
+          PMDSPRC.DEF  - Module definition file (for LINK of PMDSPLAY.DLL)
+          PMDSPLAY.RC  - Resource definitions
+          PMDSPLAY.IPF - Help source
+          PMDSPLAY.H   - Global typedefs, prototypes, and #includes
+          PMDSPLAY.C   - Main function
+          PMD_MAIN.C   - Client window procedure
+          PMD_UTIL.C   - Utilities
+          PMD_DLGS.C   - Dialog functions
+          DISPLAY.H    - Global typedefs, prototypes, and #includes
+          DISPUTIL.C   - Common utility functions
+          EXECDISP.C   - Utility function to execute DISPLAY verb
+          APPCUTIL.C   - Common utilities for remote DISPLAY
+          SNA.C        - Formats global information
+          LU62.C       - Formats LU 6.2 information
+          AM.C         - Formats attach manager information
+          TP.C         - Formats transaction program information
+          SESS.C       - Formats session information
+          LINKS.C      - Formats link information
+          LU03.C       - Formats LU 0, 1, 2, and 3 information
+          GW.C         - Formats gateway information
+          X25.C        - Formats X.25 logical link information
+          DEFAULTS.C   - Formats system defaults information
+          ADAPTER.C    - Formats adapter information
+          LU_DEF.C     - Formats LU definition information
+          PLU_DEF.C    - Formats partner LU definition information
+          MODE_DEF.C   - Formats mode definition information
+          LINK_DEF.C   - Formats link definition information
+          MS.C         - Formats management services information
+          NODE.C       - Formats APPN node information
+          PMRCSTUB.C   - Stub for creating PMDSPLAY.DLL
+          DIR.C        - Formats APPN directory information
+          TOP.C        - Formats APPN topology information
+          ISR.C        - Formats APPN intermediate session information
+          COS.C        - Formats APPN class of service information
+          CN.C         - Formats APPN connection network information
+          APD.TXT      - Messages (English)
+          MSGID.H      - #defines for messages
+
+   4.  Copy the file PMDSPLAY.HLP to a directory specified in the HELP
+       environment variable.
+
+
+RESTRICTIONS
+
+   o   None
+
+

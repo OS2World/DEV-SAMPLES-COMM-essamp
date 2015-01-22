@@ -1,0 +1,132 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+
+DISPLAY SAMPLE PROGRAM
+
+   The DISPLAY sample program displays status and configuration information
+   for the active SNA configuration of the Communications Manager,
+   demonstrating the use of the APPC management verbs DISPLAY and DISPLAY_APPN
+   for retrieving this information.
+
+   Source for the DISPLAY sample program is provided in C.
+
+RUNNING THE DISPLAY SAMPLE PROGRAM
+
+   To run the sample programs, you need to have Communications Manager
+   installed and running.
+
+   In addition to providing DISPLAY as a sample program, Communications
+   Manager will install the DISPLAY-related executable files in the
+   directory \CMLIB\APPN where it can be initiated from a command line.
+
+   To use the remote capability of the DISPLAY sample program, the
+   RDSPSRVR sample program must be installed on the remote computer.
+   See the file RDSPSRVR.DOC.
+
+   From an OS/2 command prompt (full-screen or windowed), enter the
+   command as follows:
+
+      DISPLAY [Partner LU Name] [Options]
+
+      Partner LU Name: Displays a remote computer's configuration
+
+      Options:  ?    - Displays a help screen
+                -AD  - Displays Adapter information
+                -AM  - Displays Attach Manager information
+                -CN  - Displays Connection Network information
+                -CO  - Displays APPN Class of Service information
+                -D   - Displays APPN Directory information
+                -G   - Displays SNA Gateway information
+                -I   - Displays Intermediate Session Routing information
+                -LD  - Displays Link Definitions
+                -LI  - Displays Active Links information
+                -LUD - Displays Logical Unit Definitions
+                -LU0 - Displays Logical Unit 0-3 information
+                -LU6 - Displays Logical Unit 6.2 information
+                -MD  - Displays Mode Definitions
+                -MS  - Displays Management Services information
+                -N   - Displays APPN Node information
+                -P   - Displays Partner Logical Unit Definitions
+                -SE  - Displays Session information
+                -SN  - Displays SNA Global information
+                -SY  - Displays System Defaults
+                -TO  - Displays APPN Topology information
+                -TP  - Displays Active Transaction Programs information
+                -X   - Displays X.25 Physical Links information
+
+   Partner LU Name, if present, must be the first option.  It may be
+   a partner LU alias or a fully qualified partner LU name.  Options,
+   if present, are not case sensitive.  Multiple options may be
+   specified, but they must be separated by blanks.
+
+
+COMPILING THE DISPLAY SAMPLE PROGRAM
+
+   To compile the DISPLAY sample program, you must have the following
+   installed:
+
+   o Extended Services for OS/2 Release 1.0, Communications Manager and
+     High Level Languages (HLL) include files.
+
+   o The IBM Extended Services for OS/2 Communications Manager API
+     Sample Programs Support diskette containing the program source.
+
+   o Microsoft C Compiler Version 6.0 (including multi-thread support)
+
+   The procedure is as follows.
+
+   1.  Change directory to the directory containing the source for the
+       DISPLAY sample program (path\SNA\DISPLAY).
+
+   2.  In addition to the settings required for the C compiler and the
+       IBM OS/2 Programming Tools, set the following environment
+       variables to include the following directories:
+
+          INCLUDE and LIB must include "\CMLIB".
+
+   3.  Compile the program using the "nmake" command for Microsoft C compiler
+       Version 6.0:
+             nmake display.mak
+
+       The source files associated with the DISPLAY sample program are
+       listed below.
+
+          DISPLAY.MAK  - MAKE file
+          DISPLAY.DEF  - Module definition file (for LINK)
+          DISPLAY.H    - Global typedefs, prototypes, and #includes
+          DISPLAY.C    - Main function and unique utility functions
+          DISPUTIL.C   - Common utility functions
+          APPCUTIL.C   - Common utility functions for remote DISPLAY
+          EXECDISP.C   - Utility function to execute DISPLAY verb
+          SNA.C        - Formats global information
+          LU62.C       - Formats LU 6.2 information
+          AM.C         - Formats attach manager information
+          TP.C         - Formats transaction program information
+          SESS.C       - Formats session information
+          LINKS.C      - Formats link information
+          LU03.C       - Formats LU 0, 1, 2, and 3 information
+          GW.C         - Formats gateway information
+          X25.C        - Formats X.25 logical link information
+          DEFAULTS.C   - Formats system defaults information
+          ADAPTER.C    - Formats adapter information
+          LU_DEF.C     - Formats LU definition information
+          PLU_DEF.C    - Formats partner LU definition information
+          MODE_DEF.C   - Formats mode definition information
+          LINK_DEF.C   - Formats link definition information
+          MS.C         - Formats management services information
+          NODE.C       - Formats APPN node information
+          DIR.C        - Formats APPN directory information
+          TOP.C        - Formats APPN topology information
+          ISR.C        - Formats APPN intermediate session information
+          COS.C        - Formats APPN class of service information
+          CN.C         - Formats APPN connection network information
+          APD.TXT      - Messages (English)
+          MSGID.H      - #defines for messages
+
+
+RESTRICTIONS
+
+   o   It doesn't do windows (but the PMDSPLAY sample program does).
+
+

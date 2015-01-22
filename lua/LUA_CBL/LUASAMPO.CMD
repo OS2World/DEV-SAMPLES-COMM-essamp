@@ -1,0 +1,17 @@
+
+@echo off
+COBOL LUASAMPO,,,,
+IF ERRORLEVEL 1 GOTO COMPERR
+LINK @LUASAMPO.LRF
+IF ERRORLEVEL 1 GOTO LINKERR
+
+GOTO DONE
+:COMPERR
+ECHO There were compiler errors
+GOTO DONE
+:LINKERR
+ECHO There were linker errors
+:DONE
+@echo on
+
+

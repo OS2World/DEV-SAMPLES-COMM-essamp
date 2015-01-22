@@ -1,0 +1,5 @@
+ 
+  DEFINE_CPIC_SIDE_INFO  SYMBOLIC_DESTINATION_NAME(CREDRPT )
+                         FQ_PARTNER_LU_NAME(netid.luname     )
+                         MODE_NAME(#INTER)
+                         TP_NAME(CREDRPT);

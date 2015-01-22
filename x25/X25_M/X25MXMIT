@@ -1,0 +1,6 @@
+x25mxmit.obj: x25mxmit.asm
+  masm x25mxmit.asm;
+
+x25mxmit.exe: x25mxmit.obj
+  link @x25mxmit.lrf
+

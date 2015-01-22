@@ -1,0 +1,9 @@
+; DEF file for LUASAMPM Sample MASM/2 Program                                   
+NAME                                                                            
+                                                                                
+DESCRIPTION  'LUASAMPM'                                                         
+PROTMODE                                                                        
+                                                                                
+IMPORTS                                                                         
+        ACSSLI.SLI                                                              
+        ACSSVC.ACSSVC                                                           

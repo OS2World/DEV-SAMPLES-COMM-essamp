@@ -1,0 +1,10 @@
+; DEF file for LUASAMPC Sample C Program
+NAME
+
+DESCRIPTION  'LUASAMPC'
+PROTMODE
+
+IMPORTS
+        ACSSLI.SLI
+        ACSSVC.ACSSVC
+

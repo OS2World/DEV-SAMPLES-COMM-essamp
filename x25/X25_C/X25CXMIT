@@ -1,0 +1,8 @@
+all:          x25cxmit.exe
+
+x25cxmit.obj: x25cxmit.c
+  cl /Alfu /W4 /c x25cxmit.c
+
+x25cxmit.exe: x25cxmit.obj
+  link @x25cxmit.lrf
+

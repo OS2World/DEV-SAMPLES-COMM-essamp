@@ -1,0 +1,205 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+CONFIGURATION FOR THE APPC FILECREQ AND FILECSVR SAMPLE PROGRAMS
+
+The previous versions of the sample programs shipped in OS/2 EE 1.0 through
+1.3 do not communicate correctly with these new sample programs.  The previous
+versions did not handle the case where they received DATA_INCOMPLETE on a
+RECEIVE_AND_WAIT verb because the partner was using a larger buffer size.
+
+The APPC sample programs use the APPC native application programming
+interface verbs.  The function of the sample programs is to transmit a file
+from one OS/2 workstation to another.  Two sample programs support this
+function.  One is a receive program, which is referred to as the "requester;"
+the other is a send program, which is referred to as the "server."  Do not
+confuse these names with the LAN Requester/Server software, which is
+not related to APPC.
+
+On the receiving side, a user starts the requester program, supplying a drive,
+path and file name at the OS/2 command prompt.  The server program transmits
+that file to the requester in the directory defined by the path.
+
+The sample programs are designed to work with Communications Manager while in
+the protected mode of OS/2 Extended Edition.  The sample program source code
+and the supporting files are for the C language.
+
+
+
+PREREQUISITES
+
+To run the sample programs, you need to have Communications Manager configured
+and running, then configure the sample programs.
+
+o Communications Manager
+  The machine must be configured as either an End Node or a Network Node and
+  have at least a Control Point (CP) defined.  It is assumed that you have
+  also configured to use a DLC.  You must also have started the attach
+  manager on the server side.
+
+To compile the sample programs, you should be familiar with and have the
+following available
+
+o OS/2 1.3 Toolkit
+
+o Extended Services for OS/2 Release 1.0, Communications Manager and
+  High Level Languages (HLL) include files.
+
+o The IBM Extended Services for OS/2 Communications Manager API
+  Sample Programs Support diskette containing the program source.
+
+o The C compiler and linker.  You should be able to compile programs for OS/2
+  (PATH and INCLUDE environment variables are correct).
+
+
+
+CONFIGURING THE COMMUNICATIONS MANAGER TO USE THE SAMPLE PROGRAMS
+
+You can configure the sample programs using either the APPNC configuration
+screens, by editing your node definitions file, or by using the FILECFG sample
+program.
+
+Configuring Using APPNC
+
+To configure Communications Manager using the APPNC configuration screens,
+perform the follow steps for each situation:
+
+To configure the Requester:
+Select 'Additional SNA Features'.
+Select 'Partner LUs' to create a new Partner LU.
+Type the Fully Qualified LU name of an LU on the Partner workstation.
+Type FILESVR in the Alias field.
+Select OK.
+
+To configure the Server:
+Select 'Additional SNA Features'.
+Select 'Transaction Program Definitions'.
+Type FileServer for the Transaction Program name.
+  (This is a case sensitive field!)
+Enter the path to APPCTELL.EXE in the next field.  This will
+  be of the form: path\SNA\FILE\filecsvr.exe, where 'path'
+  was that specified when the CM Sample Programs Diskette was installed.
+Select Continue.
+Select VIO-Windowable for Presentation Type.
+Select Non-Queued Attach Manager Started.
+Select OK.
+
+To configure Requester and Server on the same workstation:
+Follow instructions for the Server above.
+EDIT a NEW Local LU.
+Type a unique LU name.
+Type FILESVR for the Alias field.
+Select OK.
+
+
+Configuring Using Supplied Node Definitions Files
+
+To configure Communications Manager using the supplied node definition files,
+"FILEREQ.NDF" and "FILESVR.NDF", or "FILEBOTH.NDF", the following changes
+must be made to the supplied node definition files:
+
+Requester:
+Change the "fq_partner_lu_name" parameter value of the DEFINE_PARTNER_LU verb
+to the LU name of an LU that exists on the server machine.  The CP name of
+the server may be used as the LU name.  The name need not be fully qualified
+unless the server has a different network name. The network name is also known
+on some machines as NETID.
+
+Server:
+The "filespec" parameter value of the DEFINE_TP verb must be changed to
+reflect the correct drive, path and file name of the OS/2 program to be
+remotely started on the server, in C, FILECSVR.
+
+Both sides on one workstation:
+In Communications Manager, a TP can establish a conversation with a TP on the
+same workstation.  To set up this configuration, use the "FILEBOTH.NDF" file
+and append it to your working node definition file as shown above.  You will
+need to alter the "filespec" as explained above, and create a unique
+"lu_name" for the DEFINE_LOCAL_LU verb.  The "lu_name" must be unique within
+an APPN network name.  You must also be sure to have a "START_ATTACH_MANAGER;"
+in your .NDF file.
+
+You should append these files to your active node definition files on the
+respective workstation.  For example, this can be done with the COPY command by
+specifying "COPY WORKING.NDF+FILEREQ.NDF".  Then you must execute APPNV against
+the combined file and restart Communications Manager.  APPNV takes the node
+definition file and updates both the ".CFG" and ".CF2" files. You must also be
+sure to have a "START_ATTACH_MANAGER;" in your ".NDF" file.
+
+
+Configuring Using FILECFG
+
+The FILECFG sample program can be used for three things: configuring
+the requester side, the server side, or configuring both sides on
+one workstation.
+
+Requester Configuration: You must specify the fully qualified partner
+LU name of an LU on the server machine to which your wish to connect.
+Example: FILECFG -r NETID.LU_NAME
+
+Server Configuration: Requires no parameter, other than specifying a server
+configuration.  Example: FILECFG -s
+
+Configuration for Both server and requester on the same workstation:
+Requires that you specify an LU name so FILECREQ can use this LU as the
+server partner LU alias.  This LU name must be unique on the local
+workstation and within the network.  Example:  FILECFG -b LU_NAME
+
+
+
+RUNNING THE SAMPLE PROGRAMS
+
+1.  From the requester side, switch to OS/2 and select the OS/2 Full Screen
+    or OS/2 Window command prompt.
+
+2.  Start your requester program FILECREQ.EXE with the drive, path and file
+    name of the file you want to request from the server program.  The
+    specified file is transmitted to the requester.  The server workstation
+    runs in unattended mode.
+
+    For example, entering "filecreq c:\temp" would copy the file named
+    "C:\TEMP" from the server to the requester and name it "C:\TEMP".
+
+    You can also specify as second parameter the local file name you want
+    the file copied into.  Thus, "filecreq c:\temp d:\diffrnt" would copy
+    the file "C:\TEMP" on the server to "D:\DIFFRNT" on the requester, You
+    should specify two filenames when running both programs on the same
+    workstation to avoid trying to read and write to the same file.
+
+
+
+COMPILING THE SAMPLE PROGRAMS
+
+1.  Change directory to the directory containing the sample programs
+    (usually \CMLIB\APPN\SNA\FILE).
+
+2.  Make sure "\TOOLKT13\BIN" is on your path.  This is necessary to build
+    the message file.
+
+3.  Add the path of the include files for Communications Manager to your
+    INCLUDE environment variable. A common INCLUDE statement necessary for
+    compilation is:
+
+       SET INCLUDE=C:\C600\INCLUDE;C:\CMLIB;C:\TOOLKT13\C\INCLUDE;
+
+4.  Make sure \CMLIB is in your LIB environment variable.
+    A common LIB statement necessary for linking is:
+
+       SET LIB=C:\C600\LIB;C:\CMLIB;C:\OS2;C:\TOOLKT13\LIB;
+
+5.  Compile the program using the "nmake" command for Microsoft C compiler
+    Version 6.0:
+          nmake filecreq.mak
+          nmake filecsvr.mak
+
+6.  Copy APX.MSG from the sample program subdirectory to \CMLIB to make it
+    available to the Communications Manager.  This is necessary for the
+    server side to be able to log messages using the LOG_MESSAGE services
+    verb.
+
+RESTRICTIONS
+
+o   When you request a file with the path, the directory must exist on the
+    local machine.  This program will not create the directory path for you.
+
+

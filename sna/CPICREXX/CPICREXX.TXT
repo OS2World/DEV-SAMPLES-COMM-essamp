@@ -1,0 +1,98 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+SET AND EXTRACT CPI-C SIDE INFORMATION REXX SAMPLE PROGRAMS
+
+The function of the XCMSSI.CMD and XCMESI.CMD sample programs
+is to demonstrate how to set and extract CPI-C side information
+using the REXX environment for CPI-C, CPICOMM.   (Executing
+the supplied program CPICREXX.EXE registers the CPICOMM environment
+with REXX.)
+
+XCMSSI.CMD is an example of how to set side information variables
+then access the CPICOMM environment to set side information.
+You can change the values used to set side information
+to values that suit your configuration needs.
+
+XCMESI.CMD is an example of how to extract existing side information.
+XCMESI.CMD first extracts all existing side information using the entry
+number as the key.  Then it extracts a particular side information
+entry by using the symbolic destination name as the key.
+
+The sample programs are designed to work with Communications Manager
+while in the protected mode of OS/2 Extended Edition or Extended
+Services program.  The source code for the sample programs is for
+the REXX language.
+
+PREREQUISITES
+
+o Communications Manager must be configured as either an End Node or
+  a Network Node and have at least a CP defined.  Communications Manager
+  must be active.
+
+RUNNING THE SAMPLE PROGRAMS
+
+1.  From the requester side, switch to OS/2 and select the OS/2 Full Screen
+    or OS/2 Window command prompt.
+
+2.  If you haven't yet run the CPICREXX.EXE program since you last started
+    your system, type:
+          CD \CMLIB\APPN
+          CPICREXX
+
+    Note: CPICREXX.EXE must be executed at some point prior to running
+          any REXX program which uses the CPICOMM environment.
+
+3.  To run the set CPI-C side information sample program type:
+          CD path\SNA\CPICREXX
+          START /F XCMSSI
+
+    The /F parameter makes the sample program the foreground session.
+
+4.  Read the message displayed by XCMSSI.CMD, then press any key
+    to terminate XCMSSI.CMD and the window.
+
+5.  To run the extract CPI-C side information sample program type:
+          START /FS XCMESI
+
+    The /FS parameter gives the sample program a full screen to display
+    its messages.
+
+6.  Read the messages displayed by XCMESI, then press any key
+    to terminate XCMESI.CMD and the full screen.
+
+    Note: Each sample program is coded to exit from the "started" window
+          or full screen when it completes.  The same effect can be achieved
+          by adding the /C parameter to the START command.
+
+    Refer to Common Programming Interface Communications Reference
+    (SC26-4399-03) for any CPI-C or REXX error return code values
+    displayed by the sample programs.   Refer to the "Variables and
+    Characteristics" appendix to translate CPI-C return code values to
+    labels, then to the "Returns Codes" appendix for return code label
+    descriptions, and to the REXX part of the "CPI Communications on OS/2"
+    appendix for information on REXX error return codes.
+    In addition to displayed return codes, messages may be
+    logged in the Communications Manager message log,
+    and for CPI-C error return code CM_PRODUCT_SPECIFIC_ERROR (20),
+    in particular, display the Communications Manager error log.
+    Communications Manager Problem Determination Guide contains
+    information on how to display the message log and error log,
+    and descriptions of CPI-C message log and error log entries.
+
+ALTERNATIVE TECHNIQUES FOR SETTING CPI-C SIDE INFORMATION
+
+CPI-C side information may also be set when the Communications
+Manager is loaded when you use the DEFINE_CPIC_SIDE_INFO verb
+in a working node definition file (.NDF) in \CMLIB\APPN.
+
+In addition the 'CPI Communications Side Info' option can be used;
+this function can be invoked by running APPNV, by selecting the
+Communications Manager Tools from Desktop Manager, or by using the
+Communications Manager Menu. Any changes must be verified (by running APPNV,
+for example).
+
+The new CPI-C side information will be set the next time you start
+the Communications Manager specifying this configuration file.
+
+

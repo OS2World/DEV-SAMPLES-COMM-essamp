@@ -1,0 +1,144 @@
+
+
+   Extended Services Version 1.0
+   (c) Copyright International Business Machines Corp., 1988, 1991
+
+
+
+   CMSTOP SAMPLE PROGRAM
+
+   The CMSTOP sample program is an example of an application program written
+   using the CmkDeactivateService verb. The function of the sample program is
+   to request the Communications Manager to start its exit processing.
+
+   The sample program is designed to work in the OS/2 protect mode,
+   with Extended Services 1.0 Communications Manager. Sample program
+   source code and the supporting files are provided for C.
+
+   RESTRICTIONS
+
+   CMSTOP uses the Communications Manager API CmkDeactivateService.  This
+   API simulates a user selecting Exit from the Advanced Pull Down on the
+   Main Menu.  For this API to work the Communications Manager must be
+   displaying the Main Menu,  otherwise it will take effect when the
+   Main Menu is re-displayed.
+
+   PREREQUISITE INFORMATION
+
+   To run the sample programs, a user must be familiar with the following:
+
+   1.  OS/2 installation and command prompt
+   2.  Installation of the Toolkit
+   3.  Extended Services Communications Manager installation
+   4.  Compiler of the language in which you are interested.
+
+   INSTALLATION
+
+   To build the CMSTOP sample program, the following programs must
+   be installed on the build machine:
+
+   1. OS/2 Standard Edition Version 1.30.1 or
+      OS/2 Standard Edition Version 2.0
+   2. IBM Extended Services Version 1.0 with Communications Manager
+      and with the Communications Manager API data structures
+   3. OS/2 Standard Edition Version 1.3 Programming Tools and Information
+      (Toolkit)
+   4. Microsoft C Version 6.0 or equivalent compiler.
+
+   INSTALLING IBM EXTENDED SERVICES VERSION 1.0
+
+   Install OS/2 and the Communications Manager according to instructions
+   in the documentation provided with the product.
+
+   CREATING CMSTOP SAMPLE PROGRAM CONFIGURATION FILES
+
+   No special configuration is required.
+
+   INSTALLING THE COMPILER
+
+   Install the compiler for the language in which you are interested.
+   Use the installation procedure for the compiler.   Refer to the
+   following section on supported languages for additional information.
+
+   Note:  The instructions that you are to type at the OS/2 command prompt
+          show the command line with the path for information only.  For
+          example, [C:] is displayed, but you should not type
+          it at the OS/2 command prompt.  Also, you should not type the
+          instruction [press Enter].
+
+   SUPPORTED LANGUAGES
+
+   1.  C LANGUAGE SETUP
+
+       a.  INSTALLING THE C COMPILER
+
+           Install the Microsoft C Compiler Version 6.0 using the
+           installation procedure for the compiler. The SETUP program is
+           used to install the compiler.  Insert the Setup diskette
+           in drive A, make drive A the current drive and type the
+           following at the OS/2 command prompt:
+
+             [A:\]setup  [press Enter]
+
+           Follow the directions provided by the menus.  Select the
+           default directories and subdirectories, and be certain the
+           large model compiler is selected. The compiler is installed
+           at this point.
+
+       b.  SETTING UP ENVIRONMENT VARIABLES
+
+           During the compiler installation, a file called NEW-VARS.CMD
+           is placed in the C:\C600\BIN directory.  This file contains
+           commands to setup environment variables used by the Microsoft
+           C compiler.  These commands can be copied to the CONFIG.SYS
+           file and the computer rebooted or you can just simply use
+           NEW-VARS.CMD file directly.  In any case, the path to the
+           C:\CMLIB directory needs to be added to the INCLUDE and LIB
+           environment variables.  This allows the compiler to find the
+           ACDI_C.H and the ACS.LIB files that are in the C:\CMLIB
+           directory.  Likewise, the path to the toolkit include directory
+           should be included on the INCLUDE environment variable.  The
+           path to the toolkit library directory should be included on
+           the LIB environment variable.  The INCLUDE and LIB environment
+           commands should look something like this:
+
+           SET INCLUDE=C:\C600\INCLUDE;C:\TOOLKT13\C\INCLUDE;C:\CMLIB;
+           SET LIB=C:\C600\LIB;C:\OS2;C:\TOOLKT13\LIB:C:\CMLIB;
+
+           You should also make sure that the PATH environment variable
+           includes the paths to the C compiler and toolkit binary files.
+           The PATH should have as a minimum:
+
+           SET PATH=C:\C600\BINB;C:\C600\BINP;C:\CMLIB;C:\TOOLKT13\BIN;
+
+           The PATH command will most likely contain many additional paths.
+
+       c.  BUILDING THE SAMPLE PROGRAMS
+
+           Create a directory on the build machine called SAMPBLD.  Copy
+           all the files from the A:\CMSTOP directory to the SAMPBLD
+           directory.  To build the sample program type at an OS/2
+           command prompt:
+
+           [C:\SAMPBLD\]nmake cmstop [press Enter]
+
+           This will cause the CMSTOP.C program to the compiled, linked
+           and messages bound.  The final result is CMSTOP.EXE.
+
+   RUNNING THE SAMPLE PROGRAMS
+
+   Start Communications Manager on your workstation.  From an OS/2
+   full screen or windowed command prompt enter CMSTOP <stop_type>.
+
+   The <stop_type> is optional and corresponds to the selections
+   on the Exit Pulldown on the Main Menu.  They options are "SOFT"
+   and "HARD".  Soft refers to the "Exit when complete" choice,
+   while hard refers to "Exit Immediate".  If no stop type is entered
+   or the type is not recognized, then soft is defaulted.  If the
+   stop_type begins with an 'H' then an Immediate Stop is sent.
+
+   A successful return means that the stop has been accepted,  not that
+   the stop has occurred.  This is necessary so that a user can enter
+   a hard stop if the soft stop does not complete.  An unsuccessful
+   return will display an error to the screen.
+

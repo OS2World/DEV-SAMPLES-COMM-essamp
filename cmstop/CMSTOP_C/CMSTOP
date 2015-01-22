@@ -1,0 +1,8 @@
+PCOPTS =  -c -AL -Zd -Od
+
+cmstop.exe : cmstop.obj
+  link @cmstop.lrf
+
+cmstop.obj : cmstop.c
+  cl $(PCOPTS) cmstop.c
+

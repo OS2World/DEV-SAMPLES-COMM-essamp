@@ -1,0 +1,7 @@
+luasampo.obj 
+luasampo.exe
+luasampo.map /M
+doscalls.lib+lcobol.lib /NOD /STACK:5000
+luasampo.def;
+
+                                                 

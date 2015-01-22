@@ -1,0 +1,703 @@
+
+
+                 IBM EXTENDED SERVICES FOR OS/2
+        COMMUNICATIONS MANAGER API SAMPLE PROGRAMS SUPPORT
+
+   (c) Copyright International Business Machines Corp., 1989, 1990,
+   1991
+
+
+
+
+   LUA SAMPLE PROGRAM
+
+
+   The LUA sample programs provide examples for writing application
+   programs using the LUA interface verbs. The function of the sample
+   programs is to communicate with a HOST using the LUA interface
+   verbs to SEND and RECEIVE data, SNA commands, and responses. The
+   sample scenario consists of an OS/2 program (secondary),
+   communicating with a HOST program (primary).
+
+   NOTE: There is information included in the source module
+         header of VTAMPGMA.JCL, the HOST (primary) sample
+         program. You need to configure the  APPL  table
+         and  MODE  table entries before execution.
+
+
+   After compiling and linking, a user starts the secondary program,
+   supplying a filename and path at the OS/2 command prompt.
+   The primary sample program is started by submitting the
+   assemble, link, and go job to MVS.
+
+   The secondary sample programs are designed to run only in
+   protected mode of IBM Extended Services for OS/2.
+   There are 3 equivalent secondary sample programs, where the
+   program source code and the supporting files are for C,
+   MASM, and COBOL languages. The primary sample
+   program source code language is 370 ASSEMBLER.
+
+
+   PREREQUISITES
+
+   To run the sample programs, a user must obtain and be familiar
+   with the following:
+
+   1.  OS/2 installation and program execution
+
+   2.  TOOLKIT installation
+
+   3.  Communications Manager installation
+
+   4.  Compiler of the language(s) selected
+
+   5.  Host VTAM and NCP configuration
+
+
+
+
+
+                                                                         1
+
+   HARDWARE REQUIREMENTS
+
+   For this example configuration, ensure you have the following
+   hardware.
+   (a) a PS/2 containing a Multifunction Protocol Adapter, or
+       equivalent hardware (ie. PC-AT with SDLC adapter, etc.).
+   (b) either 2 modems or a modem eliminator with proper cabling.
+   (c) a Host connection with a 3725 Communication Control Unit or
+       equivalent communication equipment.
+
+   If your hardware configuration is different, then you
+   must select the appropriate parameters on the Data Link Control
+   Profiles and Partner Logical Unit Profiles.
+
+   Other Data Link types may be substituted where supported.
+
+   INSTALLATION
+
+   The installation for running LUA sample programs consists of the
+   following:
+
+   1. Installing IBM Extended Services for OS/2 including
+      Communications Manager.
+
+   2. Creating the LUA configuration file for the sample programs.
+
+   3. Reinstalling Communication Manager using the user configuration
+      file created in step 2.
+
+   4. Installing TOOLKIT
+
+   5. Installing the compiler selected
+
+   6. Host VTAM and NCP configuration
+
+   ASSUMPTIONS
+
+   The INSTALLATION DETAIL section explains the installation procedure.
+   It is assumed that Extended Services, TOOLKIT and the compiler
+   are installed on the same drive. For ease of discussion the C drive
+   is used as the default.
+
+   INSTALLATION DETAIL
+
+   1. INSTALLING IBM EXTENDED SERVICES FOR OS/2
+
+   Install IBM Extended Services for OS/2 according to the
+   installation documentation provided with the product.
+   Install the Communications Manager and default configuration file
+   ACSCFG.CFG. Do NOT select Custom Install; do NOT select Basic
+   Configuration Services. Select "Configuration services" in the
+   "Install Additional Features" panel. Select "API data structures"
+   in the "Install Additional Features" panel to copy the API
+   structures to the \CMLIB directory. Select ACSCFG.CFG in panel
+   "Select Configuration file to Update CONFIG.SYS file".
+
+   2. CREATING LUA SAMPLE PROGRAM CONFIGURATION FILE
+
+   Use the configuration steps outlined below to create
+   configuration file for the secondary (ACSLUA.CFG).
+                                                                         2
+
+
+
+
+
+   CONFIGURATION STEPS FOR LUA TO USE SDLC DLC
+
+
+   The following instructions will configure the Extended Services
+   machine to run the LUA sample programs. They guide you through the
+   configuration process, panel by panel, until complete.
+
+
+   On the secondary, copy the system supplied default configuration
+   file, ACSCFG.CFG, to ACSLUA.CFG in the C:\CMLIB directory.
+
+
+   Start Communications Manager on the secondary side using ACSLUA
+   as the startup configuration file.
+
+
+   Beginning at the "Communications Manager Main Menu" follow the
+   instructions below.
+
+
+   Press F10  to position to the Action bar
+   Select "Advanced" from action bar
+   Select "Configuration"
+
+   Select "Workstation profile
+          (and auto-start options)"
+   Select "Change"
+   Specify "Machine type-
+            model number"
+   Specify "IBM plant of manufacture
+           -machine sequence number"
+   Select "Enable auto-start.." Yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                         3
+
+
+
+   Select "SNA feature profiles"
+   Select "SNA base profile"
+   Select "Change"
+   Select "Auto-activate..."  No
+
+   Select "Data Link Control (DLC)
+           profiles"
+   Select "SDLC"
+   Select "Number" Adapter 0
+   Select "Operation" Create
+
+   Select "Load DLC"  Yes
+   Select "Free Unused Link"  No
+   Specify "Maximum RU size"       1024
+   Specify "Send window count"       7
+   Specify "Receive window count"    7
+   Select "Line type"  Non-switched
+   Select "Link station role"
+          secondary
+   Select "Line mode"  Line turnaround required
+   Select "NRZI"  Yes
+   Select "Modem rate"  Full speed
+   Specify "Local station address (in hex)"  C1
+
+
+   Select "SNA LUA Profiles"
+   Select "Create"
+   Specify "Profile name"  LUA1
+   Specify "Local (NAU) address"  02
+   Select "DLC type"  SDLC
+   Select "Adapter"  0
+
+
+   Press ESC to return to the Communication Configuration Menu.
+
+
+   Press F10 to position to the Action bar
+   Select "Verify" from action bar
+   Select "Run verify"
+
+
+   Press F10 to position to the Action bar
+   Select "Exit" from action bar
+   Select "Exit communication
+          configuration"
+
+
+
+
+
+
+
+
+
+
+
+                                                                         4
+
+
+
+
+   3. REINSTALLING COMMUNICATION MANAGER USING THE
+      USER CONFIGURATION FILE
+
+
+   Communication Manager needs to be reinstalled, using the
+   user configuration file created in step 2, by issuing the REINST
+   command. Refer to the IBM Extended Services for OS/2
+   installation manual for instructions on using this command.
+
+   During reinstallation of Communication Manager, select
+   "User configuration files and features" in the
+   "Communications Manager Install Menu" panel.
+   Select ACSLUA.CFG in the "Select Configuration File to
+   update CONFIG.SYS File" panel.
+
+
+   YOU MUST RESTART YOUR SYSTEM (ALT+CTRL+DEL) FOR CHANGES TO TAKE EFFECT.
+
+   4. INSTALLING TOOLKIT
+
+   Install TOOLKIT using its installation procedure.
+
+   5. INSTALLING THE COMPILER
+
+   Install the compiler of the language in which you are
+   interested.  Use the installation procedure of the compiler.
+   Refer to the following SUPPORTED LANGUAGES section for
+   additional information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        5
+
+
+
+
+
+
+   SUPPORTED LANGUAGES
+
+   1.  C LANGUAGE
+
+       a.  C SAMPLE PROGRAM
+
+           The C sample program and the following instructions
+           are for Microsoft C version 6.0.
+
+           There is one 'C' language LUA sample program for the
+           secondary which is called LUASAMPC. Copy this file
+           into directory C:\C600. The files to be copied are
+           Source code (.C extension), Module definition
+           (.DEF extension), Make file (no extension), and Link
+           response (.LRF extension).
+
+           All the INCLUDE files are required in \C600\INCLUDE
+           directory. Copy the files LUA_C.H and ACSSVCC.H from the
+           Communications Manager directory (C:\CMLIB) into the
+           \C600\INCLUDE directory. Also copy DOSCALLS.H from
+           C:\TOOLKTxx\C\INCLUDE directory into \C600\INCLUDE
+           directory.
+
+       b.  LIBRARY FILES FOR C SAMPLE PROGRAM
+
+           For this example, all the LIBRARY files must reside
+           in \C600\LIB directory.  Copy ACS.LIB from the
+           Communications Manager directory (CMLIB) into
+           the \C600\LIB directory and DOSCALLS.LIB from the
+           OS/2 directory (OS2) into the \C600\LIB directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        6
+
+
+
+
+       c.  COMPILE/LINK C SAMPLE PROGRAM
+
+           You must set up the environment for the Microsoft C compiler
+           in order to use it; refer to the installation documentation
+           provided with the product for instructions.
+
+           Language extensions must be enabled in order for the C
+           compiler to recognize the "pascal" and "far" keywords.
+           Therefore, note that the compiler option /Za should NOT
+           appear either on the compiler command line input (e.g., in
+           the MAKE file) or in the environment setup file (e.g., in the
+           NEW-VARS.CMD file).  After setting up the environment variables
+           proceed as follows:
+
+           Change your current directory to C:\C600
+
+           To compile and link the secondary program, type the following
+           at the OS/2 command prompt:
+
+             [C:\C600]nmake luasampc /r [Press Enter]
+
+
+           The file LUASAMPC.EXE will be created.
+
+
+           After the above procedure, the executable file LUASAMPC.EXE
+           is in directory C:\C600 in executable form.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        7
+
+
+
+
+
+
+
+   2.  MACRO ASSEMBLER
+
+
+
+       a.  ASSEMBLER SAMPLE PROGRAMS
+
+           There is one 'MACRO ASSEMBLER' language LUA sample program
+           for the secondary which is called LUASAMPM. Copy this file
+           into directory C:\MASM\BIN. The files to be copied are
+           Source code (.ASM extension), Module definition (.DEF
+           extension), Make file (no extension), and Link response
+           (.LRF extension).
+
+           All the INCLUDE files are required in \MASM\BIN directory.
+           Copy the files LUA_M.INC and ACSSVCA.INC from the
+           Communications Manager directory (C:\CMLIB) into \MASM\BIN
+           directory.  Also copy DOSCALLS.INC and SUBCALLS.INC
+           from C:\TOOLKTxx\MASM\INCLUDE directory into
+           \MASM\BIN directory.
+
+
+       b.  LIBRARY FILES FOR ASSEMBLER SAMPLE PROGRAM
+
+           For this example, all the LIBRARY files must reside
+           in \MASM\BIN directory. Copy ACS.LIB from the
+           Communications Manager directory (CMLIB)
+           into the \MASM\BIN directory and DOSCALLS.LIB from the OS/2
+           directory (OS2) into the \MASM\BIN directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                         8
+
+
+
+
+
+       c.  ASSEMBLE/LINK ASSEMBLER SAMPLE PROGRAM
+
+           Change your current directory to C:\MASM\BIN.
+
+           To assemble and link the secondary program, type the
+           following at the OS/2 command prompt:
+
+             [C:\MASM\BIN]make luasampm [Press Enter]
+
+           The file LUASAMPM.EXE will be created.
+
+
+
+
+           After the above procedure, the executable file LUASAMPM.EXE
+           is in directory C:\MASM\BIN in executable form.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                         9
+
+
+
+   3.  COBOL LANGUAGE
+
+
+       a.  COBOL SAMPLE PROGRAM
+
+           The COBOL sample program and the instructions below are
+           for the Micro Focus COBOL/2 compiler version 2.5.31 or
+           higher.
+
+           There is one 'COBOL' language LUA sample program for the
+           secondary which is called LUASAMPO. Copy this file from
+           the LUA_CBL subdirectory on the sample program diskette
+           into directory C:\COBOL. The files to be copied are Source
+           code (.CBL extension), Module definition (.DEF extension)
+           and Link response (.LRF extension).
+           Also copy the command file (LUASAMPO.CMD) from
+           the LUA_CBL directory into directory C:\COBOL.
+
+           Copy the include files LUA_C_C.CBL, LUA_C.CBL, LUA_C_O.CBL,
+           LUA_C_E.CBL, LUA_C_S.CBL, LUA_C_B.CBL, and ACSSVCB.CBL from
+           the C:\CMLIB directory to the C:\COBOL directory.
+
+
+       b.  LIBRARY FILES FOR COBOL SAMPLE PROGRAM
+
+           For this example, copy DOSCALLS.LIB from the OS/2 directory
+           (OS/2) into the \COBOL directory.
+
+
+       c.  COMPILE/LINK COBOL SAMPLE PROGRAM
+
+           Change your current directory to C:\COBOL
+
+           To compile and link the secondary program, type the
+           following at the OS/2 command prompt:
+
+             [C:\COBOL]luasampo [Press Enter]
+
+           File LUASAMPO.EXE will be created.
+
+
+           After the above procedure, the executable file LUASAMPO.EXE
+           is in directory C:\COBOL in executable form.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        10
+
+
+
+
+
+
+   6. HOST VTAM AND NCP CONFIGURATION
+
+     a. Have an assembler available
+
+     b. VTAM and NCP GEN to configure the line, PU, and LU for LUA.
+
+     c. Modify the VTAM APPL table to include VTAMPGM.
+
+     d. Modify the VTAM MODE table to include LUA768RU MODEENT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        11
+
+
+
+
+   RUNNING THE SAMPLE PROGRAMS
+
+
+
+   Create a new directory SAMPLE on the secondary side workstation.
+   Copy the secondary sample program (LUASAMPC.EXE, LUASAMPM.EXE,
+   or LUASAMPO.EXE) to the SAMPLE directory.
+
+
+   On the primary side, submit the assemble, link, and go, using
+   VTAMPGMA.JCL, uploaded to the HOST with the BINARY option.
+   Before submitting the VTAMPGMA program, the question marks in
+   the USER and PASSWORD fields on the JOB statement should be
+   replaced by your logon ID and password.
+
+
+   It is recommended that the primary sample program be started
+   prior to the secondary, in that the primary may take several
+   minutes to complete the assemble, link, and go steps.
+
+
+   Start Communication Manager on the secondary using the
+   configuration file ACSLUA.
+
+
+   Then switch to OS/2 Task Manager and select the OS/2 full screen
+   command prompt. Change the current directory to SAMPLE.  Start
+   your secondary program (LUASAMPC.EXE, LUASAMPM.EXE, or
+   LUASAMPO.EXE) with the filename of the SAMPLE program you
+   want to run.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        12
+
+

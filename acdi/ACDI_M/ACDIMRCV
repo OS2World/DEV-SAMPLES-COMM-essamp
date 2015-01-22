@@ -1,0 +1,10 @@
+acdimrcv.exe: acdimrcv.obj acx.msg
+   link @acdimrcv.lrf
+   msgbind acdimrcv.bnd
+
+acdimrcv.obj: acdimrcv.asm
+ masm acdimrcv;
+
+acx.msg: acx.txt
+ mkmsgf acx.txt acx.msg
+

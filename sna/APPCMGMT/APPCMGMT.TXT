@@ -1,0 +1,96 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+CONFIGURATION FOR THE APPCMGMT SAMPLE PROGRAM
+
+
+The APPCMGMT sample program uses APPC subsystem management verbs.  The function
+of the sample program is to deactivate the users of APPC, and the resources
+being used.  The program source demonstrates how some of the management verbs
+can be used.  The management verbs issued by APPCMGMT are:
+
+     CNOS
+     DEACTIVATE_LOGICAL_LINK
+     DEACTIVATE_SESSION
+     DISPLAY
+     STOP_AM
+
+
+APPCMGMT is designed to work in the OS/2 protect mode with the
+Communications Manager. APPCMGMT is written using the C programming language
+and can be compiled as a 16-bit application using Microsoft C6 or as a 32-bit
+using IBM C Set/2 Compiler.
+
+PREREQUISITES
+
+To use APPCMGMT successfully, you need to have Communications Manager
+configured and running.
+
+o Communications Manager
+  The machine may be configured as any node type, which implies that at
+  least a CP has been defined.  It is assumed that you have also configured
+  and activated a DLC.  The attach manager does not have to be active.
+
+
+To compile APPCMGMT, you should be familiar with, and have the following
+available:
+
+o OS/2 Toolkit:
+     - 1.3 or higher as a 16-bit application
+     - 2.0 as a 32-bit application
+
+o Extended Services for OS/2 Release 1.0, Communications Manager and
+  High Level Languages (HLL) include files.
+
+o The IBM Extended Services for OS/2 Communications Manager API
+  Sample Programs Support diskette containing the program source.
+
+o The compiler and linker for the C programming language.  You should be able
+  to compile programs for OS/2. The PATH and INCLUDE environment variables
+  should be correct.
+
+
+RUNNING THE SAMPLE PROGRAM
+
+1.  Select an OS/2 Full Screen or Windowed command prompt.
+
+2.  Start APPCMGMT, and optionally provided the configured management_key.
+
+         APPCMGMT [management_key]
+
+    The optional managment_key is the password protection mechanism provided
+    by APPC and the Communications Manager.  If a key (i.e., password) has
+    been configured for the system, then all trace, dump, and configuration
+    requests must contain the key.  Only the DISPLAY verb does not require the
+    key.
+
+
+
+COMPILING THE SAMPLE PROGRAM WITH MICROSOFT C6
+
+1.  Change directory to the directory containing the sample program
+    (path\SNA\APPCMGMT).
+
+2.  Add the path of the include files for Communications Manager to your
+    INCLUDE environment variable. A common INCLUDE statement necessary
+    for compilation is:
+
+       SET INCLUDE=C:\C600\INCLUDE;C:\CMLIB;C:\TOOLKT13\C\INCLUDE;
+
+3.  Make sure \CMLIB is in your LIB environment variable.
+    A common LIB statement necessary for linking is:
+
+       SET LIB=C:\C600\LIB;C:\CMLIB;C:\OS2;C:\TOOLKT13\LIB;
+
+4.  Compile the program using the "nmake" command for Microsoft C compiler
+    Version 6.0:
+          nmake appcmgmt.mak
+
+COMPILING THE SAMPLE PROGRAM WITH IBM C Set/2 Compiler
+
+1. Include the '#define E32TO16' statement in the source file.
+
+2. Follow the general steps above, ensuring that the environment
+   for using the C Set/2 Compiler is provided.
+
+

@@ -1,0 +1,4 @@
+NAME        FILECREQ WINDOWCOMPAT NEWFILES
+DESCRIPTION 'APPC file transfer sample program (requester side)'
+PROTMODE
+STACKSIZE   4500

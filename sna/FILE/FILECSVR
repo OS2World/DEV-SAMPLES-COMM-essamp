@@ -1,0 +1,25 @@
+#  Compiler Options:
+#   -c  = Compile only, no link.
+#   -AS = Using the Small memory model.
+#   -G2 = Enable 80286 instruction generation.
+#   -Gr = Fast calls (Microsoft C compiler Version 6.0 only)
+#   -Gs = Remove stack probes - Use only on fully debugged program.
+#   -Ox = Maximum optimization
+#   -W4 = Maximum warning message level supported by Microsoft C 6.0 compiler
+#   -Ze = Enable special keywords.
+#   -Zl = Suppress default library selection.
+#   -Zp = Pack structure members - OS/2 API calls expect packed structures.
+
+#           Options for Microsoft C compiler Version 6.0
+C_OPTIONS = -c -AS -G2rs -Oazx -W4 -Zelp
+
+FILECSVR.EXE: FILECSVR.OBJ APX.MSG FILECSVR.BND FILECSVR.DEF
+    LINK    @FILECSVR.LRF
+    MSGBIND  FILECSVR.BND
+
+APX.MSG: APX.TXT
+    MKMSGF  APX.TXT APX.MSG
+
+FILECSVR.OBJ: FILECSVR.C
+    CL $(C_OPTIONS) FILECSVR.C
+

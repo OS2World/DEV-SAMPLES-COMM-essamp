@@ -1,0 +1,103 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+FILECFG
+
+The FILECFG Sample Program will configure the FILECREQ and FILECSVR sample
+programs also supplied with this product.  The TP definitions, mode
+definitions, and partner lu definitions are created dynamically by this
+program.  This program will not change anything in your node definitions
+file (.NDF).  The definitions made by this program will be lost when the
+Communications Manager is exited.
+
+
+PREREQUISITES
+
+To run this sample program, you need to have Communications Manager configured
+and running, then configure this sample program.
+
+o Communications Manager
+  The machine must be configured as either an End Node or a Network Node and
+  have at least a Control Point (CP) defined.  It is assumed that you have
+  also configured to use a DLC.  You must also have started the attach
+  manager on the server side.
+
+To compile the sample programs, you should be familiar with and have the
+following available
+
+o OS/2 1.3 Toolkit
+
+o Extended Services for OS/2 Release 1.0, Communications Manager and
+  High Level Languages (HLL) include files.
+
+o The IBM Extended Services for OS/2 Communications Manager API
+  Sample Programs Support diskette containing the program source.
+
+o The C compiler and linker.  You should be able to compile programs for OS/2
+  (PATH and INCLUDE environment variables are correct).
+
+FILECFG Usage:
+
+FILECFG - a sample program to configure the FILE Sample Programs
+
+This program will execute the dynamic configuration verbs necessary
+to run the FILECREQ and FILECSVR sample programs.  This program
+can create definitions for a requester, a server, or both on the
+same machine.
+
+FILECFG usage:
+FILECFG [-k keylock] -r fqplu_name  -- configures requester
+FILECFG [-k keylock] -s             -- configures server
+FILECFG [-k keylock] -b lu_name     -- configures requester and server
+                                       on one machine
+
+Where:
+   fqplu_name - the Fully Qualified Partner LU Name of the Server.
+   lu_name  - a unique LU name that will be used on your workstation.
+
+Note: If the keylock is specified, it must be the first argument.
+
+
+Running FILECFG
+
+The FILECFG sample program can be used for three things: configuring
+the requester side, the server side, or configuring both sides on
+one workstation.
+
+Requester Configuration: You must specify the fully qualified partner
+LU name of an LU on the server machine to which your wish to connect.
+Example: FILECFG -r NETID.LU_NAME
+
+Server Configuration: Requires no parameter, other than specifying a server
+configuration.  Example: FILECFG -s
+
+Configuration for Both server and requester on the same workstation:
+Requires that you specify an LU name so FILECREQ can use this LU as the
+server partner LU alias.  This LU name must be unique on the local
+workstation and within the network.  Example:  FILECFG -b LU_NAME
+
+
+COMPILING THE SAMPLE PROGRAMS
+
+1.  Change directory to the directory containing the sample programs
+    (usually \CMLIB\APPN\SNA\FILECFG).
+
+2.  Make sure "\TOOLKT13\BIN" is on your path.  This is necessary to build
+    the message file.
+
+3.  Add the path of the include files for Communications Manager to your
+    INCLUDE environment variable. A common INCLUDE statement necessary for
+    compilation is:
+
+       SET INCLUDE=C:\C600\INCLUDE;C:\CMLIB;C:\TOOLKT13\C\INCLUDE;
+
+4.  Make sure \CMLIB is in your LIB environment variable.
+    A common LIB statement necessary for linking is:
+
+       SET LIB=C:\C600\LIB;C:\CMLIB;C:\OS2;C:\TOOLKT13\LIB;
+
+5.  Compile the program using the "nmake" command for Microsoft C compiler
+    Version 6.0:
+          nmake filecfg.mak
+
+

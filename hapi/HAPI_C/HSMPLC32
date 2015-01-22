@@ -1,0 +1,5 @@
+hsmplc.exe:  hsmplc.obj
+ LINK386 @hsmplc.lrf
+
+hsmplc.obj:  hsmplc.c hapi_c.h
+ ICC /C hsmplc.c

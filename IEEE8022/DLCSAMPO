@@ -1,0 +1,7 @@
+dlcsampo.exe : dlcsampo.obj
+  LINK386  /map /noi /pm:vio dlcsampo.obj,dlcsampo.exe,,,dlcsampo.def
+
+dlcsampo.obj :  dlcsampo.c dlcsampo.mak dirintf.h dlcintf.h dlcgblv.h
+   icc /C /Gt /O- dlcsampo.c
+
+

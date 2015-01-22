@@ -1,0 +1,10 @@
+acdimxmt.exe: acdimxmt.obj acx.msg
+   link @acdimxmt.lrf
+   msgbind acdimxmt.bnd
+
+acdimxmt.obj: acdimxmt.asm
+ masm acdimxmt;
+
+acx.msg: acx.txt
+ mkmsgf acx.txt acx.msg
+

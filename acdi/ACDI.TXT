@@ -1,0 +1,327 @@
+
+
+   IBM Extended Services for OS/2
+   (c) Copyright International Business Machines Corp., 1988, 1991
+
+
+
+   ACDI SAMPLE PROGRAMS
+
+   The ACDI sample programs are examples of application programs written
+   using the ACDI interface verbs. The function of the sample programs is
+   to echo, line by line, a screen image from one personal computer to a
+   second personal computer. To support the function, there are two
+   sample programs:  one for the transmit side and one for the
+   receive side. Characters typed on the transmit side are echoed on the
+   receive side, one line at a time.
+
+   The sample programs are designed to work in the OS/2 protect mode, with
+   Extended Services Communications Manager.  Sample program source code
+   and the supporting files are provided for C and Macro Assembler
+   languages.
+
+   RESTRICTIONS
+
+   Only alphanumeric keys are supported. The backspace, cursor movement, and
+   other keys are not supported by the sample programs.
+
+   PREREQUISITE INFORMATION
+
+   To run the sample programs, a user must be familiar with the following:
+
+   1.  OS/2 installation and command prompt
+   2.  Installation of the Toolkit
+   3.  Extended Services Communications Manager installation
+   4.  Compiler of the language in which you are interested.
+
+   HARDWARE REQUIREMENTS
+
+   The two PS/2 or AT systems are to be connected to each other through a
+   null modem on an RS232 cable to ports COM1 for a non-switched connection.
+   If your connection or ports are different from this, then you must
+   select the appropriate parameters on the Select Modem/Interface Device
+   and Select Line Interface panels during Communications Manager
+   configuration.
+
+   INSTALLATION
+
+   To build the ACDI sample programs, the following programs must
+   be installed on the build machine:
+
+   1. OS/2 Standard Edition Version 1.30.1 or
+      OS/2 Standard Edition Version 2.0
+   2. IBM Extended Services for OS/2 with Communications Manager
+      and with the Communications Manager API data structures
+   3. OS/2 Standard Edition Version 1.3 Programming Tools and Information
+      (Toolkit)
+   4. Microsoft C Version 6.0 or IBM Macro Assembler/2 Version 1.0
+
+   INSTALLING IBM EXTENDED SERVICES FOR OS/2
+
+   When installing Extended Services, make sure that you install
+   the Communications Manager with ACDI.  You can explictly install
+   ACDI by selecting it from the "Install Additional Features" panel.
+   Or, if you install the ASCII Terminal Emulator, then ACDI will
+   automatically be installed.
+
+   To build the ACDI sample programs, the Communcations Manager API
+   data structures must be installed on the build machine.  The API
+   data structores are high level language include files.  To install
+   the API data structures select them from the "Install Additonal
+   Features" panel.
+
+   CREATING ACDI SAMPLE PROGRAM CONFIGURATION FILES
+
+   Create a configuration file for the ACDI sample program using the
+   configuration functions in Communications Manager.
+
+   The following instructions will configure two workstations on which
+   the OS/2 program has been installed to run the ACDI sample programs.
+   The instructions guide you through the configuration process, panel
+   by panel, until complete.
+
+   On the workstation that will run the receive side of the sample
+   program, copy the system-supplied configuration file named ACSCFGUS.CFG
+   to ACDISAMP.CFG in the C:\CMLIB directory.
+
+   Start Communications Manager for the receive side using ACDISAMP
+   as the startup configuration file.
+
+   Beginning at the Communications Manager Main Menu, complete the
+   following instructions.
+
+   Press the Switch to Action Bar (F10) key.
+   Select "Advanced" from the action bar.
+   Select "Configuration" from the Advanced pull-down.
+   Select Enter.
+
+   Specify the configuration file name.
+   Enter ACDISAMP in the Name field if not already there.
+   Select Enter.
+
+   Specify Configuration Usage.
+   Select "Select this option if you intend to use this configuration
+   on this workstation."
+
+   The Communications Configuration Menu is displayed.
+   Select "Asynchronous feature profiles" from the Communications
+   Configuration Menu.
+
+   Select "Asynchronous communication port profiles" from the Asynchronous
+   Feature Configuration menu.
+
+   Select "Create" from the Profile Operations panel.
+
+   The Select Asynchronous Communications Port Profile panel is displayed.
+   Select "COM1" from the Select Asynchronous Communication Port panel.
+   Select Enter.
+
+   The Specify Telephone Network ID panel is displayed.
+   Specify the telephone network ID "011"
+   Select Enter.
+
+   The Select Interface Device panel is displayed.
+   Specify "Device" to be "Other modem or device" (be sure to use
+   the Spacebar).
+   Select Enter.
+
+   The Select Line Interface panel is displayed.
+   Select "Non-switched" from the Select Line Interface panel.
+   Select Enter.
+
+   Select Esc=Cancel on the Asynchronous Feature Configuration panel.
+
+   Press the F10 key on the Communication Configuration Menu panel.
+   Select "Verify" from the action bar.
+   Select "Run verify" from the Verify pull-down.
+
+   When the verification is successfully completed press Enter to
+   remove the panel.
+
+   Press the F10 key.
+   Select "Exit" from the action bar.
+   Select "Exit communication configuration" from the Exit pull-down.
+
+   Exit Communications Manager.
+
+   The receive and transmit configuration files are the same.  If both
+   workstations are running under IBM Extended Services and the port
+   configurations are identical, you can copy ACDISAMP.CFG to the other
+   workstation instead of going through the configuration steps again.
+
+
+   INSTALLING THE COMPILER
+
+   Install the compiler for the language in which you are interested.
+   Use the installation procedure for the compiler.   Refer to the
+   following section on supported languages for additional information.
+
+   Note:  The instructions that you are to type at the OS/2 command prompt
+          show the command line with the path for information only.  For
+          example, [C:] is displayed, but you should not type
+          it at the OS/2 command prompt.  Also, you should not type the
+          instruction [press Enter].
+
+   SUPPORTED LANGUAGES
+
+   1.  C LANGUAGE SETUP
+
+       a.  INSTALLING THE C COMPILER
+
+           Install the Microsoft C Compiler Version 6.0 using the
+           installation procedure for the compiler. The SETUP program is
+           used to install the compiler.  Insert the Setup diskette
+           in drive A, make drive A the current drive and type the
+           following at the OS/2 command prompt:
+
+             [A:\]setup  [press Enter]
+
+           Follow the directions provided by the menus.  Select the
+           default directories and subdirectories, and be certain the
+           large model compiler is selected. The compiler is installed
+           at this point.
+
+       b.  SETTING UP ENVIRONMENT VARIABLES
+
+           During the compiler installation, a file called NEW-VARS.CMD
+           is placed in the C:\C600\BIN directory.  This file contains
+           commands to setup environment variables used by the Mirosoft
+           C compiler.  These commands can be copied to the CONFIG.SYS
+           file and the computer rebooted or you can just simply use
+           NEW-VARS.CMD file directly.  In any case, the path to the
+           C:\CMLIB directory needs to be added to the INCLUDE and LIB
+           environment variables.  This allows the compiler to find the
+           ACDI_C.H and the ACS.LIB files that are in the C:\CMLIB
+           directory.  Likewise, the path to the toolkit include directory
+           should be included on the INCLUDE environment variable.  The
+           path to the toolkit library directory should be included on
+           the LIB environment variable.  The INCLUDE and LIB enviroment
+           commands should look something like this:
+
+           SET INCLUDE=C:\C600\INCLUDE;C:\TOOLKT13\C\INCLUDE;C:\CMLIB;
+           SET LIB=C:\C600\LIB;C:\OS2;C:\TOOLKT13\LIB:C:\CMLIB;
+
+           You should also make sure that the PATH environment variable
+           includes the paths to the C compiler and toolkit binary files.
+           The PATH should have as a minimum:
+
+           SET PATH=C:\C600\BINB;C:\C600\BINP;C:\CMLIB;C:\TOOLKT13\BIN;
+
+           The PATH command will most likely contain many additional paths.
+
+       c.  BUILDING THE SAMPLE PROGRAMS
+
+           Create a directory on the build machine called SAMPBLD.  Copy
+           all the files from the A:\ACDI\ACDI_C directory to the SAMPBLD
+           directory.  To build the receive sample program type at an OS/2
+           command prompt:
+
+           [C:\SAMPBLD\]nmake acdicrcv [press Enter]
+
+           This will cause the ACDICRCV.C program to the compiled, linked
+           and messages bound.  The final result is ACDICRCV.EXE.
+
+           To build the transmit sample program type at an OS/2 command
+           prompt:
+
+           [C:\SAMPBLD\]nmake acdicxmt [press Enter]
+
+           This builds the transmit sample program: ACDICXMT.EXE
+
+   2.  MACRO ASSEMBLER LANGUAGE SETUP
+
+       a.  INSTALLING MACRO ASSEMBLER
+
+           Install the IBM Macro Assembler/2 Version 1.0 using the
+           installation procedure for the assembler. The INSTAID program
+           is used to install the assembler.  Insert the master diskette
+           in drive A, and type the following at the OS/2 command prompt:
+
+             [C:\]instaid [press Enter]
+
+           Follow the directions provided by the menus. Select the
+           default directories and subdirectories.  The assembler is
+           installed at this point.
+
+           During installation of the assembler, the \MASM\BIN
+           directory is created.
+
+       b.  SETTING UP ENVIRONMENT VARIABLES
+
+           The CONFIG.SYS file contains commands which initialize the
+           PATH, INCLUDE and LIB environment variables.  The path to
+           the C:\CMLIB directory needs to be added to the INCLUDE and
+           LIB environment variables.  This allows the compiler to
+           find the ACDI_A.INC and the ACS.LIB files that are in the
+           C:\CMLIB directory.  Likewise, the path to the toolkit
+           include directory should be included on the INCLUDE
+           environment variable.  The path to the toolkit library
+           directory should be included on the LIB environment
+           variable.  The INCLUDE and LIB enviroment commands should
+           look something like this:
+
+           SET INCLUDE=C:\TOOLKT13\MASM\INCLUDE;C:\CMLIB;
+           SET LIB=C:\TOOLKT13\LIB:C:\CMLIB;
+
+           You should also make sure that the PATH environment
+           variable includes the paths to the assembler and toolkit
+           binary files.  The PATH should have as a minimum:
+
+           SET PATH=C:\MASM\BIN;C:\CMLIB;C:\TOOLKT13\BIN;
+
+           The PATH command will most likely contain many additional paths.
+
+       c.  ASSEMBLING AND LINKING THE MACRO ASSEMBLER SAMPLE PROGRAMS
+
+           Create a directory on the build machine called SAMPBLD.
+           Copy all the files from the A:\ACDI\ACDI_M directory to the
+           SAMPBLD directory.  To build the receive sample program type
+           at an OS/2 command prompt:
+
+           [C:\SAMPBLD\]make acdimrcv [press Enter]
+
+           This will cause the ACDIMRCV.C program to the assembled,
+           linked and messages bound.  The final result is
+           ACDIMRCV.EXE.
+
+           To build the transmit sample program type at an OS/2 command
+           prompt:
+
+           [C:\SAMPBLD\]make acdimxmt [press Enter]
+
+           This builds the transmit sample program: ACDIMXMT.EXE
+
+   RUNNING THE SAMPLE PROGRAMS
+
+   Create a new directory named SAMPLE on the transmit side workstation.
+   Copy the transmit sample program (ACDICXMT.EXE or ACDIMXMT.EXE) to the
+   SAMPLE directory.
+
+   Create a new directory named SAMPLE on the receive side workstation.
+   Copy the receive sample program (ACDICRCV.EXE or ACDIMRCV.EXE) to the
+   SAMPLE directory.
+
+   Start Communications Manager on both workstations, the transmit side and
+   the receive side, with the configuration file ACDISAMP.   ACDI has
+   already been loaded on both workstations (ACDI is the default).
+
+   Select "OS/2 command prompt" from the Program Selector panel on
+   each workstation.  Change the current directory to SAMPLE.  If
+   there is a blue help line at the top of the screen, type "help off"
+   to remove help.  Start your receive program (ACDICRCV.EXE or
+   ACDIMRCV.EXE) on the receive workstation.  Then start your transmit
+   program (ACDICXMT.EXE or ACDIMXMT.EXE) on the other workstation.
+
+   You will see a blank screen displayed.  Start typing at the transmit
+   side.  The information you type is echoed at the receive side, line by
+   line.  To end the connection, press the Interrupt (Ctrl+C) key.
+
+   NOTE: If the High Speed DMA Asynchronous Device Driver is installed
+         on the receive workstation, the receive sample program (ACDICRCV.EXE
+         or ACDIMRCV.EXE) will terminate with an apparent error.  This
+         behavior is inherent to the design of the High Speed DMA Asynchronous
+         Device Driver and does not indicate an error with the workstation or
+         the sample program, and the state of the workstation after termination
+         is identical to the termination state of a workstation not using the
+         High Speed Asynchronous Device Driver.
+

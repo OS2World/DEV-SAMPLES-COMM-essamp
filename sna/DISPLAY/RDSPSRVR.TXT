@@ -1,0 +1,106 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+APPCMGMT is designed to work in the OS/2 protect mode with Extended Services
+Communications Manager. APPCMGMT is written using the C programming language.
+
+RDSPSRVR SAMPLE PROGRAM
+
+   The RDSPSRVR (remote DISPLAY server) sample program allows either
+   the DISPLAY or PMDSPLAY sample program running on a remote computer
+   to retrieve state and configuration information of the active SNA
+   configuration of the Communications Manager on the computer on which
+   RDSPSRVR is installed.
+
+   Source for the RDSPSRVR sample program is provided in C.
+
+
+RUNNING THE RDSPSRVR SAMPLE PROGRAM
+
+   To run the sample programs, you need to have Communications Manager
+   installed and running.
+
+   In addition to RDSPSRVR being available as a sample program, Communications
+   Manager will install RDSPSRVR.EXE in the directory \CMLIB\DSPSVR.
+   This makes the program available without requiring the purchase
+   of the separate Samples diskette.
+
+   NOTE: This program gives remote users the ability to learn significant
+         information about your machine including LU definitions, TP
+         definitions, partner LU definitions, etc.. Be aware that these
+         sample programs as written have no security capability; for this
+         reason RDSPSRVR was not installed 'active' but requires you to
+         take an explicate action, below, to enable RDSPSRVR to be called.
+
+   To allow RDSPSRVR to run when a remote computer requests it, do one
+   of the following:
+
+   1.  Copy RDSPSRVR.EXE to the directory specified by the
+       DIRECTORY_FOR_INBOUND_ATTACHES statement in your .NDF file.
+
+   2.  Add a DEFINE_TP statement for RDSPSRVR to your .NDF file.
+       An example DEFINE_TP statement appears below:
+
+          DEFINE_TP TP_NAME(RDSPSRVR)
+                    FILESPEC(C:\CMLIB\DSPSVR\RDSPSRVR.EXE)
+                    CONV_SECURITY_RQD(NO)
+                    CONVERSATION_TYPE(MAPPED)
+                    PROGRAM_TYPE(BACKGROUND)
+                    RECEIVE_ALLOCATE_TIMEOUT(100)
+                    SYNC_LEVEL(EITHER)
+                    TP_OPERATION(NONQUEUED_AM_STARTED)
+                    DESCRIPTION(Server TP supporting remote display);
+
+       After adding the DEFINE_TP statement to your .NDF file, you can
+       make it take effect by using the /E option of the APPNV program;
+       from the OS/2 command prompt, enter "APPNV fn /E", where "fn" is
+       the filename of your .NDF file.
+
+
+COMPILING THE RDSPSRVR SAMPLE PROGRAMS
+
+   To compile the RDSPSRVR sample program, you must have the following
+   installed:
+
+   o Extended Services for OS/2 Release 1.0, Communications Manager and
+     High Level Languages (HLL) include files.
+
+   o The IBM Extended Services for OS/2 Communications Manager API
+     Sample Programs Support diskette containing the program source.
+
+   o Microsoft C Compiler Version 6.0 (including multi-thread support)
+
+   The procedure is as follows.
+
+   1.  Change directory to the directory containing the source for the
+       RDSPSRVR sample program (path\SNA\DISPLAY).
+
+   2.  In addition to the settings required for the C compiler and the
+       IBM OS/2 Programming Tools, set the following environment
+       variables to include the following directories:
+
+          INCLUDE and LIB must include "\CMLIB".
+
+   3.  Compile the program using the "nmake" command for Microsoft C compiler
+       Version 6.0:
+
+             nmake /f rdspsrvr.mak
+
+       The source files associated with the RDSPSRVR sample program are
+       listed below.
+
+          RDSPSRVR.MAK - MAKE file
+          RDSPSRVR.DEF - Module definition file (for LINK)
+          DISPLAY.H    - Global typedefs, prototypes, and #includes
+          RDSPSRVR.C   - Main function and unique utility functions
+          APPCUTIL.C   - Common utility functions for remote DISPLAY
+          EXECDISP.C   - Utility function to execute DISPLAY verb
+          APD.TXT      - Messages (English)
+          MSGID.H      - #defines for messages
+
+
+RESTRICTIONS
+
+   o   None
+
+

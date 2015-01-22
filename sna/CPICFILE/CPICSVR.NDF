@@ -1,0 +1,24 @@
+// This .NDF fragment is intended to be appended to an .NDF file in the
+// server's \CMLIB\APPN subdirectory.
+//
+// Instructions:
+// 1. Insure there is only one START_ATTACH_MANAGER in the combined .NDF.
+// 2. Change "server_lu" to an LU name that is unique in the network.
+// 3. If there is a DEFINE_DEFAULTS in the combined .NDF, be sure
+//    IMPLICIT_INBOUND_PLU_SUPPORT is specified as YES (the default),
+//    otherwise you have to add a DEFINE_PARTNER_LU for the requester LU.
+ 
+START_ATTACH_MANAGER;
+ 
+DEFINE_LOCAL_LU  lu_name(server_lu)
+                 lu_alias(CPICSVR)
+                 nau_address(INDEPENDENT_LU);
+ 
+DEFINE_TP        tp_name(FileServer)
+                 filespec(C:\CMLIB\APPN\SAMPLES\CPICFILE\CPICCSVR.EXE)
+                 conversation_type(MAPPED)
+                 conv_security_rqd(NO)
+                 sync_level(CONFIRM)
+                 tp_operation(NONQUEUED_AM_STARTED)
+                 program_type(vio_windowable);
+ 

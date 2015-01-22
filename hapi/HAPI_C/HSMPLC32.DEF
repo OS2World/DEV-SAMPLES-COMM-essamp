@@ -1,0 +1,10 @@
+NAME    HSMPLC     WINDOWCOMPAT ;This is the EHLLAPI application module
+
+PROTMODE                        ;It will run only in protect mode
+
+DESCRIPTION 'EHLLAPI APPLICATION'
+
+STACKSIZE 8192
+
+IMPORTS
+      ACS3EHAP.HLLAPI

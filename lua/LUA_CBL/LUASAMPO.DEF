@@ -1,0 +1,12 @@
+
+; DEF file for LUASAMPO Sample COBOL Program
+NAME
+
+DESCRIPTION  'LUASAMPO'
+PROTMODE
+
+IMPORTS
+        ACSSLI.SLI
+        ACSSVC.ACSSVC
+
+            

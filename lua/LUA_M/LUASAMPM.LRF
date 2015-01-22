@@ -1,0 +1,5 @@
+luasampm.obj                                                                    
+luasampm.exe                                                                    
+luasampm.map / MAP                                                              
+doscalls.lib /NOD                                                               
+luasampm.def;                                                                   

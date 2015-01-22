@@ -1,0 +1,271 @@
+/****************************************************************************/
+/*                                                                          */
+/*  MODULE NAME : PMDSPLAY.RC                                               */
+/*                                                                          */
+/*  DESCRIPTIVE NAME : DISPLAY SAMPLE PROGRAM FOR OPERATING SYSTEM/2        */
+/*                      EXTENDED SERVICES/2 1.0                             */
+/*                                                                          */
+/*  COPYRIGHT        : (C) COPYRIGHT IBM CORP. 1991                         */
+/*                     LICENSED MATERIAL - PROGRAM PROPERTY OF IBM          */
+/*                     ALL RIGHTS RESERVED                                  */
+/*                                                                          */
+/*  FUNCTION:   PMDSPLAY resource script file                               */
+/*                                                                          */
+/*  MODULE:     Operating System/2 Resource Compiler Version 1.20           */
+/*  TYPE        (RC.EXE; part of Microsoft C Compiler Version 6.0           */
+/*              and IBM OS/2 Programming Tools and Information              */
+/*              Versions 1.2 and 1.3)                                       */
+/*                                                                          */
+/*  ASSOCIATED FILES:  See PMDSPLAY.MAK                                     */
+/*                                                                          */
+/****************************************************************************/
+/* Define _MSC_VER 600 to make the includes nested in pmdsplay.h work right */
+#define _MSC_VER 600
+/*---------------------------------------------------------------------*\
+ | Includes                                                            |
+\*---------------------------------------------------------------------*/
+#include "pmdsplay.h"
+
+/*---------------------------------------------------------------------*\
+ | Resources                                                           |
+\*---------------------------------------------------------------------*/
+/***********************************************************************/
+/* Icon to show when window is minimized                               */
+/***********************************************************************/
+POINTER ID_MAIN_RESOURCE pmdsplay.ico
+
+/***********************************************************************/
+/* Help Table                                                          */
+/***********************************************************************/
+HELPTABLE ID_MAIN_RESOURCE {
+   HELPITEM ID_MAIN_RESOURCE,  ID_MAIN_RESOURCE,  IDH_MAIN_EXT
+   HELPITEM IDD_FILE,          IDD_FILE,          IDH_FILE_DLG_EXT
+   HELPITEM IDD_TARGET,        IDD_TARGET,        IDH_TARG_DLG_EXT
+   }
+
+HELPSUBTABLE ID_MAIN_RESOURCE {
+   HELPSUBITEM IDM_SELECT,        IDH_SELECT
+      HELPSUBITEM IDM_APPC,          IDH_APPC
+         HELPSUBITEM IDM_INFO_ADAPTER,  IDH_ADAPTER
+         HELPSUBITEM IDM_INFO_GLOBAL,   IDH_GLOBAL
+         HELPSUBITEM IDM_INFO_LINKDEF,  IDH_LINKDEF
+         HELPSUBITEM IDM_INFO_LINKS,    IDH_LINKS
+         HELPSUBITEM IDM_INFO_LU03,     IDH_LU03
+         HELPSUBITEM IDM_INFO_LU62,     IDH_LU62
+         HELPSUBITEM IDM_INFO_LUDEF,    IDH_LUDEF
+         HELPSUBITEM IDM_INFO_MS,       IDH_MS
+         HELPSUBITEM IDM_INFO_MODES,    IDH_MODES
+         HELPSUBITEM IDM_INFO_PLUDEF,   IDH_PLUDEF
+         HELPSUBITEM IDM_INFO_SESSIONS, IDH_SESSIONS
+         HELPSUBITEM IDM_INFO_GW,       IDH_GW
+         HELPSUBITEM IDM_INFO_SYSDEF,   IDH_SYSDEF
+         HELPSUBITEM IDM_INFO_AM,       IDH_AM
+         HELPSUBITEM IDM_INFO_TP,       IDH_TP
+         HELPSUBITEM IDM_INFO_X25,      IDH_X25
+      HELPSUBITEM IDM_APPN,          IDH_APPN
+         HELPSUBITEM IDM_INFO_COS,      IDH_COS
+         HELPSUBITEM IDM_INFO_CN,       IDH_CN
+         HELPSUBITEM IDM_INFO_DIR,      IDH_DIR
+         HELPSUBITEM IDM_INFO_ISR,      IDH_ISR
+         HELPSUBITEM IDM_INFO_NODE,     IDH_NODE
+         HELPSUBITEM IDM_INFO_TOP,      IDH_TOP
+      HELPSUBITEM IDM_EXIT,          IDH_EXIT
+   HELPSUBITEM IDM_OPTIONS,       IDH_OPTIONS
+      HELPSUBITEM IDM_SCREEN,        IDH_SCREEN
+      HELPSUBITEM IDM_FILE,          IDH_FILE
+      HELPSUBITEM IDM_TARGET,        IDH_TARGET
+      HELPSUBITEM IDM_REFRESH,       IDH_REFRESH
+   HELPSUBITEM IDM_HELP,          IDH_HELP
+      HELPSUBITEM IDM_HELP_FOR_HELP, IDH_HELPHELP
+      HELPSUBITEM SC_HELPEXTENDED,   IDH_HELPEXTENDED
+      HELPSUBITEM SC_HELPINDEX,      IDH_HELPINDEX
+      HELPSUBITEM SC_HELPKEYS,       IDH_HELPKEYS
+      HELPSUBITEM IDM_ABOUT,         IDH_ABOUT
+   }
+
+HELPSUBTABLE IDD_FILE {
+   HELPSUBITEM IDD_DRIVE_LIST,    IDH_DRIVE_LIST
+   HELPSUBITEM IDD_DIR_LIST,      IDH_DIR_LIST
+   HELPSUBITEM IDD_FILE_LIST,     IDH_FILE_LIST
+   HELPSUBITEM IDD_FILE_EDIT,     IDH_FILE_EDIT
+   HELPSUBITEM IDD_APPEND,        IDH_APPEND
+   HELPSUBITEM DID_OK,            IDH_FILE_OK
+   HELPSUBITEM DID_CANCEL,        IDH_FILE_CANCEL
+   HELPSUBITEM IDD_FILE_DLG_HELP, IDH_FILE_DLG_HLP
+   }
+
+HELPSUBTABLE IDD_TARGET {
+   HELPSUBITEM IDD_PLU_LIST,      IDH_PLU_LIST
+   HELPSUBITEM IDD_PLU_EDIT,      IDH_PLU_EDIT
+   HELPSUBITEM DID_OK,            IDH_TARG_OK
+   HELPSUBITEM DID_CANCEL,        IDH_TARG_CANCEL
+   HELPSUBITEM IDD_PLU_DLG_HELP,  IDH_PLU_DLG_HLP
+   }
+
+/***********************************************************************/
+/* Menu                                                                */
+/***********************************************************************/
+MENU ID_MAIN_RESOURCE {
+   SUBMENU  "~Display",            IDM_SELECT {
+      SUBMENU  "General ~SNA",              IDM_APPC {
+         MENUITEM "~Adapters",              IDM_INFO_ADAPTER
+         MENUITEM "~Global SNA",            IDM_INFO_GLOBAL
+         MENUITEM "L~ink Definitions",      IDM_INFO_LINKDEF
+         MENUITEM "~Links",                 IDM_INFO_LINKS
+         MENUITEM "Logical Units ~0 to 3",  IDM_INFO_LU03
+         MENUITEM "Logical Unit ~6.2",      IDM_INFO_LU62
+         MENUITEM "L~U Definitions",        IDM_INFO_LUDEF
+         MENUITEM "~Management Services",   IDM_INFO_MS
+         MENUITEM "M~ode Definitions",      IDM_INFO_MODES
+         MENUITEM "~Partner LU Definitions", IDM_INFO_PLUDEF
+         MENUITEM "LU 6.2 ~Sessions",       IDM_INFO_SESSIONS
+         MENUITEM "S~NA Gateway",           IDM_INFO_GW
+         MENUITEM "System ~Defaults",       IDM_INFO_SYSDEF
+         MENUITEM "T~ransaction Program Definitions", IDM_INFO_AM
+         MENUITEM "~Transaction Programs",  IDM_INFO_TP
+         MENUITEM "~X.25 Physical Links",   IDM_INFO_X25 }
+      SUBMENU  "APP~N",               IDM_APPN {
+         MENUITEM "~Class of Service",      IDM_INFO_COS
+         MENUITEM "C~onnection Networks",   IDM_INFO_CN
+         MENUITEM "~Directory",             IDM_INFO_DIR
+         MENUITEM "~Intermediate Sessions", IDM_INFO_ISR
+         MENUITEM "~Node",                  IDM_INFO_NODE
+         MENUITEM "~Topology",              IDM_INFO_TOP }
+      MENUITEM SEPARATOR
+      MENUITEM "~Refresh\tCtrl+R",         IDM_REFRESH
+      MENUITEM SEPARATOR
+      MENUITEM "~Exit\tF3",           IDM_EXIT }
+   SUBMENU  "~Options",            IDM_OPTIONS {
+      MENUITEM "Display to ~Screen\tF4",   IDM_SCREEN,, MIA_CHECKED
+      MENUITEM "Display to ~File...\tF5",  IDM_FILE
+      MENUITEM "Select ~Target...\tF6",    IDM_TARGET }
+
+   SUBMENU  "~Help",               IDM_HELP {
+      MENUITEM "~Help for help...",   IDM_HELP_FOR_HELP
+      MENUITEM "~Extended help...",   SC_HELPEXTENDED,  MIS_SYSCOMMAND
+      MENUITEM "~Keys help...",       SC_HELPKEYS,      MIS_SYSCOMMAND
+      MENUITEM "Help ~index...",      SC_HELPINDEX,     MIS_SYSCOMMAND
+      MENUITEM SEPARATOR
+      MENUITEM "~About...",           IDM_ABOUT }
+   }
+
+/***********************************************************************/
+/* Accelerator Table                                                   */
+/***********************************************************************/
+ACCELTABLE ID_MAIN_RESOURCE {
+   VK_F3, IDM_EXIT,    VIRTUALKEY
+   VK_F4, IDM_SCREEN,  VIRTUALKEY
+   VK_F5, IDM_FILE,    VIRTUALKEY
+   VK_F6, IDM_TARGET,  VIRTUALKEY
+   "^R",  IDM_REFRESH
+   }
+
+/***********************************************************************/
+/* String Table                                                        */
+/***********************************************************************/
+STRINGTABLE {
+   IDM_INFO_ADAPTER,   "Adapters"
+   IDM_INFO_GLOBAL,    "Global SNA"
+   IDM_INFO_LINKDEF,   "Link Definitions"
+   IDM_INFO_LINKS,     "Links"
+   IDM_INFO_LU03,      "Logical Units 0 to 3"
+   IDM_INFO_LU62,      "Logical Unit 6.2"
+   IDM_INFO_LUDEF,     "LU Definitions"
+   IDM_INFO_MS,        "Management Services"
+   IDM_INFO_MODES,     "Mode Definitions"
+   IDM_INFO_PLUDEF,    "Partner LU Definitions"
+   IDM_INFO_SESSIONS,  "LU6.2 Sessions"
+   IDM_INFO_GW,        "SNA Gateway"
+   IDM_INFO_SYSDEF,    "System Defaults"
+   IDM_INFO_AM,        "Transaction Program Definitions"
+   IDM_INFO_TP,        "Transaction Programs"
+   IDM_INFO_X25,       "X.25 Physical Links"
+   IDM_INFO_COS,       "Class of Service"
+   IDM_INFO_CN,        "Connection Networks"
+   IDM_INFO_DIR,       "Directory"
+   IDM_INFO_ISR,       "Intermediate Sessions"
+   IDM_INFO_NODE,      "Node"
+   IDM_INFO_TOP,       "Topology"
+
+   PROG_TITLE_FIRST,   "IBM Communications Manager"
+   PROG_TITLE_LAST,    "Display Active SNA Configuration"
+
+   HELP_WIN_TITLE,     "Help"
+
+   NOT_AVAILABLE,      "This Feature Is Not Available"
+   NO_HELP_AVAILABLE,  "Help Not Available"
+   HELP_ERROR,         "Help Terminated Due to Error"
+   BUF_ALLOC_ERROR,    "Not Enough Memory For DISPLAY Buffer"
+   FILE_OPEN_FAILURE,  "Unable to Open File"
+   NOT_APPC_OPTION,    "This Option Not Available in APPC"
+   INVALID_DRIVE,      "Invalid Drive Specification"
+   INVALID_DIRECTORY,  "Invalid Directory Specification"
+   INVALID_FILENAME,   "Invalid Filename Specification"
+   DISP_TO_FILE_DONE,  "DISPLAY to file complete"
+   ATTEMPTING_ALLOC,   "Allocating Conversation"
+   CONV_ALLOC_SUCC,    "Conversation Allocation Successful"
+   CONV_ALLOC_UNSUCC,  "Conversation Allocation Unsuccessful"
+   LOCAL_MACHINE,      "Local"
+   INVALID_PLU_NAME,   "Invalid Partner LU Name"
+   THREAD_ALLOC_ERR,   "Error Allocating Stack for Thread"
+   BEGINTHREAD_ERR,    "Error Creating Thread to perform DISPLAY"
+   }
+
+/***********************************************************************/
+/* Dialog Template for About Box                                       */
+/***********************************************************************/
+DLGTEMPLATE IDD_ABOUT {
+   DIALOG "About", IDD_ABOUT, 32, 32, 200, 80,
+          WS_VISIBLE, FCF_TITLEBAR | FCF_SYSMENU {
+      CTEXT "IBM Communications Manager",           -1,  10,  44, 180,   8
+      CTEXT "Display Active SNA Configuration", -1,  10,  36, 180,   8
+      DEFPUSHBUTTON "OK",                          DID_OK,  80,   4,  40,  12
+         WS_GROUP
+      }
+   }
+
+/***********************************************************************/
+/* Dialog Template for Display to File dialog                          */
+/***********************************************************************/
+DLGTEMPLATE IDD_FILE {
+   DIALOG "Display to File", IDD_FILE, 8, 8, 250, 160,
+          WS_VISIBLE, FCF_TITLEBAR | FCF_SYSMENU {
+      CTEXT "Drives:",                                 -1,   8, 144,  32,   8
+      CTEXT "Directories:",                            -1,  60, 144,  80,   8
+      CTEXT "Files:",                                  -1, 160, 144,  80,   8
+      LISTBOX                              IDD_DRIVE_LIST,  12,  80,  32,  64
+      LISTBOX                                IDD_DIR_LIST,  56,  80,  88,  64
+      LISTBOX                               IDD_FILE_LIST, 156,  80,  88,  64
+      LTEXT "Path:",                                   -1,   8,  64,  80,   8
+      LTEXT "",                                  IDD_PATH,  56,  64, 144,   8
+      LTEXT "Filename:",                               -1,   8,  48,  48,   8
+      ENTRYFIELD "",                        IDD_FILE_EDIT,  56,  48, 176,   8,
+         ES_MARGIN
+      AUTOCHECKBOX "Append",                   IDD_APPEND,   8,  28,  48,  12
+      DEFPUSHBUTTON "OK",                          DID_OK,  38,   8,  48,  12,
+         WS_GROUP
+      PUSHBUTTON "Cancel",                     DID_CANCEL, 100,   8,  48,  12
+      PUSHBUTTON "Help",                IDD_FILE_DLG_HELP, 163,   8,  48,  12,
+         BS_HELP | BS_NOPOINTERFOCUS
+      }
+   }
+
+/***********************************************************************/
+/* Dialog Template for Target PLU Name Selection dialog                */
+/***********************************************************************/
+DLGTEMPLATE IDD_TARGET {
+   DIALOG "Target Partner LU Selection", IDD_TARGET, 8, 8, 225, 125,
+          WS_VISIBLE, FCF_TITLEBAR | FCF_SYSMENU {
+      LTEXT "Partner LU Aliases and Names:",           -1,  24, 112, 136,   8
+      LISTBOX                                IDD_PLU_LIST,  24,  48, 178,  64
+      LTEXT "Partner LU:",                             -1,  24,  28,  48,   8
+      ENTRYFIELD "",                         IDD_PLU_EDIT,  80,  28, 120,   8,
+         ES_MARGIN
+      DEFPUSHBUTTON "OK",                          DID_OK,  24,   8,  48,  12,
+         WS_GROUP
+      PUSHBUTTON "Cancel",                     DID_CANCEL,  90,   8,  48,  12
+      PUSHBUTTON "Help",                 IDD_PLU_DLG_HELP, 156,   8,  48,  12,
+         BS_HELP | BS_NOPOINTERFOCUS
+      }
+   }
+

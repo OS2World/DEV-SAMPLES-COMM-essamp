@@ -1,0 +1,6 @@
+msampl.obj:  msampl.asm
+MASM msampl,,,;
+
+msampl.exe:  msampl.obj
+LINK @msampl.lrf
+

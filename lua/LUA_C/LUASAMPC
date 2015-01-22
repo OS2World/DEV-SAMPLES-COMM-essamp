@@ -1,0 +1,8 @@
+
+luasampc.exe: luasampc.obj
+   link @luasampc.lrf
+
+luasampc.obj: luasampc.c  lua_c.h  acssvcc.h
+   cl /c /Fc /Fs /Ot /Zp /Ze /Lp /G2 /Gs /AL luasampc.c ;
+
+

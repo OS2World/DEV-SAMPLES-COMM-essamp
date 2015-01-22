@@ -1,0 +1,11 @@
+NAME HSMPLM                     ;This is the EHLLAPI application module
+
+PROTMODE                        ;It will run only in protect mode
+
+DESCRIPTION 'EHLLAPI APPLICATION'
+
+STACKSIZE 3500
+
+IMPORTS
+      ACS3EHAP.HLLAPI
+

@@ -1,0 +1,6 @@
+reactx25.exe: reactx25.obj
+   link @reactx25.lrf /CO
+
+reactx25.obj: reactx25.c
+ cc reactx25 /G2 /W3 /Zl /Zi /Zp /Od /AS
+                                  

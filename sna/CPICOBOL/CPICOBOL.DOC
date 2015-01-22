@@ -1,0 +1,226 @@
+   Communications Manager
+   (c) Copyright International Business Machines Corp. 1991
+
+
+Four sample COBOL programs are included in the CPICOBOL sample subdirectory:
+
+o SALESRPT
+
+The SALESRPT program is taken directly from the Sample Programs (Appendix F),
+contained in the Common Programming Interface Communications Reference manual
+(form number SC26-4399).  This program forms the initiator half of the
+SALESRPT/CREDRPT program pair.
+
+
+o CREDRPT
+
+The CREDRPT program is also taken directly form the Sample Programs Appendix
+referred to above.  This program forms the acceptor half of the program
+pair.
+
+
+o DEFSIDE
+
+The DEFSIDE program is an example implementation illustrating the dynamic
+configuration update capability introduced with this product.  Using this
+program, you can add the necessary CPI Communications 'side information'
+required to run the sample SALESRPT/CREDRPT program pair.
+
+
+o DELSIDE
+
+The DELSIDE program forms the counterpart to the DEFSIDE program.  Using the
+DELSIDE program, you can dynamically delete the configuration information
+added through DEFSIDE.
+
+
+PREREQUISITES
+
+To run the sample programs, you need to have the nodes involved configured
+and running as follows:
+
+o Communications Manager
+  The two machines must be configured as either a Network Node / End Node
+  pair, or as two Network Nodes.  Each node must be configured to use
+  a DLC (for example, Token-Ring).  You must also have started the attach
+  manager on the acceptor (CREDRPT) side.
+
+o SALESRPT
+  In order to use the SALESRPT program, you must define the necessary
+  CPI Communications 'side information' on that node.  (The alternatives
+  for defining this information follow.)
+
+o CREDRPT
+  In order to use the CREDRPT program, you must ensure that the CREDRPT.EXE
+  file is put into the default search path for Transaction Programs (TPs)
+  on the node that will run the program.  Alternatively, you can create
+  an explicit TP definition for the program in the configuration (NDF)
+  file that will be active at the time you run the samples.
+
+o DEFSIDE and DELSIDE
+  These programs are designed to be run on the side which will run the
+  SALESRPT program.
+
+To compile the sample programs, you should be familiar with and have the
+following available:
+
+o A COBOL compiler and linker such as Micro Focus COBOL/2.
+  You should be able to compile programs for OS/2 (PATH and INCLUDE
+  environment variables are correct).
+
+o Extended Services/2 Version 1.0, Communications Manager and
+  High Level Languages (HLL) include files.
+
+o The Extended Services/2 Communications Manager API Sample
+  Programs Support diskette containing the program source.
+
+
+
+CONFIGURING COMMUNICATIONS MANAGER TO USE THE SAMPLE PROGRAMS
+
+Configuring using APPNC:
+
+You can configure the sample programs using either the Advanced Services
+of Communications Manager, the APPNC configuration screens, by editing your
+node definitions file, or by running the DEFSIDE program (on the side
+containing the SALESRPT program) and placing the CREDRPT program in the
+default path for TPs on the side that will run CREDRPT.
+
+To configure Communications Manager using the APPNC configuration screens,
+perform the following steps at each side (node):
+
+At the SALESRPT side:
+Select 'Additional SNA Features'.
+Select 'CPI-C Communications Side Information'.
+In the CPI-C symbolic destination name box, enter CREDRPT.
+In the Partner LU box, enter either a Fully qualified name (the name of
+the LU to be used in the node containing the CREDRPT program), or enter
+the Alias for that LU.
+In the Partner TP box, enter CREDRPT (leave the Service TP box blank).
+Skip by the Security type box (or select Same).
+Click on the Mode Name box, and select #INTER.
+Select OK.
+
+At the CREDRPT side:
+Select 'Additional SNA Features'.
+Select 'Transaction Program Definitions'.
+Type CREDRPT for the Transaction Program name.
+  (This is a case sensitive field!)
+Type the path for the CREDRPT sample program in the next field.  This
+will likely be of the form:  'path'\SNA\CPICOBOL\CREDRPT.EXE, where 'path'
+was that specified when the samples were installed.
+Select Continue.
+Select VIO-Windowable for Presentation Type.
+Select Non-Queued Attach Manager Started.
+Select OK.
+
+
+Configuring Using Supplied Node Definitions Files
+
+To configure Communications Manager using the supplied node definition files,
+"SALESRPT.NDF" and "CREDRPT.NDF", the following changes must be made to the
+supplied node definition files:
+
+SALESRPT:
+Change the FQ_PARTNER_LU_NAME parameter of the DEFINE_CPIC_SIDE_INFO definition
+to the Network and LU name of an LU that exists on the node that will run
+the CREDRPT TP.  You do not need to include the Network name (or netid) if the
+LU you specify is in the same network as the LU supporting the SALESRPT
+program.  As an alternative to entering the fully qualified name, you can
+can define the PARTNER_LU_ALIAS parameter, supplying the Alias name defined
+for the Partner LU.
+
+CREDRPT:
+Ensure that the FILESPEC parameter for the DEFINE_TP contains the correct
+path information for the location of the CREDRPT.EXE TP.  Also, you must
+be sure to have a "START_ATTACH_MANAGER;" statement in the NDF file for
+this node.
+
+You should append these files to your active node definition files on the
+respective workstations.  For example, this can be done with the COPY
+command by specifying " COPY WORKING.NDF+SALESRPT.NDF".  After appending
+the NDF file, you must execute APPNV against the combined file and restart
+Communications Manager. (If you have performed the preceding steps on an
+active configuration, and Communications Manager is currently running, you
+may choose to update the running configuration rather than going through
+the restart step).
+
+
+Dynamic Side Definition
+
+You can eliminate the configuration step on the side
+which contains the SALESRPT program by running the DEFSIDE
+program.  The program will dynamically define the required CPIC
+side information.  You may then run the SALESRPT program.
+(Note that you must change the source for DEFSIDE so that it is appropriate
+for your network.  The parameters that must be changed are as described for
+the SALESRPT.NDF file).
+
+The DELSIDE program will delete the side information related to the
+SALESRPT/CREDRPT transaction program pair.  This program is an functional
+example, and need not be executed to run the other samples.
+
+
+RUNNING THE SAMPLE PROGRAMS
+
+1.  From the SALESRPT side, switch to OS/2 and select the OS/2 Full Screen
+    or OS/2 Window command prompt.
+
+2.  Start the SALESRPT program by entering SALESRPT at the command prompt.
+
+
+COMPILING THE SAMPLE PROGRAMS
+
+
+1.  To compile these programs, you should modify the supplied CPICOBOL.CMD
+    command file to suit your compilation environment (or use your existing
+    COBOL compilation procedures).  At a minimum, you must change the
+    COBOLDRIVE environment variable to the drive that your COBOL compiler
+    is on.
+
+2.  When you are prepared to link the resulting object modules, take note
+    of the libraries that are required for the COBOL interface to CPIC.
+    You must supply the linkage editor with the correct library statement for
+    your environment.  For the samples, include CPICOBOL.LIB on the library
+    statement (along with DOSCALLS.LIB).
+
+Notes on Environment
+
+Compiling Portable Source
+
+If you are coding your source programs for portability (non-OS/2 specific),
+you must supply the CPICOBOL.LIB statement to the linkage editor at the
+Libraries prompt.  Do NOT include the CPIC.LIB statement.
+
+The conditions for portability that are important here are:
+
+o integer items passed to CPI Communications must be COMPUTATIONAL-4
+  (not COMPUTATIONAL-5)
+
+o CPI Communications routines must be called without the double underscore
+  prefix to the routine name
+
+o parameters passed to CPI Communications must be ordered in standard COBOL
+  form (not reversed)
+
+
+Compiling for OS/2 Environment Only
+-----------------------------------
+If your COBOL programs do not require portability, and are designed to run
+in the OS/2 environment only, you should not include the CPICOBOL.LIB library
+statement to the linkage editor libraries prompt. Instead you should include
+the CPIC.LIB library statement.
+
+The following list is an example of coding techniques used for the OS/2 only
+environment in calling CPI Communications routines:
+
+o integer data passed to CPI Communications must be COMPUTATIONAL-5
+  (not COMPUTATIONAL-4)
+
+o CPI Communications routine names must be coded with the double underscore
+  prefix.
+
+o all parameters passed to CPI Communications must be coded in reverse order
+  (Pascal calling convention)
+
+

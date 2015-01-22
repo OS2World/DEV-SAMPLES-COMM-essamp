@@ -1,0 +1,10 @@
+acdicxmt.exe: acdicxmt.obj acx.msg
+   link @acdicxmt.lrf
+   msgbind acdicxmt.bnd
+
+acdicxmt.obj: acdicxmt.c
+ cl /ALw /G2 /Zp /c $**
+
+acx.msg: acx.txt
+ mkmsgf acx.txt acx.msg
+

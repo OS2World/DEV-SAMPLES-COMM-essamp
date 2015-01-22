@@ -1,0 +1,19 @@
+/*
+ 
+This file should be used to help configure the APPC server side of
+the file sample programs.  The APPC server is the workstation where
+the file will be sent from.
+ 
+You may copy this configuration command into your current APPC node
+definition file (.NDF).
+ 
+*/
+ 
+DEFINE_TP tp_name(FileServer)
+          filespec(\cmlib\appn\samples\file\filecsvr.exe)
+          conversation_type(mapped)
+          conv_security_rqd(no)
+          sync_level(confirm)
+          tp_operation(nonqueued_am_started)
+          program_type(vio_windowable);
+ 

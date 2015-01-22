@@ -1,0 +1,8 @@
+NAME MSAMPL WINDOWCOMPAT        ;This is the SRPI application module
+
+PROTMODE                        ;It will run only in protect mode
+
+DESCRIPTION 'SRPI APPLICATION'
+
+STACKSIZE 3500
+

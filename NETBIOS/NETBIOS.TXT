@@ -1,0 +1,237 @@
+
+
+                 IBM EXTENDED SERVICES FOR OS/2
+        COMMUNICATIONS MANAGER API SAMPLE PROGRAMS SUPPORT
+
+   (c) Copyright International Business Machines Corp., 1989, 1990,
+   1991
+
+
+
+
+   NETBIOS SAMPLE PROGRAM
+
+
+   The NETBIOS sample program is an example of an application
+   program written to the dynamic link interface of NETBIOS.
+   The function of the sample program is to communicate on a
+   Local Area Network using NETBIOS protocol.  In the sample
+   scenario communication is set up between two NETBIOS session
+   partners on the Local Area Network; one session sends data
+   while the other receives the data.  The session partners
+   can be on one machine or separate machines.
+
+   The sample program is designed to run only in protected
+   mode of IBM Extended Services for OS/2.  The sample program
+   source code and supporting files are provided for C.  The
+   sample program can be compiled as a 16 bit application or
+   a 32 bit application.  The 16 bit program is compiled with
+   the Microsoft C Compiler Version 6.0 and runs on OS/2 SE Version
+   1.30.1 or higher.  The 32 bit program is compiled with the
+   the IBM C Set/2 Compiler and runs on OS/2 Standard Edition
+   Version 2.0.
+
+
+   PREREQUISITES
+
+   To run the sample program, a user must obtain and be familiar
+   with the following:
+
+   1.  OS/2 installation and program execution
+
+   2.  TOOLKIT installation
+
+   3.  IBM Extended Services for OS/2 including Communications
+       Manager Installation and Configuration
+
+   5.  Microsoft C Compiler Version 6.0 (for 16-bit programs) or
+       IBM C Set/2 Compiler (for 32-bit programs)
+
+
+   HARDWARE REQUIREMENTS
+
+   One or two PS/2 or AT machines which are connected to the same
+   Local Area Network.  The network adapter must be one supported by
+   IBM Extended Services for OS/2.  The adapter should be configured
+   as adapter 0 or adapter 1.
+
+
+   INSTALLATION
+
+   The installation for running NETBIOS sample programs consists of the
+   following:
+
+   1. Installing IBM Extended Services for OS/2 including
+      Communications Manager.
+
+   2. Creating the LAN Adapter and Protocol Support configuration file
+      for the network adapter installed and IBM OS/2 NETBIOS protocol
+      for the sample program
+
+   3. Installing TOOLKIT
+
+   4. Installing the compiler selected
+
+
+   ASSUMPTIONS
+
+   The INSTALLATION DETAIL section explains the installation procedure.
+   It is assumed that Extended Services, TOOLKIT and the compiler
+   are installed on the same drive. For ease of discussion the C drive
+   is used as the default.
+
+   INSTALLATION DETAIL
+
+   1. INSTALLING IBM EXTENDED SERVICES FOR OS/2
+
+   Install IBM Extended Services for OS/2 according to the
+   installation documentation provided with the product.
+   When you install make sure you install LAN Adapter
+   and Protocol Support.
+
+   To build the NETBIOS sample program, the Communications
+   Manager API data structures must be installed on the build
+   machine.  The API data structures are high level language
+   include files.  To install the API data structures select them
+   from the "Install Additional Features" panel.
+
+   2. CREATING NETBIOS SAMPLE PROGRAM CONFIGURATION FILE
+
+   Use Communications Manager Advanced Configuration and
+   select LAN Adapter and Protocol Support to configure
+   the workstation.  Configure the network adapter
+   driver for the network adapter installed and configure
+   the NETBIOS protocol driver for adapter 0 or 1.  The
+   default configuration parameters for both the network
+   adapter driver and the NETBIOS protocol driver are
+   sufficient to run the sample program.
+
+
+   4. INSTALLING TOOLKIT
+
+   Install TOOLKIT using its installation procedure.
+
+
+   5. INSTALLING THE COMPILER
+
+   For the 16-bit application install Microsoft C Compiler
+   Version 6.0 using the installation procedure for the compiler.
+   For the 32-bit application install IBM C Set/2 Compiler
+   using the installation procedure for the compiler.
+
+
+
+
+   C SAMPLE PROGRAM 16 BIT APPLICATION
+
+   The C sample program and the following instructions are
+   for Microsoft C version 6.0.
+
+   Set up the environment for the Microsoft C Compiler according
+   to the compiler documentation. Create a subdirectory for the
+   sample program.
+
+   Copy the following into the sample program subdirectory from
+   the sample program diskette:
+
+        NETSAMPO.C    - sample program source code
+        NETERROR.H    - sample program header file
+        NETGBLV.H     - sample program header file
+        NETSAM16      - 16 bit sample program make file
+        NETSAMPO.DEF  - sample program module definition file
+
+   Copy the following Extended Services LAN Adapter and Protocol
+   Support header files into the sample program subdirectory:
+
+        NETB_1_C.H
+        NETB_2_C.H
+        NETB_4_C.H
+        LAN_7_C.H
+
+   These header files are installed during Extended Services
+   installation.  To install the API header files select them
+   from the "Install  Additional Features" panel.
+
+   To compile and link make sure the current directory is the sample
+   program subdirectory.  Rename the file NETSAM16 as NETSAM16.MAK.
+   Type the following at the OS/2 command prompt:
+           nmake netsam16.mak
+   The file netsampo.exe will be created.
+
+
+   C SAMPLE PROGRAM 32 BIT APPLICATION
+
+   The C sample program and the following instructions are
+   for the IBM C Set/2 Compiler.
+
+   Set up the environment for the IBM C Set/2 Compiler according
+   to the compiler documentation. Create a subdirectory for the
+   sample program.  The nmake utiltity used to compile and link
+   the sample program is in the toolkit.  Be sure to include
+   the path to nmake in the path statement when setting up the
+   work environment.
+
+   Copy the following into the sample program subdirectory from
+   the sample program diskette:
+
+        NETSAMPO.C    - sample program source code
+        NETERROR.H    - sample program header file
+        NETGBLV.H     - sample program header file
+        NETSAMPO      - 32 bit sample program make file
+        NETSAMPO.DEF  - sample program module definition file
+
+   Copy the following Extended Services LAN Adapter and Protocol
+   Support header files into the sample program subdirectory:
+
+        NETB_1_C.H
+        NETB_2_C.H
+        NETB_4_C.H
+        LAN_7_C.H
+
+   These header files are installed during Extended Services
+   installation.  To install the API header files select them
+   from the "Install  Additional Features" panel.
+
+   Add the following to the source program NETSAMPO.C
+
+        #define E32TO16
+
+   This will cause the 32-bit versions of the .H files to be expanded
+   when compiling.
+
+   To compile and link make sure the current directory is the sample
+   program subdirectory.  Rename the file NETSAMPO as NETSAMPO.MAK.
+   Type the following at the OS/2 command prompt:
+           nmake netsampo.mak
+   The file netsampo.exe will be created.
+
+
+   RUNNING THE SAMPLE PROGRAM
+
+
+   If you are running the sample program on one machine set up two
+   OS/2 sessions.  If you are running the sample program on two
+   machines set up one OS/2 session per machine.  Change the
+   current directory to the directory containing NETSAMPO.EXE.
+
+   The sample program has a sender and receiver.  Start the
+   receiver first.  At the command prompt enter:
+
+       netsampo recv adapter=adapter_num lclname=rcvname netname=sendname
+
+   In the OS/2 session (either on the same machine or the partner
+   machine) at the command prompt enter:
+
+       netsampo send adapter=adapter_num lclname=sendname netname=rcvname
+
+   The parameter adapter= defaults to 0.  The sender's local name defaults
+   to netsamplesend and the receiver's local name defaults to netsamplerecv.
+   The netname for each is the partner's local name.
+
+   To simply use the defaults the respective inputs for the receiver
+   and sender are:
+
+       netsampo recv
+
+       netsampo send
+

@@ -1,0 +1,903 @@
+
+
+
+
+
+
+     Version 1.2 (c) Copyright International Business Machines Corp., 1988,1991
+
+
+
+
+  X.25 SAMPLE APPLICATION
+
+  The X.25 sample application consists of programs that demonstrate the use of
+  the X.25 interface verbs. The function of the sample application is to
+  transmit data, using the X.25 protocol, from one PS/2 and receive that data
+  on the same or a different PS/2.  To support this function, the sample appli-
+  cation consists of two programs.  One is a receive program, which is referred
+  to as the receiver side.  The other is a transmit program, which is referred
+  to as the transmitter side.  On the receiver side, a user starts the receiver
+  program, supplying a routing table entry name that has been created in the
+  configuration file used to start Communictions Manager.  On the transmitter
+  side, a user starts the transmitter program, supplying a directory entry name
+  that has been created in the configuration file used to start Communictions
+  Manager.
+
+  The sample programs are designed to work in the OS/2 protected mode, with the
+  Communications Manager of the OS/2 Extended Services.  The sample program
+  source code and the supporting files are for C and MASM languages.
+
+  PREREQUISITES
+
+  To run the sample program, a user must be familiar with the following things:
+
+  1.  OS/2 installation and command prompt
+
+  2.  TOOLKIT installation
+
+  3.  Communications Manager installation
+
+  4.  Compiler of the language in which you are interested
+
+  INSTALLATION
+
+  Install OS/2 and TOOLKIT according to the OS/2 installation procedure.  Then,
+  install the Communications Manager using the following procedure.  When the
+  configuration menu, prompts Select a type of configuration file for installa-
+                              _________________________________________________
+  tion, select IBM-supplied files and features.  Include ACSCFG.CFG among the
+  ____         _______________________________
+  list of selected configuration files.  Next, create an X.25 configuration
+  file by following the instructions given under "Creating an X.25 Configura-
+  tion file", later in this read me file.  Then, re-install the Communications
+  Manager using the following procedure.  When the configuration menu, prompts
+  Select a type of configuration file for installation, select User-supplied
+  ____________________________________________________         _____________
+  files, include X25RCV.CFG, or X25XMIT.CFG, or X25SAMP.CFG, depending on which
+  _____
+  file you have created on your machine, among the list of selected configura-
+  tion files.  When the configuration menu, prompts Select configuration file
+                                                    _________________________
+  to update CONFIG.SYS, include X25RCV.CFG, or X25XMIT.CFG, or X25SAMP.CFG,
+  ____________________
+  depending on which file you have created on your machine, among the list of
+  selected configuration files.  When X.25 is installed, your CONFIG.SYS file
+  will contain the statement:
+
+
+                                                                              1
+
+
+
+
+
+
+
+
+
+
+
+    DEVICE=C:\CMLIB\ICARICIO.SYS
+
+  Install the compiler of the language in which you are interested.  Use the
+  installation procedure of the compiler.  Refer to the following language
+  section for additional information.
+
+  NOTES
+
+
+  1.  The instructions for typing at the OS/2 command prompt show the command
+      line with the path for information only.  For example, ÕC:þ is displayed,
+      and you must not type it at the OS/2 command prompt.
+
+  2.  All the following instructions assume that you have installed:
+
+          OS/2
+
+          TOOLKIT
+
+          macro assembler or C compiler
+
+      on your C disk, with the product default directory names.  If you have
+      installed any of these products on another disk you will need to alter
+      the disk identifier accordingly.  If you have chosen different directory
+      names you will need to change the directory names shown to match those
+      you have chosen.
+
+  SUPPORTED LANGUAGES
+
+  1.  C LANGUAGE
+
+      a.  INSTALL C COMPILER
+
+          Install the Microsoft C compiler Version 6.0 as directed by the
+          microsoft publications supplied with your compiler.
+
+          Follow the directions provided by the menus. Choose the default
+          directories and subdirectories.  Select the large memory model.  The
+          compiler is installed at this point.
+
+      b.  C SAMPLE PROGRAMS
+
+          There are two X.25 sample programs.  The receiver side is called
+          X25CRCV.  The transmitter side is called X25CXMIT.  Copy the files
+          with the filename X25CRCV and X25CXMIT into directory C:\C600.  The
+          files to be copied are Source code (.C extension), Module definition
+          (.DEF extension), Make file (no extension), and Link response (.LRF
+          extension).
+
+          All the INCLUDE files are required in C:\C600\INCLUDE directory. Copy
+          the file X25_C.H from the Communications Manager directory (C:\CMLIB)
+
+
+
+  2
+
+
+
+
+
+
+
+
+
+          into the C:\C600\INCLUDE directory.  Also copy DOSCALLS.H from
+          C:\TOOLKT13\C\INCLUDE directory into C:\C600\INCLUDE directory.
+
+      c.  LIBRARY FILES FOR C SAMPLE PROGRAM
+
+          All the LIBRARY files must reside in C:\C600\LIB directory.  Copy
+          ACS.LIB from the Communications Manager directory (C:\CMLIB) into the
+          C:\C600\LIB directory and DOSCALLS.LIB from the OS/2 directory
+          (C:\OS2) into the C:\C600\LIB directory.
+
+      d.  COMPILE/LINK C SAMPLE PROGRAMS
+
+          During installation of the compiler, a file NEW-VARS.CMD is created
+          in your C:\C600\BIN directory.  Change your current directory to
+          C:\C600\BIN. Type the following at the OS/2 command prompt to set up
+          the environment for the compiler.
+
+
+            [C:\C600\BIN]new-vars
+            [Press Enter]
+
+          Change your current directory to C:\C600
+
+          To compile and link the receiver program, type the following at the
+          OS/2 command prompt:
+
+
+            [C:\C600]NMAKE \A X25CRCV
+            [Press Enter]
+
+          To compile and link the transmitter program, type the following on
+          the command line:
+
+
+            [C:\C600]NMAKE \A X25CXMIT
+            [Press Enter]
+
+          The files X25CRCV.EXE and X25CXMIT.EXE will be created.
+
+          After the above procedure, the executable files X25CRCV.EXE and
+          X25CXMIT.EXE are in directory C:\C600 in executable form.
+
+  2.  MACRO ASSEMBLER
+
+      a.  INSTALL MACRO ASSEMBLER
+
+          Install the Microsoft Macro Assembler version 5.1 as directed by the
+          microsoft publications supplied with your macro assembler.  Follow
+          the directions provided by the menus. Choose the default directories
+          and subdirectories.  The assembler is installed at this point.
+
+          During installation of the assembler, directory \MASM\BIN is created.
+
+      b.  ASSEMBLER SAMPLE PROGRAMS
+
+
+                                                                              3
+
+
+
+
+
+
+
+
+
+          There are two macro assembler sample programs.  The receiver side is
+          called X25MRCV.  The transmitter side is called X25MXMIT.  Copy the
+          files with the filename X25MRCV and X25MXMIT into directory
+          C:\MASM\BIN. The files to be copied are Source code (.ASM extension),
+          Module definition (.DEF extension), Make file (no extension), and
+          Link response (.LRF extension).
+
+          All the INCLUDE files are required in C:\MASM\BIN directory. Copy the
+          files X25_A.INC and X25_ASET.INC from the Communications Manager
+          directory (C:\CMLIB) into C:\MASM\BIN directory.  Also copy
+          SYSMAC.INC, DOSCALLS.INC, and SUBCALLS.INC from
+          C:\TOOLKT13\MASM\INCLUDE directory into \MASM\BIN directory.
+
+      c.  LIBRARY FILES FOR ASSEMBLER SAMPLE PROGRAM
+
+          All the LIBRARY files must reside in \MASM\BIN directory.  Copy
+          ACS.LIB from the Communications Manager directory (C:\CMLIB) into the
+          C:\MASM\BIN directory and DOSCALLS.LIB from the OS/2 directory
+          (C:\OS2) into the \MASM\BIN directory.
+
+      d.  ASSEMBLE/LINK ASSEMBLER SAMPLE PROGRAMS
+
+          Change your current directory to C:\MASM\BIN.
+
+          To assemble and link the receiver program, type the following at the
+          OS/2 command prompt:
+
+
+            [C:\MASM\BIN]MAKE X25MRCV
+            [Press Enter]
+
+          To assemble and link the transmitter program, type the following at
+          the OS/2 command prompt:
+
+
+            [C:\MASM\BIN]MAKE X25MXMIT
+            [Press Enter]
+
+          The files X25MRCV.EXE and X25MXMIT.EXE will be created.
+
+          After the above procedure, the executable files X25MRCV.EXE and
+          X25MXMIT.EXE are in directory C:\MASM\BIN in executable form.
+
+  CREATING AN X.25 CONFIGURATION FILE.
+
+  To run the sample program, you have to create X.25 configuration files using
+  the following procedure.
+
+  HARDWARE CONFIGURATIONS
+
+  There are 5 possible configurations that can be used to run the X.25 sample
+  programs.
+
+
+
+
+  4
+
+
+
+
+
+
+
+
+
+  A) Two PS/2's each with an IBM X.25 Interface Co-Processor/2 adapter installed
+     and connected through a PSDN.
+
+  B) Two PS/2's each with an IBM X.25 Interface Co-Processor/2 adapter installed
+     and connected through a modem eliminator.
+
+  C) One PS/2 with two IBM X.25 Interface Co-Processor/2 adapters installed with
+     both adapters connected to the same PSDN.
+
+  D) One PS/2 with two IBM X.25 Interface Co-Processor/2 adapters installed with
+     the adapters connected through a modem eliminator.
+
+  E) One PS/2 with one IBM X.25 Interface Co-Processor/2 adapters installed with
+     the adapter connected to a PSDN
+
+
+  CONFIGURATION STEPS FOR HARDWARE CONFIGURATIONS A and B
+
+  Create a configuration file for the X.25 sample programs using the configura-
+  tion functions in Communications Manager.
+
+  The following instructions will configure two OS/2 Extended Edition machines
+  to run the X.25 sample programs. They guide you through the configuration
+  process, panel by panel, until complete.
+
+  On the PS/2 that will run the receiver side of the sample program, copy the
+  system-supplied configuration file, ACSCFG.CFG, to X25RCV.CFG in the C:\CMLIB
+  directory.
+
+  On the PS/2 that will run the transmitter side of the sample program, copy
+  the system supplied configuration file, ACSCFG.CFG, to X25XMIT.CFG in the
+  C:\CMLIB directory.
+
+  Start the Communications Manager for the receiver side using X25RCV as the
+  startup configuration file.
+
+  Start the Communications Manager for the transmitter side using X25XMIT as
+  the startup configuration file.
+
+  Beginning at the "Communications Manager Main Menu" follow the instructions
+  below.
+
+
+  Transmitter                          Receiver
+
+  Press F10                            Press F10
+  Select "Advanced" from action bar    Select "Advanced" from action bar
+  Select "Configuration"               Select "Configuration"
+  Press Enter                          Press Enter
+
+  On Specify Configuration Usage       On Specify Configuration Usage
+  Panel select either:                 Panel select either:
+  "Select this option if you                  "Select this option if you
+          intend to use this                   intend to use this
+
+
+                                                                              5
+
+
+
+
+
+
+
+
+
+          configuration on this                configuration on this
+          workstation."                        workstation."
+         or:                                  or:
+         "Select this option if you           "Select this option if you
+          intend to use this                   intend to use this
+          configuration on another             configuration on another
+          workstation."                        workstation."
+  Press Enter                          Press Enter
+
+  Select "X.25 feature profiles"       Select "X.25 feature profiles"
+  Select "Adapter profiles"            Select "Adapter profiles"
+  Select "Create"                      Select "Create"
+  Specify "Adapter name"               Specify "Adapter name"
+          - ADAPTER1                           - ADAPTER2
+  Press Enter                          Press Enter
+  Specify "Comment"                    Specify "Comment"
+  Specify "Slot number"                Specify "Slot number"
+          - enter slot number of               - enter slot number of
+            IBM X.25 Interface                   IBM X.25 Interface
+            Co-Processor/2 adapter               Co-Processor/2 adapter
+  Press Enter                          Press Enter
+  Press F3                             Press F3
+
+  Select "Link profiles"               Select "Link profiles"
+  Select "Create"                      Select "Create"
+  Specify "Link profile name"          Specify "Link profile name"
+          - LINK1                              - LINK2
+  Press Enter                          Press Enter
+  Select "Base link parameters"        Select "Base link parameters"
+  Specify "Comment"                    Specify "Comment"
+  Specify "Adapter profile name"       Specify "Adapter profile name"
+          - ADAPTER1                           - ADAPTER2
+  Specify "Local DTE address"          Specify "Local DTE address"
+          - see note 1 below                   - see note 1 below
+  Specify "Operation"                  Specify "Operation"
+          - DTE                                - DTE
+          - see note 3 below
+  Specify "Local CCITT compliance"     Specify "Local CCITT compliance"
+          - see note 1 below                   - see note 1 below
+  Specify "Initial mode of link"       Specify "Initial mode of link"
+          - CONNECT                            - CONNECT
+  Specify "Link set up mode"           Specify "Link set up mode"
+          - INITIATE FROM DTE                  - INITIATE FROM DTE
+  Press Enter                          Press Enter
+  Select "Virtual Circuit Ranges"      Select "Virtual Circuit Ranges"
+  Specify "Circuit ranges"             Specify "Circuit ranges"
+          - see note 1 below                   - see note 1 below
+  Press Enter                          Press Enter
+  Press F3                             Press F3
+  Press F3                             Press F3
+
+  Select "Directory"                   Select "Routing Table"
+  Select "M6"                          Select "M7"
+
+
+
+  6
+
+
+
+
+
+
+
+
+
+  Select "Create"                      Select "Create"
+  Specify "Directory entry name"       Specify "Routing table entry name"
+          - REMOTE1                            - ROUTE1
+  Press Enter                          Press Enter
+  Specify "Remote DTE address"         Press Enter
+          - see notes 1 and 2 below    Select "Top of table"
+  Specify "Remote DTE address
+           extension"
+          - see notes 1 and 2 below
+  Press Enter
+  Press F3                             Press F3
+  Press F3                             Press F3
+  Press F10                            Press F10
+  Select "Verify" from action bar      Select "Verify" from action bar
+  Select "Run verify"                  Select "Run verify"
+  Press Enter                          Press Enter
+
+  Press F10                            Press F10
+  Select "Exit" from action bar        Select "Exit" from action bar
+  Select "Exit communication           Select "Exit communication
+          configuration"                       configuration"
+
+
+  Note 1 - This information is specific to the network subscription and is
+           defined by the network provider when the subscription is set up
+           Contact your network provider if you uncertain of the values to
+           place in these fields.
+
+  Note 2 - This is the address of the receiver PS/2.
+
+  Note 3 - If hardware configuration B is being used then specify PARTNER.
+
+
+  You need to exit the Communications Manager.
+
+  CONFIGURATION STEPS FOR HARDWARE CONFIGURATION C and D
+
+  Create a configuration file for the X.25 sample programs using the configura-
+  tion functions in Communications Manager.
+
+  The following instructions will configure one OS/2 Extended Edition machines
+  to run the X.25 sample programs. They guide you through the configuration
+  process, panel by panel, until complete.
+
+  Copy the system-supplied configuration file, ACSCFG.CFG, to X25SAMP.CFG in
+  the C:\CMLIB directory.
+
+  Start the Communications Manager using X25SAMP as the startup configuration
+  file.
+
+  Beginning at the "Communications Manager Main Menu" follow the instructions
+  below.
+
+
+
+
+                                                                              7
+
+
+
+
+
+
+
+
+
+  Press F10
+  Select "Advanced" from action bar
+  Select "Configuration"
+  Press Enter
+
+  On Specify Configuration Usage Panel
+  select either:
+         "Select this option if you
+          intend to use this
+          configuration on this
+          workstation."
+         or:
+         "Select this option if you
+          intend to use this
+          configuration on another
+          workstation."
+  Press Enter
+
+  Select "X.25 feature profiles"
+  Select "Adapter profiles"
+  Select "Create"
+  Specify "Adapter name"
+          - ADAPTER1
+  Press Enter
+  Specify "Comment"
+  Specify "Slot number"
+          - enter slot number of
+            first IBM X.25 Interface
+            Co-Processor/2 adapter
+  Press Enter
+  Press F3
+
+  Select "X.25 feature profiles"
+  Select "Adapter profiles"
+  Select "Create"
+  Specify "Adapter name"
+          - ADAPTER2
+  Press Enter
+  Specify "Comment"
+  Specify "Slot number"
+          - enter slot number of
+            second IBM X.25 Interface
+            Co-Processor/2 adapter
+  Press Enter
+  Press F3
+
+  Select "Link profiles"
+  Select "Create"
+  Specify "Link profile name"
+          - LINK1
+  Press Enter
+  Select "Base link parameters"
+  Specify "Comment"
+  Specify "Adapter profile name"
+
+
+  8
+
+
+
+
+
+
+
+
+
+          - ADAPTER1
+  Specify "Local DTE address"
+          - see note 1 below
+  Specify "Operation"
+          - DTE
+          - see note 3 below
+  Specify "Local CCITT compliance"
+          - see note 1 below
+  Specify "Initial mode of link"
+          - CONNECT
+  Specify "Link set up mode"
+          - INITIATE FROM DTE
+  Press Enter
+  Select "Virtual Circuit Ranges"
+  Specify "Circuit ranges"
+          - see note 1 below
+  Press Enter
+  Press F3
+  Press F3
+
+
+  Select "Link profiles"
+  Select "Create"
+  Specify "Link profile name"
+          - LINK2
+  Press Enter
+  Select "Base link parameters"
+  Specify "Comment"
+  Specify "Adapter profile name"
+          - ADAPTER2
+  Specify "Local DTE address"
+          - see note 1 below
+  Specify "Operation"
+          - DTE
+          - see note 3 below
+  Specify "Local CCITT compliance"
+          - see note 1 below
+  Specify "Initial mode of link"
+          - CONNECT
+  Specify "Link set up mode"
+          - INITIATE FROM DTE
+  Press Enter
+  Select "Virtual Circuit Ranges"
+  Specify "Circuit ranges"
+          - see note 1 below
+  Press Enter
+  Press F3
+  Press F3
+
+
+  Select "Routing Table"
+  Select "M7"
+  Select "Create"
+  Specify "Routing table entry name"
+
+
+                                                                              9
+
+
+
+
+
+
+
+
+
+          - ROUTE1
+  Press Enter
+  Press Enter
+  Select "Top of table"
+
+
+
+  Select "Directory"
+  Select "M6"
+  Select "Create"
+  Specify "Directory entry name"
+          - REMOTE1
+  Press Enter
+  Specify "Link profile name"
+          - LINK1
+  Specify "Remote DTE address"
+          - see notes 1 and 2 below
+  Specify "Remote DTE address
+           extension"
+          - see notes 1 and 2 below
+  Press Enter
+  Press F3
+  Press F3
+  Press F10
+  Select "Verify" from action bar
+  Select "Run verify"
+  Press Enter
+
+  Press F10
+  Select "Exit" from action bar
+  Select "Exit communication
+          configuration"
+
+
+  Note 1 - This information is specific to the network subscription and is
+           defined by the network provider when the subscription is set up
+           Contact your network provider if you uncertain of the values to
+           place in these fields.
+
+  Note 2 - This is the address of the receiver PS/2.
+
+  Note 3 - If hardware configuration D is being used then specify PARTNER.
+
+
+  CONFIGURATION STEPS FOR HARDWARE CONFIGURATION E
+
+  Create a configuration file for the X.25 sample programs using the configura-
+  tion functions in Communications Manager.
+
+  The following instructions will configure one OS/2 Extended Edition machines
+  to run the X.25 sample programs. They guide you through the configuration
+  process, panel by panel, until complete.
+
+
+
+
+  10
+
+
+
+
+
+
+
+
+
+  Copy the system-supplied configuration file, ACSCFG.CFG, to X25SAMP.CFG in
+  the C:\CMLIB directory.
+
+  Start the Communications Manager using X25SAMP as the startup configuration
+  file.
+
+  Beginning at the "Communications Manager Main Menu" follow the instructions
+  below.
+
+
+  Press F10
+  Select "Advanced" from action bar
+  Select "Configuration"
+  Press Enter
+
+  On Specify Configuration Usage Panel
+  select either:
+         "Select this option if you
+          intend to use this
+          configuration on this
+          workstation."
+         or:
+         "Select this option if you
+          intend to use this
+          configuration on another
+          workstation."
+  Press Enter
+
+  Select "X.25 feature profiles"
+  Select "Adapter profiles"
+  Select "Create"
+  Specify "Adapter name"
+          - ADAPTER1
+  Press Enter
+  Specify "Comment"
+  Specify "Slot number"
+          - enter slot number of
+            IBM X.25 Interface
+            Co-Processor/2 adapter
+  Press Enter
+  Press F3
+
+  Select "Link profiles"
+  Select "Create"
+  Specify "Link profile name"
+          - LINK1
+  Press Enter
+  Select "Base link parameters"
+  Specify "Comment"
+  Specify "Adapter profile name"
+          - ADAPTER1
+  Specify "Local DTE address"
+          - see note 1 below
+  Specify "Operation"
+
+
+                                                                             11
+
+
+
+
+
+
+
+
+
+          - DTE
+          - see note 3 below
+  Specify "Local CCITT compliance"
+          - see note 1 below
+  Specify "Initial mode of link"
+          - CONNECT
+  Specify "Link set up mode"
+          - INITIATE FROM DTE
+  Press Enter
+  Select "Virtual Circuit Ranges"
+  Specify "Circuit ranges"
+          - see note 1 below
+  Press Enter
+  Press F3
+  Press F3
+
+
+  Select "Routing Table"
+  Select "M7"
+  Select "Create"
+  Specify "Routing table entry name"
+          - ROUTE1
+  Press Enter
+  Press Enter
+  Select "Top of table"
+
+
+  Select "Directory"
+  Select "M6"
+  Select "Create"
+  Specify "Directory entry name"
+          - REMOTE1
+  Press Enter
+  Specify "Remote DTE address"
+          - see notes 1 and 2 below
+  Specify "Remote DTE address
+           extension"
+          - see notes 1 and 2 below
+  Press Enter
+  Press F3
+  Press F3
+  Press F10
+  Select "Verify" from action bar
+  Select "Run verify"
+  Press Enter
+
+  Press F10
+  Select "Exit" from action bar
+  Select "Exit communication
+          configuration"
+
+
+  Note 1 - This information is specific to the network subscription and is
+           defined by the network provider when the subscription is set up
+
+
+  12
+
+
+
+
+
+
+
+
+
+           Contact your network provider if you uncertain of the values to
+           place in these fields.
+
+  Note 2 - This is the address of the receiver PS/2.
+
+
+  You need to exit the Communications Manager.
+
+  RUNNING THE SAMPLE PROGRAMS ON TWO PS/2's
+
+  Create a new directory SAMPLE on the receiver side workstation.  Copy the
+  receiver sample program (X25CRCV.EXE, or X25MRCV.EXE) to the SAMPLE direc-
+  tory.
+
+  Create a new directory SAMPLE on the transmitter side workstation.  Copy the
+  transmitter sample program (X25CXMIT.EXE, or X25MXMIT.EXE) to the SAMPLE
+  directory.
+
+  Start the receiver side with the configuration file X25RCV.  Start the trans-
+  mitter side with the configuration file X25XMIT.
+
+  Select "OS/2 command prompt" from the Program Selector panel on the receiver
+  workstation. Change the current directory to SAMPLE.  Start your receiver
+  program (X25CRCV.EXE, or X25MRCV.EXE) supplying a routing table entry name (
+  n.b. in upper case ).
+
+  Select "OS/2 command prompt" from the Program Selector panel on the trans-
+  mitter workstation. Change the current directory to SAMPLE.  Start your
+  transmitter program (X25CXMIT.EXE, or X25MXMIT.EXE) supplying a directory
+  table entry name ( n.b. in upper case ).
+
+  RUNNING THE SAMPLE PROGRAMS ON ONE PS/2
+
+  Create a new directory SAMPLE on the PS/2.  Copy the receiver sample program
+  (X25CRCV.EXE, or X25MRCV.EXE) to the SAMPLE directory.  Copy the transmitter
+  sample program (X25CXMIT.EXE, or X25MXMIT.EXE) to the SAMPLE directory.
+
+  Start Communications Manager with the configuration file X25SAMP.
+
+  Select "OS/2 command prompt" from the Program Selector panel on the PS/2.
+  Change the current directory to SAMPLE.  Start your receiver program
+  (X25CRCV.EXE, or X25MRCV.EXE) supplying a routing table entry name ( n.b. in
+  upper case ).
+
+  Select "OS/2 command prompt" from the Program Selector panel on the PS/2.
+  Change the current directory to SAMPLE.  Start your transmitter program
+  (X25CXMIT.EXE, or X25MXMIT.EXE) supplying a directory table entry name ( n.b.
+  in upper case ).
+
+
+
+
+
+
+
+
+                                                                             13
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
